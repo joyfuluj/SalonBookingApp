@@ -1,6 +1,8 @@
 package com.example.salonbookingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,5 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onButton1Pressed(Bundle savedInstanceState){
         root.setValue("HelloWorld");
+    }
+
+    public void onClick (View view){
+        Intent intent = new Intent(this, Search.class);
+        startActivity(intent);
     }
 }
