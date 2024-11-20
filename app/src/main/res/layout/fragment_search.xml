@@ -127,6 +127,7 @@
         android:layout_width="107dp"
         android:layout_height="57dp"
         android:background="@color/light_green"
+        android:onClick="onClickMap"
         android:text="Map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

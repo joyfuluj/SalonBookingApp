@@ -1,12 +1,15 @@
 package com.example.salonbookingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,12 +56,29 @@ public class SearchFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        // Inflate the fragment's layout
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        // Optionally, you can manually set an OnClickListener for debugging
+        Button button5 = view.findViewById(R.id.button5);
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SearchFragment", "Button clicked");
+                Intent intent = new Intent(getActivity(), Map.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
+
+
+
 }
