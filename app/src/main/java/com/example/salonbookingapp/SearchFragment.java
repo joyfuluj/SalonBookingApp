@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,15 +59,95 @@ public class SearchFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    private String userInput;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the fragment's layout
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        // Optionally, you can manually set an OnClickListener for debugging
-        Button button5 = view.findViewById(R.id.button5);
-        button5.setOnClickListener(new View.OnClickListener() {
+
+        // Reference the Button and SearchView
+        Button searchButton = view.findViewById(R.id.button6);
+        SearchView searchView = view.findViewById(R.id.search_view);
+
+        // Class-level variable to store user input
+        final String[] userInput = new String[1]; // Use an array to modify inside inner classes
+
+        // Set up the SearchView listener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                userInput[0] = query;
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userInput[0] == null || userInput[0].isEmpty()) {
+                    Toast.makeText(getActivity(), "Please enter a search term", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("SearchFragment", "Button clicked");
+
+                    Intent intent = new Intent(getActivity(), SearchResult.class);
+                    intent.putExtra("search", userInput[0]); // Pass the search query
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Button hairButton = view.findViewById(R.id.button);
+        hairButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SearchFragment", "Button clicked");
+                Intent intent = new Intent(getActivity(), SearchResult.class);
+                intent.putExtra("search", "HAIR");
+                startActivity(intent);
+            }
+        });
+
+        Button nailButton = view.findViewById(R.id.button2);
+        nailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SearchFragment", "Button clicked");
+                Intent intent = new Intent(getActivity(), SearchResult.class);
+                intent.putExtra("search", "NAIL");
+                startActivity(intent);
+            }
+        });
+
+        Button RelaxButton = view.findViewById(R.id.button3);
+        RelaxButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SearchFragment", "Button clicked");
+                Intent intent = new Intent(getActivity(), SearchResult.class);
+                intent.putExtra("search", "RELAXATION");
+                startActivity(intent);
+            }
+        });
+
+        Button eyeButton = view.findViewById(R.id.button4);
+        eyeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SearchFragment", "Button clicked");
+                Intent intent = new Intent(getActivity(), SearchResult.class);
+                intent.putExtra("search", "EYELASH");
+                startActivity(intent);
+            }
+        });
+
+        Button mapButton = view.findViewById(R.id.button5);
+        mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("SearchFragment", "Button clicked");
@@ -73,6 +155,7 @@ public class SearchFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         return view;
     }
 }

@@ -1,12 +1,21 @@
 package com.example.salonbookingapp;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Calendar;
 
 public class SearchResult extends AppCompatActivity {
 
@@ -20,5 +29,21 @@ public class SearchResult extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        String show = bundle.getString("search");
+
+        TextView search = findViewById(R.id.textView2);
+        search.setText(show);
+
     }
+
+//    public void detailClick(View view) {
+//        Button hairButton = view.findViewById(R.id.button);
+//        Intent intent = new Intent(this, SearchResult.class);
+//        intent.putExtra("search", "HAIR");
+//        startActivity(intent);
+//    }
 }
