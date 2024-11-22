@@ -2,6 +2,26 @@
     <string name="app_name">SalonBookingApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="month">
+        <item>2024</item>
+        <item>2025</item>
+    </string-array>
+
+    <string-array name="year">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
     <string-array name="location">
         <item>Downtown</item>
         <item>Orchard Park</item>

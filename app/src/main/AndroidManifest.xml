@@ -39,6 +39,21 @@
             android:name=".Map"
             android:exported="false" />
         <activity
+            android:name=".staffProfile"
+            android:exported="false" />
+        <activity
+            android:name=".MyPageforStaff"
+            android:exported="false" />
+        <activity
+            android:name=".SearchMonth"
+            android:exported="false" />
+        <activity
+            android:name=".ChooseStaff"
+            android:exported="false" />
+        <activity
+            android:name=".DailySchedule"
+            android:exported="false" />
+        <activity
             android:name=".Search"
             android:exported="false" />
         <activity
