@@ -1,7 +1,10 @@
 package com.example.salonbookingapp;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,6 +16,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
     Spinner spinner1;
     @Override
@@ -29,21 +40,76 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
     }
+
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        LatLng kelowna = new LatLng(49.8801, -119.4436);
-        LatLng ubco = new LatLng(49.9394, -119.3948);
-        LatLng lakeCountry = new LatLng(50.0537, -119.4106);
-        googleMap.addMarker(new MarkerOptions()
-                .position(kelowna)
-                .title("Kelowna"));
-        googleMap.addMarker(new MarkerOptions()
-                .position(ubco)
-                .title("UBCO"));
-        googleMap.addMarker(new MarkerOptions()
-                .position(lakeCountry)
-                .title("Lake Country"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubco, 10));
+    public void onMapReady(GoogleMap map) {
+        googleMap = map;
+        String file = "salon.txt";
+        StringBuilder data = new StringBuilder();
+        try{
+            FileInputStream fis = openFileInput(file);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",\\s*");
+                LatLng position = getPosition(words[1]);
+                googleMap.addMarker(new MarkerOptions()
+                        .position(position)
+                        .title(words[0]));
+            }
+            br.close();
+            isr.close();
+            fis.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        LatLng def = new LatLng(49.9394, -119.3948);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(def, 11));
         googleMap.getUiSettings().setZoomControlsEnabled(true);
+    }
+    GoogleMap googleMap;
+    public void onClick(View view) {
+        if (spinner1 != null) {
+            String selectedLocation = spinner1.getSelectedItem().toString();
+            LatLng targetLocation = getPosition(selectedLocation);
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(targetLocation, 13)); // Zoom level 15
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "Spinner not initialized",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public LatLng getPosition(String locationName) {
+        LatLng pos = null;
+        switch (locationName) {
+            case "Orchard Park":
+                pos = new LatLng(49.8801, -119.4436);
+                break;
+            case "UBCO":
+                pos = new LatLng(49.9394, -119.3948);
+                break;
+            case "Rutland":
+                pos = new LatLng(49.889334, -119.391872);
+                break;
+            case "Downtown":
+                pos = new LatLng(49.886923, -119.495192);
+                break;
+            case "Glenmore":
+                pos = new LatLng(49.897194, -119.454342);
+                break;
+            case "Lake Country":
+                pos = new LatLng(50.0190, -119.4130);
+                break;
+            case "Mission":
+                pos = new LatLng(49.8571, -119.4876);
+                break;
+            default:
+                pos = new LatLng(0, 0);
+                break;
+        }
+        return pos;
     }
 }
