@@ -1,4 +1,6 @@
 package com.example.salonbookingapp;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -6,6 +8,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -15,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.BufferedReader;
@@ -46,7 +50,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         googleMap = map;
         String file = "salon.txt";
         StringBuilder data = new StringBuilder();
-        try{
+        try {
             FileInputStream fis = openFileInput(file);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
@@ -61,13 +65,35 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             br.close();
             isr.close();
             fis.close();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         LatLng def = new LatLng(49.9394, -119.3948);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(def, 11));
         googleMap.getUiSettings().setZoomControlsEnabled(true);
+         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+             @Override
+             public boolean onMarkerClick(Marker marker) {
+                 showMarkerDialog(marker.getTitle());
+                 return true;
+             }
+         });
+    }
+
+    private void showMarkerDialog(String markerTitle){
+            AlertDialog.Builder builder = new AlertDialog.Builder(Map.this);
+            builder.setTitle("Select Marker: " + markerTitle)
+                    .setMessage("Do you want to view more details about this location?")
+                    .setPositiveButton("View Details", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // Launch the Detail Activity
+                            Intent intent = new Intent(Map.this, SalonDetail.class);
+                            intent.putExtra("salonName", markerTitle); // Pass the title to the new activity
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
     }
     GoogleMap googleMap;
     public void onClick(View view) {
