@@ -41,7 +41,7 @@
         android:layout_marginEnd="152dp"
         android:layout_marginBottom="1dp"
         android:text="Salon A"
-        android:textSize="60sp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
