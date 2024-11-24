@@ -3,6 +3,7 @@ package com.example.salonbookingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +32,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick (View view){
-        Intent intent = new Intent(this, Search.class);
-        startActivity(intent);
+        EditText username = findViewById(R.id.username);
+        String user = username.getText().toString().trim();
+        if(user.equals("staff")){
+            Intent intent = new Intent(this, MyPageforStaff.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, Search.class);
+            startActivity(intent);
+        }
     }
 }

@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.265" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -74,5 +74,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.482" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -61,5 +62,8 @@ public class SalonDetail extends AppCompatActivity {
         intent.putExtra("salonName", salonName);
         startActivity(intent);
 
+    }
+    public void back(View v){
+        finish();
     }
 }
