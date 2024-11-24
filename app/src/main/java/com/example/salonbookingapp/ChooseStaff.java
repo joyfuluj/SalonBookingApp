@@ -27,4 +27,7 @@ public class ChooseStaff extends AppCompatActivity {
         Intent intent = new Intent(this, SearchMonth.class);
         startActivity(intent);
     }
+    public void back(View v){
+        finish();
+    }
 }

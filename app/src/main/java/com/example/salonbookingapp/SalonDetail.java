@@ -1,6 +1,7 @@
 package com.example.salonbookingapp;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,5 +18,8 @@ public class SalonDetail extends AppCompatActivity {
         setContentView(R.layout.activity_salon_detail);
         String salonName = getIntent().getStringExtra("salonName");
 
+    }
+    public void back(View v){
+        finish();
     }
 }

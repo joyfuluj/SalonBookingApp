@@ -44,4 +44,7 @@ public class SearchMonth extends AppCompatActivity {
         Intent intent = new Intent(this, DailySchedule.class);
         startActivity(intent);
     }
+    public void back(View v){
+        finish();
+    }
 }
