@@ -57,7 +57,7 @@
         android:layout_marginEnd="152dp"
         android:layout_marginBottom="1dp"
         android:text="Salon A"
-        android:textSize="60sp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -77,6 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.185" />
+
     <Button
         android:id="@+id/button7"
         android:layout_width="203dp"
@@ -84,6 +85,7 @@
         android:layout_marginStart="152dp"
         android:layout_marginEnd="152dp"
         android:background="@color/white"
+        android:onClick="onClickReview"
         android:text="Review"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

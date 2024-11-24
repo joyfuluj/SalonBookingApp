@@ -66,14 +66,11 @@ public class SearchFragment extends Fragment {
         // Inflate the fragment's layout
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        // Reference the Button and SearchView
         Button searchButton = view.findViewById(R.id.button6);
         SearchView searchView = view.findViewById(R.id.search_view);
 
-        // Class-level variable to store user input
-        final String[] userInput = new String[1]; // Use an array to modify inside inner classes
+        final String[] userInput = new String[1];
 
-        // Set up the SearchView listener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
