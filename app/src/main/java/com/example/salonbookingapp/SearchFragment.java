@@ -105,7 +105,7 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), SearchResult.class);
-                intent.putExtra("search", "HAIR");
+                intent.putExtra("search", "Hair");
                 startActivity(intent);
             }
         });
@@ -116,7 +116,7 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), SearchResult.class);
-                intent.putExtra("search", "NAIL");
+                intent.putExtra("search", "Nail");
                 startActivity(intent);
             }
         });
@@ -127,7 +127,7 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), SearchResult.class);
-                intent.putExtra("search", "RELAXATION");
+                intent.putExtra("search", "Relaxation");
                 startActivity(intent);
             }
         });
@@ -138,7 +138,7 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), SearchResult.class);
-                intent.putExtra("search", "EYELASH");
+                intent.putExtra("search", "Eyelash");
                 startActivity(intent);
             }
         });
