@@ -30,6 +30,7 @@ import java.util.List;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
     Spinner spinner1;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 R.array.location, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
     }
 
     @Override
@@ -88,7 +92,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                         public void onClick(DialogInterface dialog, int id) {
                             // Launch the Detail Activity
                             Intent intent = new Intent(Map.this, SalonDetail.class);
-                            intent.putExtra("salonName", markerTitle); // Pass the title to the new activity
+                            intent.putExtra("salonName", markerTitle);
+                            username = intent.getStringExtra("username");
                             startActivity(intent);
                         }
                     })

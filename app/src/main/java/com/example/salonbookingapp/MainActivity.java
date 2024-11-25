@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Intent intent = new Intent(this, Search.class);
+            intent.putExtra("username", user);
             startActivity(intent);
         }
     }

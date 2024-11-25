@@ -24,12 +24,15 @@ import java.io.InputStreamReader;
 public class SalonDetail extends AppCompatActivity {
     String salonIntro;
     String salonName;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_salon_detail);
-        salonName = getIntent().getStringExtra("salonName");
+        Intent intent = new Intent();
+        salonName = intent.getStringExtra("salonName");
+        username = intent.getStringExtra("username");
 
         TextView salon = findViewById(R.id.textView14);
         salon.setText(salonName);
@@ -60,6 +63,7 @@ public class SalonDetail extends AppCompatActivity {
     public void onClickReview(View view){
         Intent intent = new Intent(this,Review.class);
         intent.putExtra("salonName", salonName);
+        intent.putExtra("username", salonName);
         startActivity(intent);
 
     }

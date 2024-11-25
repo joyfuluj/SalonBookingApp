@@ -1,5 +1,6 @@
 package com.example.salonbookingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RatingBar;
@@ -15,13 +16,18 @@ import java.io.InputStreamReader;
 
 public class Review extends AppCompatActivity {
     String salonName;
-
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_review);
-        salonName = getIntent().getStringExtra("salonName");
+
+        Intent intent = getIntent();
+        salonName = intent.getStringExtra("salonName");
+        username = intent.getStringExtra("username");
+
+
 
         TextView salon = findViewById(R.id.textView7);
         salon.setText(salonName);
@@ -99,5 +105,12 @@ public class Review extends AppCompatActivity {
     }
     public void back(View v){
         finish();
+    }
+
+    public void onClickWrite(View v){
+        Intent intent = new Intent(this, WriteReview.class);
+        salonName = intent.getStringExtra("salonName");
+        intent.putExtra("username", username);
+        startActivity(intent);
     }
 }
