@@ -2,12 +2,15 @@ package com.example.salonbookingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -163,6 +166,10 @@ public class SearchResult extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    public void back(View v){
+        finish();
     }
 
 }

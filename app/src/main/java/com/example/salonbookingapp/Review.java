@@ -1,6 +1,7 @@
 package com.example.salonbookingapp;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -95,5 +96,8 @@ public class Review extends AppCompatActivity {
             e.printStackTrace();
             overall1.setText("Error loading reviews");
         }
+    }
+    public void back(View v){
+        finish();
     }
 }
