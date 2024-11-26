@@ -1,5 +1,7 @@
 package com.example.salonbookingapp;
 
+import static android.content.Intent.getIntent;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -28,6 +30,7 @@ public class SearchFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String username;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -42,21 +45,22 @@ public class SearchFragment extends Fragment {
      * @return A new instance of fragment SearchFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
+    public static SearchFragment newInstance(String param1, String param2, String username) {
         SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
+        args.putString("username", username);
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
         }
     }
     private String userInput;
@@ -93,7 +97,8 @@ public class SearchFragment extends Fragment {
                     Log.d("SearchFragment", "Button clicked");
 
                     Intent intent = new Intent(getActivity(), SearchResult.class);
-                    intent.putExtra("search", userInput[0]); // Pass the search query
+                    intent.putExtra("search", userInput[0]);
+                    intent.putExtra("username", username);
                     startActivity(intent);
                 }
             }
@@ -106,6 +111,7 @@ public class SearchFragment extends Fragment {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), SearchResult.class);
                 intent.putExtra("search", "Hair");
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
@@ -117,6 +123,7 @@ public class SearchFragment extends Fragment {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), SearchResult.class);
                 intent.putExtra("search", "Nail");
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
@@ -128,6 +135,7 @@ public class SearchFragment extends Fragment {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), SearchResult.class);
                 intent.putExtra("search", "Relaxation");
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
@@ -139,6 +147,7 @@ public class SearchFragment extends Fragment {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), SearchResult.class);
                 intent.putExtra("search", "Eyelash");
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
@@ -149,6 +158,7 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 Log.d("SearchFragment", "Button clicked");
                 Intent intent = new Intent(getActivity(), Map.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });

@@ -18,11 +18,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class SearchResult extends AppCompatActivity {
-
+    String username;
+    String salonName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
 
         String[] hairServices = {"Cut", "Perm", "Hair Styling", "Haircuts"};
         String[] nailServices = {"Nail", "Manicure"};
@@ -63,10 +67,9 @@ public class SearchResult extends AppCompatActivity {
             while ((line = br.readLine()) != null) {
 
                 String[] words = line.split(",\\s*");
-                String salonName = words[0];
+                salonName = words[0];
                 String[] servicesArray = words[3].split(";");
                 String services = String.join(", ", servicesArray);
-
                 String rating = words[5];
 
 
@@ -130,11 +133,13 @@ public class SearchResult extends AppCompatActivity {
                         Button detailButton = new Button(this);
                         detailButton.setText("detail");
                         detailButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_green));
+                        final String currentSalonName = salonName;
                         detailButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(SearchResult.this, SalonDetail.class);
-                                intent.putExtra("salonName", salonName);
+                                intent.putExtra("salonName", currentSalonName);
+                                intent.putExtra("username", username);
                                 startActivity(intent);
                             }
                         });

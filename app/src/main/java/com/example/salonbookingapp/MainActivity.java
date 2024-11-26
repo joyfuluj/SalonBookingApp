@@ -29,13 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         copyFilesFromRawToInternalStorage();
-
-        root = FirebaseDatabase.getInstance().getReference();
-//        root.setValue("HelloWorld");
-    }
-
-    protected void onButton1Pressed(Bundle savedInstanceState){
-        root.setValue("HelloWorld");
     }
 
     public void onClick (View view){
@@ -47,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Intent intent = new Intent(this, Search.class);
+            intent.putExtra("username", user);
             startActivity(intent);
         }
     }
