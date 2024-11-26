@@ -1,2 +1,2 @@
-SalonName,overall,service,price,quality,environment,username,comment,serviceNameSerenity Hair Studio,4.8,4,3,5,4,JohnD,”Amazing experience! My stylist listened to exactly what I wanted.",Perm
-Serenity Hair Studio,4.8,4,5,3,2,WilliamH,”Amazing experience! "Exceptional service! The atmosphere was so relaxing. The staff was incredibly professional.",Cuts
+SalonName,overall,service,price,quality,environment,username,comment,serviceNameSerenity Hair Studio,4.8,4.0,3.0,5.0,4.0,JohnD,”Amazing experience! My stylist listened to exactly what I wanted.",Perm
+Serenity Hair Studio,4.8,4.0,5.0,3.0,2.0,WilliamH,”Amazing experience! "Exceptional service! The atmosphere was so relaxing. The staff was incredibly professional.",Cuts

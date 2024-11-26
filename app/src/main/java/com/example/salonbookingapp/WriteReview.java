@@ -90,7 +90,9 @@ public class WriteReview extends AppCompatActivity {
         catch (Exception e){
             e.printStackTrace();
         }
-        finish();
+        Intent intent = new Intent(this, Review.class);
+        intent.putExtra("salonName", salonName);
+        startActivity(intent);
     }
     public void back(View v){
         finish();

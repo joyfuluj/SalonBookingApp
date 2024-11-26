@@ -133,11 +133,12 @@ public class SearchResult extends AppCompatActivity {
                         Button detailButton = new Button(this);
                         detailButton.setText("detail");
                         detailButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_green));
+                        final String currentSalonName = salonName;
                         detailButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(SearchResult.this, SalonDetail.class);
-                                intent.putExtra("salonName", salonName);
+                                intent.putExtra("salonName", currentSalonName);
                                 intent.putExtra("username", username);
                                 startActivity(intent);
                             }

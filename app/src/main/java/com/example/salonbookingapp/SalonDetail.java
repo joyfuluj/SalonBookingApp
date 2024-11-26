@@ -30,7 +30,7 @@ public class SalonDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_salon_detail);
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         salonName = intent.getStringExtra("salonName");
         username = intent.getStringExtra("username");
 
