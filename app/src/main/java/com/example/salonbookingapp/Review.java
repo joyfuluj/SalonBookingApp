@@ -53,6 +53,7 @@ public class Review extends AppCompatActivity {
         float sumQuality = 0f;
         float sumEnvironment = 0f;
         int count = 0;
+        String reviewUser;
 
         LinearLayout mainLinearLayout = findViewById(R.id.firstLayout);
 
@@ -73,6 +74,7 @@ public class Review extends AppCompatActivity {
                     price = words[3];
                     serviceQuality = words[4];
                     environment = words[5];
+                    reviewUser = words[6];
                     comment = words[7];
                     serviceName = words[8];
 
@@ -94,7 +96,7 @@ public class Review extends AppCompatActivity {
                     horizontal1Layout.setLayoutParams(horizontal1LayoutParams);
 
                     TextView usernameView = new TextView(this);
-                    usernameView.setText("username:");
+                    usernameView.setText("username: " + reviewUser);
                     usernameView.setTextSize(15f);
                     horizontal1Layout.addView(usernameView);
 

@@ -5,16 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -38,10 +33,14 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MyPageforStaff.class);
             startActivity(intent);
         }
+        else if(user.isEmpty()){
+            Toast.makeText(this, "Please enter your username.", Toast.LENGTH_SHORT).show();
+        }
         else {
             Intent intent = new Intent(this, Search.class);
             intent.putExtra("username", user);
             startActivity(intent);
+
         }
     }
 

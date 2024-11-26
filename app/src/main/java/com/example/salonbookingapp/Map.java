@@ -93,7 +93,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                             // Launch the Detail Activity
                             Intent intent = new Intent(Map.this, SalonDetail.class);
                             intent.putExtra("salonName", markerTitle);
-                            username = intent.getStringExtra("username");
+                            intent.putExtra("username", username);
                             startActivity(intent);
                         }
                     })
@@ -142,5 +142,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 break;
         }
         return pos;
+    }
+    public void back(View v){
+        finish();
     }
 }

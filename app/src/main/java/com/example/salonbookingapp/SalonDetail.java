@@ -63,7 +63,7 @@ public class SalonDetail extends AppCompatActivity {
     public void onClickReview(View view){
         Intent intent = new Intent(this,Review.class);
         intent.putExtra("salonName", salonName);
-        intent.putExtra("username", salonName);
+        intent.putExtra("username", username);
         startActivity(intent);
 
     }
