@@ -92,7 +92,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (userInput[0] == null || userInput[0].isEmpty()) {
-                    Toast.makeText(getActivity(), "Please enter a search term", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Please enter a search term.", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.d("SearchFragment", "Button clicked");
 
