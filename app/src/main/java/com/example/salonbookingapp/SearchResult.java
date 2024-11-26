@@ -52,7 +52,7 @@ public class SearchResult extends AppCompatActivity {
                 serviceArr = relaxationServices;
                 break;
             default:
-                serviceArr = new String[]{};
+                serviceArr = new String[]{searchTerm};
                 break;
         }
 
@@ -133,6 +133,14 @@ public class SearchResult extends AppCompatActivity {
                         Button detailButton = new Button(this);
                         detailButton.setText("detail");
                         detailButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_green));
+
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        params.setMargins(0, 80, 0, 0);
+                        detailButton.setLayoutParams(params);
+
                         final String currentSalonName = salonName;
                         detailButton.setOnClickListener(new View.OnClickListener() {
                             @Override
