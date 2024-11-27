@@ -93,6 +93,7 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
+            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -118,20 +119,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="-"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -155,20 +157,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="⭕"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -192,20 +195,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="⭕️"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -229,20 +233,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="⭕️"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -266,20 +271,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="⭕️"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -303,20 +309,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="⭕️"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -340,20 +347,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button7"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="⭕️"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -377,20 +385,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button8"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="⭕️"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -414,20 +423,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button9"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="⭕️"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -451,20 +461,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button10"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="-"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -488,20 +499,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button11"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="-"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -525,20 +537,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button12"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="-"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -562,20 +575,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button13"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="-"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -599,20 +613,21 @@
                     android:textColor="@color/black"
                     android:textSize="28sp" />
 
-                <Switch
-                    android:id="@+id/ava13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml"
-                    tools:layout_editor_absoluteX="66dp"
-                    tools:layout_editor_absoluteY="173dp" />
+                <Button
+                    android:id="@+id/button14"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="70dp"
+                    android:backgroundTint="#fdfefe"
+                    android:onClick="bookingStatus"
+                    android:text="-"
+                    android:textColor="@color/black" />
 
                 <Switch
                     android:id="@+id/book13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="90dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml"
                     tools:layout_editor_absoluteX="66dp"
                     tools:layout_editor_absoluteY="173dp" />
@@ -651,6 +666,7 @@
         android:id="@+id/details"
         android:layout_width="97dp"
         android:layout_height="40dp"
+        android:textColor="@color/black"
         android:text="Click for booking details"
         app:layout_constraintBottom_toBottomOf="@+id/booking"
         app:layout_constraintEnd_toEndOf="parent"
