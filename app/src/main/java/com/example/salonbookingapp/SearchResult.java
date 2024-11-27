@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 public class SearchResult extends AppCompatActivity {
     String username;
     String salonName;
+    String rating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +59,17 @@ public class SearchResult extends AppCompatActivity {
 
         LinearLayout mainLinearLayout = findViewById(R.id.firstLayout);
         String file = "salon.txt";
+        String file2 = "review.txt";
         try {
             FileInputStream fis = openFileInput(file);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String line;
+
+            FileInputStream fis2 = openFileInput(file2);
+            InputStreamReader isr2 = new InputStreamReader(fis2);
+            BufferedReader br2 = new BufferedReader(isr2);
+            String line2;
 
             while ((line = br.readLine()) != null) {
 
@@ -70,7 +77,6 @@ public class SearchResult extends AppCompatActivity {
                 salonName = words[0];
                 String[] servicesArray = words[3].split(";");
                 String services = String.join(", ", servicesArray);
-                String rating = words[5];
 
 
 
@@ -124,6 +130,20 @@ public class SearchResult extends AppCompatActivity {
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         ));
+
+                        float sumAll = 0f;
+                        int count = 0;
+                        while ((line2 = br2.readLine()) != null) {
+                            String[] words2 = line2.split(",\\s*");
+                            if(words2[0].equals(salonName)){
+                                sumAll += Float.parseFloat(words2[1]);
+                                count++;
+                            }
+                        }
+                        if(count > 0)
+                            rating = String.format("%.1f", sumAll / count);
+                        else
+                            rating = "NA";
 
                         TextView ratingTextView = new TextView(this);
                         ratingTextView.setText("⭐️" + rating);
