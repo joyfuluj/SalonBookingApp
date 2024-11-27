@@ -201,6 +201,21 @@ public class SearchResult extends AppCompatActivity {
         return false;
     }
 
+
+
+        Button bookNowButton = findViewById(R.id.button);
+        bookNowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchResult.this, SalonDetail.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+
+
     public void back(View v){
         finish();
     }

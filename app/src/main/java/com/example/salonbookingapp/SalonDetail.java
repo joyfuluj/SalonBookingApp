@@ -13,13 +13,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class SalonDetail extends AppCompatActivity {
     String salonIntro;
@@ -30,6 +23,23 @@ public class SalonDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_salon_detail);
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        // "Book now" button's Click event
+        Button bookNowButton = findViewById(R.id.button3); // "Book now" button's ID
+        bookNowButton.setOnClickListener(v -> {
+            // Move to "Coupon Menu" page
+            Intent intent = new Intent(SalonDetail.this, CouponMenu.class);
+            startActivity(intent);
+        });
+
+
         Intent intent = getIntent();
         salonName = intent.getStringExtra("salonName");
         username = intent.getStringExtra("username");
