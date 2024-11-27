@@ -202,16 +202,16 @@ public class SearchResult extends AppCompatActivity {
     }
 
 
-
-        Button bookNowButton = findViewById(R.id.button);
-        bookNowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SearchResult.this, SalonDetail.class);
-                startActivity(intent);
-            }
-        });
-    }
+//
+//        Button bookNowButton = findViewById(R.id.button);
+//        bookNowButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SearchResult.this, SalonDetail.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
 
 
