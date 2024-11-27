@@ -38,6 +38,16 @@ public class SearchResult extends AppCompatActivity {
         TextView search = findViewById(R.id.textView2);
         search.setText(show);
 
+
+
+        Button bookNowButton = findViewById(R.id.button);
+        bookNowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchResult.this, SalonDetail.class);
+                startActivity(intent);
+            }
+        });
     }
 
 //    public void detailClick(View view) {
@@ -46,4 +56,6 @@ public class SearchResult extends AppCompatActivity {
 //        intent.putExtra("search", "HAIR");
 //        startActivity(intent);
 //    }
+
+
 }

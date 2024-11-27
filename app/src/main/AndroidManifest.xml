@@ -15,6 +15,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SalonBookingApp"
         tools:targetApi="31">
+
+
+        <activity
+            android:name=".BookingCompleted"
+            android:exported="false" />
+        <activity
+            android:name=".BookingConfirmation"
+            android:exported="false" />
+        <activity
+            android:name=".CouponMenu"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerInformation"
+            android:exported="false" />
+        <activity
+            android:name=".PickDateTime"
+            android:exported="false" />
+
+
         <activity
             android:name=".WriteReview"
             android:exported="false" />

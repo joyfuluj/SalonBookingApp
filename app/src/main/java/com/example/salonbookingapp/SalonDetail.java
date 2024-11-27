@@ -8,6 +8,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+
+import android.content.Intent;
+import android.widget.Button;
+
+
 public class SalonDetail extends AppCompatActivity {
 
     @Override
@@ -20,5 +25,14 @@ public class SalonDetail extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // "Book now" button's Click event
+        Button bookNowButton = findViewById(R.id.button3); // "Book now" button's ID
+        bookNowButton.setOnClickListener(v -> {
+            // Move to "Coupon Menu" page
+            Intent intent = new Intent(SalonDetail.this, CouponMenu.class);
+            startActivity(intent);
+        });
+
     }
 }
