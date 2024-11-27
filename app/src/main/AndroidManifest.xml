@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -35,6 +38,16 @@
 
 
         <activity
+            android:name=".Cancellation"
+            android:exported="false" />
+        <activity
+            android:name=".BookingDetails"
+            android:exported="false" />
+        <activity
+            android:name=".TimeSlot"
+            android:exported="false"
+            android:theme="@style/Theme.SalonBookingApp" />
+        <activity
             android:name=".WriteReview"
             android:exported="false" />
         <activity
@@ -53,6 +66,21 @@
             android:exported="false" />
         <activity
             android:name=".Map"
+            android:exported="false" />
+        <activity
+            android:name=".staffProfile"
+            android:exported="false" />
+        <activity
+            android:name=".MyPageforStaff"
+            android:exported="false" />
+        <activity
+            android:name=".SearchMonth"
+            android:exported="false" />
+        <activity
+            android:name=".ChooseStaff"
+            android:exported="false" />
+        <activity
+            android:name=".DailySchedule"
             android:exported="false" />
         <activity
             android:name=".Search"
