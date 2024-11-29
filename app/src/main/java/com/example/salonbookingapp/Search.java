@@ -29,8 +29,10 @@ public class Search extends AppCompatActivity {
         // Initialize and replace the fragment only once
         if (savedInstanceState == null) {
             // Initially load the SearchFragment
-            SearchFragment fragment = SearchFragment.newInstance("param1Value", "param2Value", username);
-            replaceFragment(fragment);
+            SearchFragment fragment_search = SearchFragment.newInstance("param1Value", "param2Value", username);
+            HotPickFragment fragment_hot_picks = HotPickFragment.newInstance("param1Value", "param2Value", username);
+            replaceFragment(fragment_search);
+            replaceFragment(fragment_hot_picks);
         }
 
         // Set up bottom navigation listener
