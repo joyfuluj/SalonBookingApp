@@ -11,7 +11,12 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
 
 public class WriteReview extends AppCompatActivity {
     TextView salon;
@@ -81,15 +86,77 @@ public class WriteReview extends AppCompatActivity {
         }
 
         String filename = "review.txt";
+        String file = "salon.txt"; // Input file for salon data
         FileOutputStream outputStream;
-        try{
+
+        try {
+            // Write initial data to "review.txt"
             outputStream = openFileOutput(filename, Context.MODE_APPEND);
             outputStream.write(fileContents.getBytes());
             outputStream.close();
-        }
-        catch (Exception e){
+
+            String line;
+            float sumAll = 0f;
+            int count = 0;
+
+            // Read "review.txt" to calculate sum and count for the specified salon
+            FileInputStream fis = openFileInput(filename);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",\\s*");
+                if (words[0].equals(salonName)) {
+                    sumAll += Float.parseFloat(words[1]);
+                    count++;
+                }
+            }
+
+            br.close();
+            fis.close();
+
+            // Read and modify "salon.txt"
+            fis = openFileInput(file);
+            isr = new InputStreamReader(fis);
+            br = new BufferedReader(isr);
+
+            String location = "";
+            String intro = "";
+            String service = "";
+            String image = "";
+            StringBuilder fileContent = new StringBuilder();
+
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",\\s*");
+
+                // Update the specific line for the salon
+                if (words[0].equals(salonName)) {
+                    location = words[1];  // Assuming locations, intro, etc., are in specific columns
+                    intro = words[2];
+                    service = words[3];
+                    image = words[4];
+
+                    String change = salonName + "," + location + "," + intro + "," + service + "," + image + "," +
+                            String.format("%.1f", sumAll / count);
+                    fileContent.append(change).append("\n");
+                } else {
+                    // Retain original lines
+                    fileContent.append(line).append("\n");
+                }
+            }
+
+            br.close();
+            fis.close();
+
+            // Write the updated content back to "salon.txt"
+            FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE); // Overwrite existing file content
+            fos.write(fileContent.toString().getBytes());
+            fos.close();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         Intent intent = new Intent(this, Search.class);
 //        intent.putExtra("salonName", salonName);
         startActivity(intent);
