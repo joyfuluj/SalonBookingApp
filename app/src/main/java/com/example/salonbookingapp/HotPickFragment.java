@@ -73,6 +73,7 @@ public class HotPickFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hot_pick, container, false);
         TextView test = view.findViewById(R.id.textView2);
+        test.setText("Username: " + username);
         LinearLayout mainLinearLayout = view.findViewById(R.id.firstLayout);
         String file = "salon.txt";
 
@@ -190,7 +191,7 @@ public class HotPickFragment extends Fragment {
                         detailButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(requireActivity(), SalonDetail.class);
+                                Intent intent = new Intent(getActivity(), SalonDetail.class);
                                 intent.putExtra("salonName", currentSalonName);
                                 intent.putExtra("username", username);
                                 startActivity(intent);

@@ -28,11 +28,10 @@ public class Search extends AppCompatActivity {
 
         // Initialize and replace the fragment only once
         if (savedInstanceState == null) {
-            // Initially load the SearchFragment
+            // Initially load the SearchFragment and HotPickFragment
             SearchFragment fragment_search = SearchFragment.newInstance("param1Value", "param2Value", username);
-            HotPickFragment fragment_hot_picks = HotPickFragment.newInstance("param1Value", "param2Value", username);
+            // Replace with SearchFragment (you can replace with HotPickFragment later)
             replaceFragment(fragment_search);
-            replaceFragment(fragment_hot_picks);
         }
 
         // Set up bottom navigation listener
@@ -41,10 +40,12 @@ public class Search extends AppCompatActivity {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.search:
-                    selectedFragment = new SearchFragment();  // Show SearchFragment
+                    // Create SearchFragment instance and pass the username
+                    selectedFragment = SearchFragment.newInstance("param1Value", "param2Value", username);
                     break;
                 case R.id.hotpick:
-                    selectedFragment = new HotPickFragment();  // Show HotPickFragment
+                    // Create HotPickFragment instance and pass the username
+                    selectedFragment = HotPickFragment.newInstance("param1Value", "param2Value", username);
                     break;
                 case R.id.home:
                     selectedFragment = new HomeFragment();  // Show HomeFragment
