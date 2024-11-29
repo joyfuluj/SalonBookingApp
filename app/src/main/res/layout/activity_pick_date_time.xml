@@ -1,719 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- Top Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/pink"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/pink"
-            android:theme="?attr/actionBarTheme">
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Pick Date &amp; Time"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white" />
-        </androidx.appcompat.widget.Toolbar>
-
-        <!-- Salon Name -->
+        <!-- Back Button -->
         <TextView
-            android:id="@+id/salon_name"
-            android:layout_width="match_parent"
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Salon A"
-            android:textSize="18sp"
-            android:gravity="center"
+            android:clickable="true"
+            android:onClick="back"
+            android:text="&lt;"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:layout_gravity="start|center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title_pick_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick Date &amp; Time"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
             android:padding="8dp" />
 
-        <!-- Coupon/Menu selected -->
-        <TextView
-            android:id="@+id/selected_coupon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Selected Coupon / Menu: Coupon A"
-            android:padding="8dp"
-            android:textSize="16sp" />
+    </androidx.appcompat.widget.Toolbar>
 
-        <!-- Stylist Selection -->
-        <TextView
-            android:id="@+id/select_stylist_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select your preferred stylist"
-            android:paddingVertical="8dp"
-            android:textSize="16sp" />
+    <!-- Main Content ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/stylist_a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Stylist A" />
-
-            <Button
-                android:id="@+id/stylist_b"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Stylist B" />
-
-            <Button
-                android:id="@+id/stylist_c"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Stylist C" />
-        </LinearLayout>
-
-        <!-- Stylist Detail -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="8dp"
-            android:background="@android:color/white"
-            android:elevation="2dp">
-
-            <ImageView
-                android:id="@+id/stylist_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/baseline_person_24" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/stylist_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Stylist A"
-                    android:textSize="18sp"
-                    android:paddingBottom="4dp" />
-
-                <EditText
-                    android:id="@+id/message_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Message"
-                    android:padding="18dp"
-                    android:background="@android:color/darker_gray" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- calendar -->
-        <TextView
-            android:id="@+id/calendar_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="November, 2024"
-            android:gravity="center"
-            android:paddingVertical="8dp"
-            android:textSize="16sp" />
-
-        <!-- date hedder -->
-        <LinearLayout
-            android:id="@+id/date_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="8dp">
-
-            <!-- day of a week -->
-            <TextView
-                android:id="@+id/date_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginStart="24dp"
-                android:text="1 Fri"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/date_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="2 Sat"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/date_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="3 Sun"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/date_4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="4 Mon"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/date_5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="5 Tue"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/date_6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="6 Wed"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/date_7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="7 Thu"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-
-        <!-- Time Availability -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingVertical="8dp">
+            android:padding="16dp">
 
-            <!-- each row -->
-            <!-- 11:00's row -->
+            <!-- Salon Name -->
+            <TextView
+                android:id="@+id/salon_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salon A"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="38dp"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <!-- Coupon/Menu selected -->
+            <TextView
+                android:id="@+id/selected_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selected Coupon / Menu: Coupon A"
+                android:textSize="16sp"
+                android:padding="8dp" />
+
+            <!-- Stylist Selection -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select your preferred stylist"
+                android:textSize="16sp"
+                android:padding="8dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingVertical="8dp">
 
-                <!-- time -->
-                <TextView
+                <Button
+                    android:id="@+id/stylist_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="11:00"
-                    android:textSize="16sp" />
+                    android:text="Stylist A" />
 
-                <!-- ◯/✕ -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <Button
+                    android:id="@+id/stylist_b"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="8dp"
+                    android:text="Stylist B" />
 
-        <!-- TEST: make circle icon clickable -->
-                    <TextView
-                        android:id="@+id/time_slot_1100_Fri"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="⭕"
-                        android:textSize="16sp"
-                        android:clickable="true"
-                        android:focusable="true" />
-
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="❌"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="⭕"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="❌"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="⭕"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="❌"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="❌"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                <Button
+                    android:id="@+id/stylist_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stylist C" />
             </LinearLayout>
 
-            <!-- 11:30's row -->
+            <!-- Stylist Details -->
             <LinearLayout
+                android:id="@+id/stylist_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@android:color/darker_gray"
+                android:padding="8dp">
 
-                <!-- 11:30 -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="11:30"
-                    android:textSize="16sp" />
+                <ImageView
+                    android:id="@+id/stylist_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/baseline_person_24" />
 
-                <!-- ◯/✕ -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/stylist_name"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="⭕"
-                        android:textSize="16sp" />
+                        android:text="Stylist A"
+                        android:textSize="18sp"
+                        android:paddingBottom="4dp" />
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/message_input"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="❌"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="⭕"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="❌"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="⭕"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="⭕"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="❌"
-                        android:textSize="16sp" />
+                        android:hint="Message"
+                        android:background="@android:color/white" />
                 </LinearLayout>
             </LinearLayout>
 
-
-            <!-- 12:00's row -->
-            <LinearLayout
+            <!-- Calendar -->
+            <TextView
+                android:id="@+id/calendar_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="12:00"
-                    android:textSize="16sp" />
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-            <!-- 12:00 -->
-            <LinearLayout
+                android:text="November, 2024"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textSize="16sp" />
+
+            <GridLayout
+                android:id="@+id/time_slot_grid"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="12:00"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 12:30's row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="12:30"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 13:00's row-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="13:00"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 13:30's row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="13:30"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 14:00's row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="14:00"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 14:30's row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="14:30"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 15:00's row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="15:00"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-            <!-- 15:30's row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="15:30"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 16:00's row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="16:00"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 16:30's row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="16:30"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="⭕" android:textSize="16sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="❌" android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:columnCount="8"
+                android:layout_weight="1"
+                android:alignmentMode="alignMargins"
+                android:useDefaultMargins="true"
+                app:layout_constraintTop_toBottomOf="@id/stylist_details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <!-- Dynamically added time slots go here -->
+            </GridLayout>
 
         </LinearLayout>
+    </ScrollView>
 
-
-
-
-
-
-
-
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

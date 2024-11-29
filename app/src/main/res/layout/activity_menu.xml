@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Top Pink Toolbar -->
+    <!-- Top Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -14,37 +14,37 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Title "Coupon & Menu" -->
-    <TextView
-        android:id="@+id/title_coupon_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Coupon &amp; Menu"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/salon_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:padding="8dp" />
 
-    <!-- Salon Name -->
-    <TextView
-        android:id="@+id/salon_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salon A"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:padding="8dp"
-        android:background="#F5F5F5"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Back Button -->
+        <TextView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="back"
+            android:text="&lt;"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:layout_gravity="start|center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title_pick_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coupon &amp; Menu"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:padding="8dp" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <!-- Tabs (All / Coupon / Menu) -->
     <LinearLayout
@@ -54,9 +54,9 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingVertical="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/salon_name">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <Button
             android:id="@+id/tab_all"
@@ -80,30 +80,11 @@
             android:text="MENU" />
     </LinearLayout>
 
-    <!-- List of Items -->
-    <ScrollView
+    <!-- ListView -->
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_toolbar"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout">
-
-        <LinearLayout
-            android:id="@+id/itemContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
-        </LinearLayout>
-    </ScrollView>
-
-    <!-- Bottom Pink Toolbar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/bottom_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/pink"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

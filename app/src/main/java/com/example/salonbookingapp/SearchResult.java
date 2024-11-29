@@ -2,16 +2,15 @@ package com.example.salonbookingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,6 +20,7 @@ public class SearchResult extends AppCompatActivity {
     String username;
     String salonName;
     String rating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,9 +79,8 @@ public class SearchResult extends AppCompatActivity {
                 String services = String.join(", ", servicesArray);
 
 
-
-                if(!salonName.equals("Name")) {
-                    if(checkServiceArray(servicesArray, serviceArr)) {
+                if (!salonName.equals("Name")) {
+                    if (checkServiceArray(servicesArray, serviceArr)) {
                         LinearLayout horizontalLayout = new LinearLayout(this);
                         horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
                         LinearLayout.LayoutParams horizontalLayoutParams = new LinearLayout.LayoutParams(
@@ -135,12 +134,12 @@ public class SearchResult extends AppCompatActivity {
                         int count = 0;
                         while ((line2 = br2.readLine()) != null) {
                             String[] words2 = line2.split(",\\s*");
-                            if(words2[0].equals(salonName)){
+                            if (words2[0].equals(salonName)) {
                                 sumAll += Float.parseFloat(words2[1]);
                                 count++;
                             }
                         }
-                        if(count > 0)
+                        if (count > 0)
                             rating = String.format("%.1f", sumAll / count);
                         else
                             rating = "NA";
@@ -183,7 +182,7 @@ public class SearchResult extends AppCompatActivity {
                         mainLinearLayout.addView(divider);
                     }
                 }
-        }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -201,23 +200,5 @@ public class SearchResult extends AppCompatActivity {
         return false;
     }
 
-
-
-        Button bookNowButton = findViewById(R.id.button);
-        bookNowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SearchResult.this, SalonDetail.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-
-
-
-    public void back(View v){
-        finish();
-    }
 
 }
