@@ -66,11 +66,6 @@ public class SearchResult extends AppCompatActivity {
             BufferedReader br = new BufferedReader(isr);
             String line;
 
-            FileInputStream fis2 = openFileInput(file2);
-            InputStreamReader isr2 = new InputStreamReader(fis2);
-            BufferedReader br2 = new BufferedReader(isr2);
-            String line2;
-
             while ((line = br.readLine()) != null) {
 
                 String[] words = line.split(",\\s*");
@@ -133,22 +128,33 @@ public class SearchResult extends AppCompatActivity {
 
                         float sumAll = 0f;
                         int count = 0;
-                        while ((line2 = br2.readLine()) != null) {
-                            String[] words2 = line2.split(",\\s*");
-                            if(words2[0].equals(salonName)){
-                                sumAll += Float.parseFloat(words2[1]);
-                                count++;
-                            }
-                        }
-                        if(count > 0)
-                            rating = String.format("%.1f", sumAll / count);
-                        else
-                            rating = "NA";
+                        try {
+                            // Read the review file again for each salon
+                            FileInputStream fis2 = openFileInput(file2);
+                            InputStreamReader isr2 = new InputStreamReader(fis2);
+                            BufferedReader br2 = new BufferedReader(isr2);
+                            String line2;
 
-                        TextView ratingTextView = new TextView(this);
-                        ratingTextView.setText("⭐️" + rating);
-                        ratingTextView.setTextSize(30f);
-                        rightLayout.addView(ratingTextView);
+                            while ((line2 = br2.readLine()) != null) {
+                                String[] words2 = line2.split(",\\s*");
+                                if (words2[0].equals(salonName)) {
+                                    sumAll += Float.parseFloat(words2[1]);
+                                    count++;
+                                }
+                            }
+                            if (count > 0)
+                                rating = String.format("%.1f", sumAll / count);
+                            else
+                                rating = "NA";
+
+                            TextView ratingTextView = new TextView(this);
+                            ratingTextView.setText("⭐️" + rating);
+                            ratingTextView.setTextSize(30f);
+                            rightLayout.addView(ratingTextView);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                         Button detailButton = new Button(this);
                         detailButton.setText("detail");

@@ -72,8 +72,6 @@ public class HotPickFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hot_pick, container, false);
-        TextView test = view.findViewById(R.id.textView2);
-        test.setText("Username: " + username);
         LinearLayout mainLinearLayout = view.findViewById(R.id.firstLayout);
         String file = "salon.txt";
 

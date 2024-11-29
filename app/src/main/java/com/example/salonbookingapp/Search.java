@@ -26,11 +26,8 @@ public class Search extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
 
-        // Initialize and replace the fragment only once
         if (savedInstanceState == null) {
-            // Initially load the SearchFragment and HotPickFragment
             SearchFragment fragment_search = SearchFragment.newInstance("param1Value", "param2Value", username);
-            // Replace with SearchFragment (you can replace with HotPickFragment later)
             replaceFragment(fragment_search);
         }
 
