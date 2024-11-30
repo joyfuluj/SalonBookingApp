@@ -34,6 +34,7 @@ public class HotPickFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String username;
 
     public HotPickFragment() {
         // Required empty public constructor
@@ -48,9 +49,10 @@ public class HotPickFragment extends Fragment {
      * @return A new instance of fragment HotPickFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HotPickFragment newInstance(String param1, String param2) {
+    public static HotPickFragment newInstance(String param1, String param2, String username) {
         HotPickFragment fragment = new HotPickFragment();
         Bundle args = new Bundle();
+        args.putString("username", username);
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
@@ -63,13 +65,13 @@ public class HotPickFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString("username");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hot_pick, container, false);
-        TextView test = view.findViewById(R.id.textView2);
         LinearLayout mainLinearLayout = view.findViewById(R.id.firstLayout);
         String file = "salon.txt";
 
@@ -183,7 +185,18 @@ public class HotPickFragment extends Fragment {
                         params.setMargins(0, 80, 0, 0);
                         detailButton.setLayoutParams(params);
 
-                        horizontalLayout.addView(detailButton);
+                        final String currentSalonName = salonName;
+                        detailButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getActivity(), SalonDetail.class);
+                                intent.putExtra("salonName", currentSalonName);
+                                intent.putExtra("username", username);
+                                startActivity(intent);
+                            }
+                        });
+                        rightLayout.addView(detailButton);
+                        horizontalLayout.addView(rightLayout);
                         mainLinearLayout.addView(horizontalLayout);
                         if(i != 2){
                             View divider = new View(requireContext());

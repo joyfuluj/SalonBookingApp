@@ -158,7 +158,7 @@ public class WriteReview extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, Search.class);
-//        intent.putExtra("salonName", salonName);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
     public void back(View v){
