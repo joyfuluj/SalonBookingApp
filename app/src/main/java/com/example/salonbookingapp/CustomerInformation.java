@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Random;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,37 +20,56 @@ public class CustomerInformation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_information);
 
+        // Generate random price between $35 and $65
+        String price = generateRandomPrice(35, 65);
+
+        // Display the random price in the TextView
+        TextView priceTextView = findViewById(R.id.price);
+        priceTextView.setText(price);
+
+
         // button
         Button reviewButton = findViewById(R.id.btn_review_reservation);
 
-        // button's click listener
+        // Button's click listener
         reviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get user input (LATER)
+                // Get user input
                 EditText nameInput = findViewById(R.id.input_name);
                 EditText phoneInput = findViewById(R.id.input_phone);
                 EditText emailInput = findViewById(R.id.input_email);
                 EditText requestInput = findViewById(R.id.input_request);
 
-                // Converts user input to string
+                // Convert user input to string
                 String name = nameInput.getText().toString();
                 String phone = phoneInput.getText().toString();
                 String email = emailInput.getText().toString();
                 String request = requestInput.getText().toString();
 
-                // move to "BookingConfirmation" page
+                // Move to "BookingConfirmation" page
                 Intent intent = new Intent(CustomerInformation.this, BookingConfirmation.class);
 
-                // Pass input data to the intent
+                // Pass input data and random price to the intent
                 intent.putExtra("CUSTOMER_NAME", name);
                 intent.putExtra("CUSTOMER_PHONE", phone);
                 intent.putExtra("CUSTOMER_EMAIL", email);
                 intent.putExtra("CUSTOMER_REQUEST", request);
+                intent.putExtra("CUSTOMER_PRICE", price);  // Add price to intent
 
-                // start "BookingConfirmation" activity
+                // Start "BookingConfirmation" activity
                 startActivity(intent);
             }
         });
     }
+
+    // Function to generate a random price between a given min and max
+    private String generateRandomPrice(int min, int max) {
+        Random random = new Random();
+        int randomPrice = random.nextInt((max - min) + 1) + min; // Generate a random price between min and max
+        return "$" + randomPrice + ".00";  // Format as a price (e.g., "$45.00")
+    }
 }
+
+
+

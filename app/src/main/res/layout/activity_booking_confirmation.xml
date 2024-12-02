@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -42,7 +41,6 @@
             android:textStyle="bold"
             android:textColor="@android:color/white" />
     </androidx.appcompat.widget.Toolbar>
-
 
     <!-- Content Scroll View -->
     <ScrollView
@@ -92,9 +90,32 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/booking_salon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Salon A"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Price -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Price (pay at salon)"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/booking_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$65.00"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -113,13 +134,14 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/booking_date_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2024/11/03(Sun) 11:00"
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Total Service Time -->
+            <!-- Stylist -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,17 +152,19 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total Service Time"
+                    android:text="Stylist"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/booking_stylist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1 Hour"
+                    android:text="Stylist A"
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Coupon Applied -->
+
+            <!-- Customer Information -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,51 +175,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Coupon Applied"
+                    android:text="Phone"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/booking_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Coupon A"
+                    android:text="No phone"
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Stylist Information -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/baseline_person_24" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Stylist A"
-                        android:textSize="14sp"
-                        android:paddingBottom="4dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Message"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Price -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -206,31 +196,37 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Price (pay at salon)"
+                    android:text="Email"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/booking_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$65.00"
+                    android:text="No email"
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- About Cancellations -->
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="About Cancellations"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingVertical="16dp" />
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancellations should be made at least 24 hours in advance to avoid any charges."
-                android:textSize="14sp"
-                android:paddingBottom="16dp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Request"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/booking_request"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No request"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <!-- Confirm Button -->
             <Button
@@ -242,6 +238,7 @@
                 android:textColor="@android:color/white"
                 android:padding="12dp"
                 android:textSize="16sp" />
+
         </LinearLayout>
     </ScrollView>
 
