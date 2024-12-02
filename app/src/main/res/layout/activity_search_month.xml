@@ -8,22 +8,6 @@
     tools:context=".SearchMonth">
 
     <TextView
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="back"
-        android:text="&lt;"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +22,7 @@
         app:layout_constraintVertical_bias="0.736" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/staff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="for staff 1"
@@ -80,26 +64,29 @@
         app:layout_constraintVertical_bias="0.144" />
 
     <Spinner
-        android:id="@+id/year"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/month"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.585" />
-
-    <Spinner
         android:id="@+id/month"
         android:layout_width="140dp"
         android:layout_height="50dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginBottom="308dp"
         app:layout_constraintBottom_toTopOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintHorizontal_bias="0.918"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.335" />
+        app:layout_constraintVertical_bias="0.035" />
+
+    <Spinner
+        android:id="@+id/year"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/month"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.918"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.192" />
 
     <Button
         android:id="@+id/search"
@@ -114,6 +101,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
         app:layout_constraintVertical_bias="0.828" />
+
+    <TextView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="back"
+        android:text="&lt;"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005"
+        android:elevation="1dp"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

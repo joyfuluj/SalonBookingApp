@@ -25,6 +25,26 @@ public class ChooseStaff extends AppCompatActivity {
     }
     public void one(View v){
         Intent intent = new Intent(this, SearchMonth.class);
+        String file = "schedule1.txt";
+        String staff = "for staff 1";
+        intent.putExtra("file",file);
+        intent.putExtra("staff",staff);
+        startActivity(intent);
+    }
+    public void two(View v){
+        Intent intent = new Intent(this, SearchMonth.class);
+        String file = "schedule2.txt";
+        intent.putExtra("file",file);
+        String staff = "for staff 2";
+        intent.putExtra("staff",staff);
+        startActivity(intent);
+    }
+    public void three(View v){
+        Intent intent = new Intent(this, SearchMonth.class);
+        String file = "schedule3.txt";
+        intent.putExtra("file",file);
+        String staff = "for staff 3";
+        intent.putExtra("staff",staff);
         startActivity(intent);
     }
     public void back(View v){

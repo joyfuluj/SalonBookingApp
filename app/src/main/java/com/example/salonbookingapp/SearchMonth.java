@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,14 +22,20 @@ public class SearchMonth extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search_month);
 
+        Intent intent = getIntent();
+        String staff = intent.getStringExtra("staff");
+        TextView staffNum = findViewById(R.id.staff);
+        staffNum.setText(staff);
+
         Spinner y = (Spinner) findViewById(R.id.year);
         Spinner m = (Spinner) findViewById(R.id.month);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.year,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.month,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        y.setAdapter(adapter1);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.month,android.R.layout.simple_spinner_item);
+        m.setAdapter(adapter1);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.year,android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        m.setAdapter(adapter2);
+        y.setAdapter(adapter2);
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -40,9 +48,23 @@ public class SearchMonth extends AppCompatActivity {
         Spinner m = (Spinner) findViewById(R.id.month);
         String year = y.getSelectedItem().toString();
         String month = m.getSelectedItem().toString();
+        CharSequence text ="";
+        int duration = Toast.LENGTH_SHORT;
 
-        Intent intent = new Intent(this, DailySchedule.class);
-        startActivity(intent);
+        if(year.equals("2025") || !month.equals("December")){
+            text = "No data yet";
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+        }
+        else{
+            Intent intent = getIntent();
+            String file = intent.getStringExtra("file");
+            Intent newintent = new Intent(SearchMonth.this, DailySchedule.class);
+            newintent.putExtra("year", year);
+            newintent.putExtra("month", month);
+            newintent.putExtra("file", file);
+            startActivity(newintent);
+        }
     }
     public void back(View v){
         finish();
