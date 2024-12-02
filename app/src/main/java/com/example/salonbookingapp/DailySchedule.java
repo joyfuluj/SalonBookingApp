@@ -45,26 +45,17 @@ public class DailySchedule extends AppCompatActivity {
 
         LinearLayout mainLinearLayout = findViewById(R.id.status);
 
+
         try {
             FileInputStream fis = openFileInput(file);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            String line=br.readLine();
-            StringBuilder fileUpdate = new StringBuilder();
-            String[] words = line.split(",\\s*");
+            String line = br.readLine();
 
-            for (int i = 0; i < 15 ; i++){
-                line = br.readLine();
-                if(line == null){
-                    break;
-                }
-                words = line.split(",\\s*");
-
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",\\s*");
                 final String dayMonth = words[0];
-                final String time = words[1];
-                final String dayStatus = words[2];
-                final String BookingStatus = words[3];
-                final String TimeAva = words[4];
+                final String dayStatus = words[1];
 
                 LinearLayout horizontalLayout = new LinearLayout(this);
                 horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -77,10 +68,10 @@ public class DailySchedule extends AppCompatActivity {
                 horizontalLayout.setLayoutParams(horizontalLayoutParams);
 
                 LinearLayout.LayoutParams b = new LinearLayout.LayoutParams(
-                        300,150
+                        300, 150
                 );
                 LinearLayout.LayoutParams s = new LinearLayout.LayoutParams(
-                        300,150
+                        300, 150
                 );
                 b.setMargins(180, 20, 5, 20);
                 s.setMargins(35, 20, 10, 20);
@@ -96,17 +87,19 @@ public class DailySchedule extends AppCompatActivity {
                 day.setTextSize(28f);
                 horizontalLayout.addView(day);
 
-                if(dayStatus.equals("0")){
+                if (dayStatus.equals("0")) {
                     TimeSlot.setText("-");
+                } else {
+                    TimeSlot.setText("TIME SLOT");
                 }
-                else{TimeSlot.setText("TIME SLOT");}
                 TimeSlot.setTextSize(20f);
                 horizontalLayout.addView(TimeSlot);
 
-                if(words[2].equals("1")) {
+                if (words[1].equals("1")) {
                     TimeOff.setChecked(true);
+                } else {
+                    TimeOff.setChecked(false);
                 }
-                else{TimeOff.setChecked(false);}
                 horizontalLayout.addView(TimeOff);
 
                 mainLinearLayout.addView(horizontalLayout);
@@ -121,126 +114,127 @@ public class DailySchedule extends AppCompatActivity {
                 TimeSlot.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(dayStatus.equals("0")){
-                            CharSequence text = "No data yet"+year;
+                        if (dayStatus.equals("0")) {
+                            CharSequence text = "No data yet";
                             int duration = Toast.LENGTH_SHORT;
                             Toast toast = Toast.makeText(DailySchedule.this, text, duration);
                             toast.show();
-                        }
-                        else {
+                        } else {
                             Intent intent = new Intent(DailySchedule.this, TimeSlot.class);
                             intent.putExtra("date", dayMonth);
-                            intent.putExtra("year",year);
-                            intent.putExtra("file",file);
+                            intent.putExtra("year", year);
+                            intent.putExtra("file", file);
                             startActivity(intent);
                         }
                     }
                 });
+
                 TimeOff.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(dayStatus.equals("0")){
-                            TimeOff.setChecked(true);
-                            TimeSlot.setText("TIME SLOT");
-                            String newLine = dayMonth + "," + time + "," + "1"+ "," + BookingStatus + "," + TimeAva+"AVAILABLE";
-                            fileUpdate.append(newLine).append("\n");
-                            FileOutputStream fos = null;
-                            try {
-                                fos = openFileOutput(file, Context.MODE_PRIVATE);
-                            } catch (FileNotFoundException e) {
-                                throw new RuntimeException(e);
-                            }
-                            try {
-                                fos.write(fileUpdate.toString().getBytes());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            try {
-                                fos.close();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        else{
-                            AlertDialog.Builder builder = new AlertDialog.Builder(DailySchedule.this);
-                            builder.setCancelable(true);
-                            builder.setTitle("Update");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DailySchedule.this);
+                        builder.setCancelable(true);
+                        builder.setTitle("Update");
+                        if(words[1].equals("1")){
                             builder.setMessage("Are you sure you want to set this day unavailable?");
                             builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int i) {
+                                public void onClick(DialogInterface dialog, int which) {
                                     TimeOff.setChecked(false);
                                     TimeSlot.setText("-");
+
+                                    try {
+                                        FileInputStream fis2 = openFileInput(file);
+                                        InputStreamReader isr2 = new InputStreamReader(fis2);
+                                        BufferedReader br2 = new BufferedReader(isr2);
+
+                                        StringBuilder updatedContent = new StringBuilder();
+                                        String line2;
+                                        while ((line2 = br2.readLine()) != null) {
+                                            String[] words2 = line2.split(",\\s*");
+                                            if (words2[0].equals(dayMonth)) {
+                                                updatedContent.append(words2[0]).append(",").append("0").append("\n");
+                                            } else {
+                                                updatedContent.append(line2).append("\n");
+                                            }
+                                        }
+                                        br2.close();
+                                        fis2.close();
+
+                                        FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
+                                        fos.write(updatedContent.toString().getBytes());
+                                        fos.close();
+
+                                        Toast.makeText(DailySchedule.this, "Day status updated", Toast.LENGTH_SHORT).show();
+                                        recreate();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             });
                             builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int i) {
+                                public void onClick(DialogInterface dialog, int which) {
                                     TimeOff.setChecked(true);
                                 }
                             });
                             AlertDialog dialog = builder.create();
                             dialog.show();
+                        }
+                        else{
+                            builder.setMessage("Are you sure you want to set this day available?");
+                            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    TimeOff.setChecked(true);
+                                    TimeSlot.setText("TIME SLOT");
 
-                            String newLine = dayMonth + "," + time + "," + "0" + "," + BookingStatus + "," + "0"+"This is a day off";
-                            fileUpdate.append(newLine).append("\n");
-                            FileOutputStream fos = null;
-                            try {
-                                fos = openFileOutput(file, Context.MODE_PRIVATE);
-                            } catch (FileNotFoundException e) {
-                                throw new RuntimeException(e);
-                            }
-                            try {
-                                fos.write(fileUpdate.toString().getBytes());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            try {
-                                fos.close();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
+                                    try {
+                                        FileInputStream fis2 = openFileInput(file);
+                                        InputStreamReader isr2 = new InputStreamReader(fis2);
+                                        BufferedReader br2 = new BufferedReader(isr2);
+
+                                        StringBuilder updatedContent = new StringBuilder();
+                                        String line2;
+                                        while ((line2 = br2.readLine()) != null) {
+                                            String[] words2 = line2.split(",\\s*");
+                                            if (words2[0].equals(dayMonth)) {
+                                                updatedContent.append(words2[0]).append(",").append("1").append("\n");
+                                            } else {
+                                                updatedContent.append(line2).append("\n");
+                                            }
+                                        }
+                                        br2.close();
+                                        fis2.close();
+
+                                        FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
+                                        fos.write(updatedContent.toString().getBytes());
+                                        fos.close();
+
+                                        Toast.makeText(DailySchedule.this, "Day status updated", Toast.LENGTH_SHORT).show();
+                                        recreate();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    TimeOff.setChecked(true);
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         }
                     }
                 });
-                for (int j = 0; j<14; j++ ) {
-                    final String d = words[0];
-                    final String t = words[1];
-                    final String ds = words[2];
-                    final String bs = words[3];
-                    final String Ta = words[4];
-
-                    String newLine = d + "," + t + "," + ds + "," + bs + "," + Ta + "IN THE LAST ONE";
-                    fileUpdate.append(newLine).append("\n");
-                    FileOutputStream fos = null;
-                    try {
-                        fos = openFileOutput(file, Context.MODE_PRIVATE);
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
-                        fos.write(fileUpdate.toString().getBytes());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    line = br.readLine();
-                    words = line.split(",\\s*");
-                    fos.close();
-                }
             }
-            fis.close();
-            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
-    public void back(View v){
+    public void back (View v){
         finish();
     }
 }
