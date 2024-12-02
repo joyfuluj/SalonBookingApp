@@ -75,6 +75,28 @@
                 android:textStyle="bold"
                 android:paddingVertical="16dp" />
 
+            <!-- Customer Name -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Name"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No name"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
             <!-- Salon Name -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,7 +134,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/booking_price"
+                    android:id="@+id/customer_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$65.00"
@@ -179,7 +201,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/booking_phone"
+                    android:id="@+id/customer_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No phone"
@@ -200,7 +222,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/booking_email"
+                    android:id="@+id/customer_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No email"
@@ -221,7 +243,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/booking_request"
+                    android:id="@+id/customer_request"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No request"

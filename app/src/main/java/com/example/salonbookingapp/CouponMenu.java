@@ -73,7 +73,7 @@ public class CouponMenu extends AppCompatActivity {
 
             // Pass selected item to next activity
             Intent intent = new Intent(CouponMenu.this, PickDateTime.class);
-            intent.putExtra("selected_coupon", selectedItem.getName());
+            intent.putExtra("MENU", selectedItem.getName());
             startActivity(intent);
         });
     }
@@ -123,6 +123,10 @@ public class CouponMenu extends AppCompatActivity {
         tabMenu.setBackgroundColor(defaultColor);
 
         selectedButton.setBackgroundColor(selectedColor);
+    }
+
+    public void back(View view) {
+        finish(); // back to previous page
     }
 
     // MenuItem class
@@ -205,4 +209,6 @@ public class CouponMenu extends AppCompatActivity {
         }
 
     }
+
+
 }

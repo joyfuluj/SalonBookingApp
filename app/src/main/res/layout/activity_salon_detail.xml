@@ -77,7 +77,9 @@
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintVertical_bias="0.185"
+        android:focusable="true"
+        android:clickable="true" />
 
     <Button
         android:id="@+id/button7"

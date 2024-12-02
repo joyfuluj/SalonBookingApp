@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import android.text.TextUtils;
+import android.util.Patterns;
+
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,6 +39,7 @@ public class CustomerInformation extends AppCompatActivity {
         reviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Get user input
                 EditText nameInput = findViewById(R.id.input_name);
                 EditText phoneInput = findViewById(R.id.input_phone);
@@ -46,6 +51,28 @@ public class CustomerInformation extends AppCompatActivity {
                 String phone = phoneInput.getText().toString();
                 String email = emailInput.getText().toString();
                 String request = requestInput.getText().toString();
+
+
+                // Validate inputs.
+                if (TextUtils.isEmpty(name)) {
+                    nameInput.setError("Name is required");
+                    nameInput.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(phone)) {
+                    phoneInput.setError("Phone is required");
+                    phoneInput.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(email)) {
+                    emailInput.setError("Email is required");
+                    emailInput.requestFocus();
+                    return;
+                }
+
+
 
                 // Move to "BookingConfirmation" page
                 Intent intent = new Intent(CustomerInformation.this, BookingConfirmation.class);

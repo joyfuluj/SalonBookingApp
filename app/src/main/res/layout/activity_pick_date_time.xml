@@ -41,62 +41,48 @@
             android:textColor="@android:color/white"
             android:layout_gravity="center"
             android:padding="8dp" />
-
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Main Content ScrollView -->
-    <ScrollView
+
+    <!-- Main Content LinearLayout-->
+    <LinearLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+        <!-- Salon Name -->
+        <TextView
+            android:id="@+id/salon_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:text="Salon A"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp" />
 
-            <!-- Spacer -->
-            <TextView
-                android:id="@+id/space"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:padding="8dp" />
+        <!-- Coupon/Menu selected -->
+        <TextView
+            android:id="@+id/selected_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selected Coupon / Menu: Coupon A"
+            android:textSize="16sp"
+            android:padding="8dp" />
 
-            <!-- Salon Name -->
-            <TextView
-                android:id="@+id/salon_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Salon A"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:padding="8dp" />
 
-            <!-- Coupon/Menu selected -->
-            <TextView
-                android:id="@+id/selected_coupon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Selected Coupon / Menu: Coupon A"
-                android:textSize="16sp"
-                android:padding="8dp" />
+<!--            &lt;!&ndash; Stylist Selection &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Select your preferred stylist"-->
+<!--                android:textSize="16sp"-->
+<!--                android:padding="8dp" />-->
 
-            <!-- Stylist Selection -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Select your preferred stylist"
-                android:textSize="16sp"
-                android:padding="8dp" />
-
-            <!-- Stylist Buttons -->
+            <!-- Stylist Buttons A,B,C-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,131 +140,157 @@
                         android:textSize="18sp"
                         android:paddingBottom="4dp" />
 
-                    <EditText
-                        android:id="@+id/message_input"
+                    <TextView
+                        android:id="@+id/message_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Message"
-                        android:background="@android:color/white" />
+                        android:text="Message"
+                        android:background="@android:color/white"
+                        android:padding="8dp"
+                        android:gravity="start" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Calendar (Days of the Week) -->
+        <!-- Calendar (Month of the Year) December, 2024 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="December, 2024"/>
 
-            <!-- Availability Grid (for Time Slots) -->
+
+        <!-- Date RecyclerView (1週間分の日付を横に表示) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_dates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            android:padding="8dp" />
+
+        <!-- Time Slots and Availability -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- Fixed Time Slots (Left Column) 10:00~16:30 -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:id="@+id/time_slots_column"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
+                <!-- 時間スロット -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="Mon"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="Tue"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="Wed"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="Thu"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="Fri"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="Sat"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="Sun"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
                     android:text="10:00"
+                    android:padding="8dp"
                     android:textSize="16sp" />
 
-                <Space
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:text="10:30"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
 
-                <TableLayout
-                    android:layout_width="164dp"
-                    android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11:00"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11:30"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12:00"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12:30"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </TableLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13:00"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
 
-                <!-- Repeat for all time slots -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13:30"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14:00"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14:30"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15:00"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15:30"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16:00"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16:30"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
             </LinearLayout>
 
-            <!-- Repeat the above row for all time slots (10:30, 11:00, etc.) -->
+            <!-- RecyclerView for Availability -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_availability"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp" />
         </LinearLayout>
-    </ScrollView>
-
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

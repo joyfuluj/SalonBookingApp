@@ -1,28 +1,28 @@
 package com.example.salonbookingapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PickDateTime extends AppCompatActivity {
 
-    private Button selectedStylistButton; // Button for the currently selected stylist
+    private Button selectedStylistButton; // Currently selected stylist button
     private String selectedStylist = "A"; // Default stylist is A
-    private GridLayout timeSlotGrid; // Grid for displaying time slots
     private Map<String, Map<String, Boolean>> stylistAvailability; // Availability data for each stylist
 
     @Override
@@ -31,11 +31,15 @@ public class PickDateTime extends AppCompatActivity {
         setContentView(R.layout.activity_pick_date_time);
 
         // Get the selected coupon/menu from the previous activity
-        String selectedCoupon = getIntent().getStringExtra("selected_coupon");
+        String selectedMenu = getIntent().getStringExtra("MENU");
         TextView selectedCouponTextView = findViewById(R.id.selected_coupon);
-        if (selectedCoupon != null) {
-            selectedCouponTextView.setText("Selected Coupon / Menu: " + selectedCoupon);
+        if (selectedMenu != null) {
+            selectedCouponTextView.setText("Selected Coupon / Menu: " + selectedMenu);
         }
+
+        TextView messageTextView = findViewById(R.id.message_text);
+        // Stylist's default message
+        messageTextView.setText("Hello! I’m your stylist. Let’s make you shine today!");
 
         // Initialize stylist buttons
         Button stylistA = findViewById(R.id.stylist_a);
@@ -62,11 +66,14 @@ public class PickDateTime extends AppCompatActivity {
             displayAvailability();
         });
 
-        // Grid layout for time slots
-        timeSlotGrid = findViewById(R.id.time_slot_grid);
-
         // Load stylist availability data from the text file
         loadStylistAvailabilityData();
+
+        // Setup date RecyclerView (horizontal scroll)
+        setupDateRecyclerView();
+
+        // Setup time slot RecyclerView (grid)
+        setupTimeSlotRecyclerView();
 
         // Display availability for the default stylist (A)
         displayAvailability();
@@ -83,7 +90,7 @@ public class PickDateTime extends AppCompatActivity {
                 if (parts.length == 3) {
                     String stylist = parts[0].trim();
                     String timeSlot = parts[1].trim();
-                    boolean available = parts[2].trim().equals("O");
+                    boolean available = parts[2].trim().equals("⭕");
 
                     // Add the stylist and their availability data
                     stylistAvailability.putIfAbsent(stylist, new HashMap<>());
@@ -97,56 +104,50 @@ public class PickDateTime extends AppCompatActivity {
         }
     }
 
-    private void displayAvailability() {
-        // Clear previous time slots
-        timeSlotGrid.removeAllViews();
+    private void setupDateRecyclerView() {
+        RecyclerView dateRecyclerView = findViewById(R.id.recycler_view_dates);
+        dateRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        if (!stylistAvailability.containsKey(selectedStylist)) return;
+        // Sample data for dates
+        List<String> dates = new ArrayList<>();
+        dates.add("1 Fri");
+        dates.add("2 Sat");
+        dates.add("3 Sun");
+        dates.add("4 Mon");
+        dates.add("5 Tue");
+        dates.add("6 Wed");
+        dates.add("7 Thu");
 
-        Map<String, Boolean> availability = stylistAvailability.get(selectedStylist);
-        int columnCount = 8; // Set the number of columns
-        String[] timeSlots = {"11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"}; // Time slots
-
-        // Create headers for the days of the week
-        for (int i = 0; i < timeSlots.length; i++) {
-            TextView timeSlotView = new TextView(this);
-            timeSlotView.setText(timeSlots[i]);
-            timeSlotView.setPadding(16, 16, 16, 16);
-            timeSlotView.setGravity(Gravity.CENTER);
-            timeSlotView.setBackgroundColor(Color.LTGRAY); // Light gray for headers
-            timeSlotView.setTextColor(Color.BLACK);
-
-            // Add to grid layout (first column for time slots)
-            timeSlotGrid.addView(timeSlotView);
-        }
-
-        // Add availability slots for the selected stylist
-        for (Map.Entry<String, Boolean> entry : availability.entrySet()) {
-            String timeSlot = entry.getKey();
-            boolean isAvailable = entry.getValue();
-
-            TextView timeSlotView = new TextView(this);
-            timeSlotView.setText(isAvailable ? "⭕" : "❌");
-            timeSlotView.setPadding(16, 16, 16, 16);
-            timeSlotView.setGravity(Gravity.CENTER);
-            timeSlotView.setBackgroundColor(isAvailable ? Color.GREEN : Color.RED);
-            timeSlotView.setTextColor(Color.WHITE);
-
-            // Enable click only for available slots
-            if (isAvailable) {
-                timeSlotView.setOnClickListener(v -> {
-                    Intent intent = new Intent(PickDateTime.this, CustomerInformation.class);
-                    intent.putExtra("SELECTED_TIME", timeSlot);
-                    startActivity(intent);
-                });
-            }
-
-            // Add the time slot to the grid (use the correct column for the time)
-            timeSlotGrid.addView(timeSlotView);
-        }
+        DateAdapter dateAdapter = new DateAdapter(dates, selectedDate -> {
+            Toast.makeText(this, "Selected Date: " + selectedDate, Toast.LENGTH_SHORT).show();
+            // Optionally update time slots based on selected date
+        });
+        dateRecyclerView.setAdapter(dateAdapter);
     }
 
+    private void setupTimeSlotRecyclerView() {
+        RecyclerView timeSlotRecyclerView = findViewById(R.id.recycler_view_availability);
+        timeSlotRecyclerView.setLayoutManager(new GridLayoutManager(this, 7)); // 7 columns (1 for each day)
 
+        // Sample data for time slots
+        List<String> timeSlots = new ArrayList<>();
+        String[] times = {"10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"};
+        for (String time : times) {
+            timeSlots.add(time);
+        }
+
+        TimeSlotAdapter timeSlotAdapter = new TimeSlotAdapter(timeSlots, stylistAvailability.get(selectedStylist), timeSlot -> {
+            Intent intent = new Intent(PickDateTime.this, CustomerInformation.class);
+            intent.putExtra("SELECTED_TIME", timeSlot);
+            startActivity(intent);
+        });
+        timeSlotRecyclerView.setAdapter(timeSlotAdapter);
+    }
+
+    private void displayAvailability() {
+        // Update the availability in the RecyclerView if needed
+        setupTimeSlotRecyclerView();
+    }
 
     private void updateStylistSelection(Button selectedButton) {
         // Reset the background color of the previously selected button
