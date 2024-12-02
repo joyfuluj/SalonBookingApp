@@ -2,11 +2,9 @@ package com.example.salonbookingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.activity.EdgeToEdge;
@@ -42,14 +40,8 @@ public class SalonDetail extends AppCompatActivity {
         Button bookNowButton = findViewById(R.id.button3); // "Book now" button's ID
         bookNowButton.setOnClickListener(v -> {
             // Move to "Coupon Menu" page
-            Log.d("Navigation", "Navigating to PickDateTime");
-            Toast.makeText(this, "Navigating to PickDateTime", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(SalonDetail.this, PickDateTime.class); // 遷移先
-            intent.putExtra("MENU", "Coupon A"); // 必要に応じてデータを渡す
+            Intent intent = new Intent(SalonDetail.this, CouponMenu.class);
             startActivity(intent);
-            finish(); // 現在のアクティビティを終了
-
         });
 
 

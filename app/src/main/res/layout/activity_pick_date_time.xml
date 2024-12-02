@@ -43,254 +43,139 @@
             android:padding="8dp" />
     </androidx.appcompat.widget.Toolbar>
 
-
     <!-- Main Content LinearLayout-->
     <LinearLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <!-- Salon Name -->
         <TextView
             android:id="@+id/salon_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
             android:text="Salon A"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:padding="8dp" />
+            android:textStyle="bold" />
 
         <!-- Coupon/Menu selected -->
         <TextView
             android:id="@+id/selected_coupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="8dp"
             android:text="Selected Coupon / Menu: Coupon A"
-            android:textSize="16sp"
-            android:padding="8dp" />
+            android:textSize="16sp" />
 
+        <!-- Stylist Buttons A,B,C -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
 
-<!--            &lt;!&ndash; Stylist Selection &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Select your preferred stylist"-->
-<!--                android:textSize="16sp"-->
-<!--                android:padding="8dp" />-->
+            <Button
+                android:id="@+id/stylist_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Stylist A" />
 
-            <!-- Stylist Buttons A,B,C-->
+            <Button
+                android:id="@+id/stylist_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Stylist B" />
+
+            <Button
+                android:id="@+id/stylist_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stylist C" />
+        </LinearLayout>
+
+        <!-- Stylist Details -->
+        <LinearLayout
+            android:id="@+id/stylist_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/stylist_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/baseline_person_24" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingVertical="8dp">
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/stylist_a"
+                <TextView
+                    android:id="@+id/stylist_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="Stylist A" />
+                    android:paddingBottom="4dp"
+                    android:text="Stylist A"
+                    android:textSize="18sp" />
 
-                <Button
-                    android:id="@+id/stylist_b"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="Stylist B" />
-
-                <Button
-                    android:id="@+id/stylist_c"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Stylist C" />
-            </LinearLayout>
-
-            <!-- Stylist Details -->
-            <LinearLayout
-                android:id="@+id/stylist_details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@android:color/darker_gray"
-                android:padding="8dp">
-
-                <ImageView
-                    android:id="@+id/stylist_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/baseline_person_24" />
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/message_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/stylist_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Stylist A"
-                        android:textSize="18sp"
-                        android:paddingBottom="4dp" />
-
-                    <TextView
-                        android:id="@+id/message_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Message"
-                        android:background="@android:color/white"
-                        android:padding="8dp"
-                        android:gravity="start" />
-                </LinearLayout>
+                    android:background="@android:color/white"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text="Message" />
             </LinearLayout>
+        </LinearLayout>
 
-        <!-- Calendar (Month of the Year) December, 2024 -->
+        <!-- Calendar (Month of the Year) -->
         <TextView
+            android:id="@+id/month_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="8dp"
-            android:text="December, 2024"/>
+            android:text="December, 2024" />
 
-
-        <!-- Date RecyclerView (1週間分の日付を横に表示) -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_dates"
+        <!-- Availability Table -->
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            android:padding="8dp" />
+            android:fillViewport="true">
 
-        <!-- Time Slots and Availability -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <!-- Fixed Time Slots (Left Column) 10:00~16:30 -->
-            <LinearLayout
-                android:id="@+id/time_slots_column"
+            <ScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_height="wrap_content"
+                android:fillViewport="true">
 
-                <!-- 時間スロット -->
-                <TextView
+                <TableLayout
+                    android:id="@+id/table_availability"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10:00"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
+                    android:layout_margin="8dp"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="*">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10:30"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
+                    <!-- 動的に生成されるコンテンツ -->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11:00"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
+                </TableLayout>
+            </ScrollView>
+        </HorizontalScrollView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11:30"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12:00"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12:30"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="13:00"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="13:30"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="14:00"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="14:30"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15:00"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15:30"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="16:00"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="16:30"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <!-- RecyclerView for Availability -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_availability"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp" />
-        </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
