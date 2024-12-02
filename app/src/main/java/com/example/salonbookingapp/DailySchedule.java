@@ -120,10 +120,11 @@ public class DailySchedule extends AppCompatActivity {
                             Toast toast = Toast.makeText(DailySchedule.this, text, duration);
                             toast.show();
                         } else {
+                            String fileT = intent.getStringExtra("fileT");
                             Intent intent = new Intent(DailySchedule.this, TimeSlot.class);
                             intent.putExtra("date", dayMonth);
                             intent.putExtra("year", year);
-                            intent.putExtra("file", file);
+                            intent.putExtra("fileT", fileT);
                             startActivity(intent);
                         }
                     }
