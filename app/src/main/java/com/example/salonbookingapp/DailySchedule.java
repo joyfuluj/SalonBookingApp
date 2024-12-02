@@ -39,6 +39,7 @@ public class DailySchedule extends AppCompatActivity {
         String year = intent.getStringExtra("year");
         String month = intent.getStringExtra("month");
         String file = intent.getStringExtra("file");
+        String fileT = intent.getStringExtra("fileT");
 
         TextView m = findViewById(R.id.month);
         m.setText(month);
@@ -120,7 +121,6 @@ public class DailySchedule extends AppCompatActivity {
                             Toast toast = Toast.makeText(DailySchedule.this, text, duration);
                             toast.show();
                         } else {
-                            String fileT = intent.getStringExtra("fileT");
                             Intent intent = new Intent(DailySchedule.this, TimeSlot.class);
                             intent.putExtra("date", dayMonth);
                             intent.putExtra("year", year);
@@ -145,29 +145,52 @@ public class DailySchedule extends AppCompatActivity {
                                     TimeSlot.setText("-");
 
                                     try {
-                                        FileInputStream fis2 = openFileInput(file);
-                                        InputStreamReader isr2 = new InputStreamReader(fis2);
-                                        BufferedReader br2 = new BufferedReader(isr2);
+                                        FileInputStream fis3 = openFileInput(fileT);
+                                        InputStreamReader isr3 = new InputStreamReader(fis3);
+                                        BufferedReader br3 = new BufferedReader(isr3);
+                                        String line3;
 
-                                        StringBuilder updatedContent = new StringBuilder();
-                                        String line2;
-                                        while ((line2 = br2.readLine()) != null) {
-                                            String[] words2 = line2.split(",\\s*");
-                                            if (words2[0].equals(dayMonth)) {
-                                                updatedContent.append(words2[0]).append(",").append("0").append("\n");
-                                            } else {
-                                                updatedContent.append(line2).append("\n");
+                                        boolean booked = false;
+
+                                        while ((line3 = br3.readLine()) != null){
+                                            String[] words3 = line3.split(",\\s*");
+                                            if (words3[3].equals("1") && words3[0].equals(dayMonth)) {
+                                                Toast.makeText(DailySchedule.this, "Please cancel the bookings on this day", Toast.LENGTH_SHORT).show();
+                                                booked = true;
+                                                break;
                                             }
                                         }
-                                        br2.close();
-                                        fis2.close();
+                                        br3.close();
+                                        fis3.close();
 
-                                        FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
-                                        fos.write(updatedContent.toString().getBytes());
-                                        fos.close();
+                                        if(booked){
+                                            TimeOff.setChecked(true);
+                                            TimeSlot.setText("TIME SLOT");}
+                                        else {
+                                            FileInputStream fis2 = openFileInput(file);
+                                            InputStreamReader isr2 = new InputStreamReader(fis2);
+                                            BufferedReader br2 = new BufferedReader(isr2);
 
-                                        Toast.makeText(DailySchedule.this, "Day status updated", Toast.LENGTH_SHORT).show();
-                                        recreate();
+                                            StringBuilder updatedContent = new StringBuilder();
+                                            String line2;
+                                            while ((line2 = br2.readLine()) != null && !booked) {
+                                                String[] words2 = line2.split(",\\s*");
+                                                if (words2[0].equals(dayMonth)) {
+                                                    updatedContent.append(words2[0]).append(",").append("0").append("\n");
+                                                } else {
+                                                    updatedContent.append(line2).append("\n");
+                                                }
+                                            }
+                                            br2.close();
+                                            fis2.close();
+
+                                            FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
+                                            fos.write(updatedContent.toString().getBytes());
+                                            fos.close();
+
+                                            Toast.makeText(DailySchedule.this, "Day status updated", Toast.LENGTH_SHORT).show();
+                                            recreate();
+                                        }
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
@@ -196,8 +219,10 @@ public class DailySchedule extends AppCompatActivity {
                                         BufferedReader br2 = new BufferedReader(isr2);
 
                                         StringBuilder updatedContent = new StringBuilder();
+
                                         String line2;
-                                        while ((line2 = br2.readLine()) != null) {
+
+                                        while ((line2 = br2.readLine()) != null ) {
                                             String[] words2 = line2.split(",\\s*");
                                             if (words2[0].equals(dayMonth)) {
                                                 updatedContent.append(words2[0]).append(",").append("1").append("\n");
@@ -207,6 +232,7 @@ public class DailySchedule extends AppCompatActivity {
                                         }
                                         br2.close();
                                         fis2.close();
+
 
                                         FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
                                         fos.write(updatedContent.toString().getBytes());

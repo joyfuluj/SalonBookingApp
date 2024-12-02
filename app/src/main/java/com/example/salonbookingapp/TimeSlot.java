@@ -126,11 +126,14 @@ public class TimeSlot extends AppCompatActivity {
                 timeV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(TimeSlot.this, BookingDetails.class);
-                        intent.putExtra("date", day);
-                        intent.putExtra("year", year);
-                        intent.putExtra("time", time);
-                        startActivity(intent);
+                        if(bookStatus.equals("0")){Toast.makeText(TimeSlot.this, "No booking", Toast.LENGTH_SHORT).show();}
+                        else {
+                            Intent intent = new Intent(TimeSlot.this, BookingDetails.class);
+                            intent.putExtra("date", day);
+                            intent.putExtra("year", year);
+                            intent.putExtra("time", time);
+                            startActivity(intent);
+                        }
                     }
                 });
 
@@ -155,8 +158,6 @@ public class TimeSlot extends AppCompatActivity {
                                         while ((line2 = br2.readLine()) != null) {
                                             String[] words2 = line2.split(",\\s*");
                                             if (words2[1].equals(time) && words2[0].equals(day)) {
-                                                Log.d("TimeSlot", "Line2: " + line2);  // Log the raw line
-                                                Log.d("TimeSlot", "Words2: " + Arrays.toString(words2));
                                                 updatedContent.append(day).append(",").append(time).append(",").append(words2[2]).append(",").append("0").append(",").append("0").append("\n");
                                             } else {
                                                 updatedContent.append(line2).append("\n");
@@ -164,9 +165,6 @@ public class TimeSlot extends AppCompatActivity {
                                         }
                                         br2.close();
                                         fis2.close();
-
-
-
 
                                         FileOutputStream fos = openFileOutput(fileT, Context.MODE_PRIVATE);
                                         fos.write(updatedContent.toString().getBytes());
