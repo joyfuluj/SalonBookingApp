@@ -77,6 +77,13 @@ public class PickDateTime extends AppCompatActivity {
         // デフォルトの週選択（Week 1 をハイライト）
         highlightWeekButton(buttonWeek1, buttonWeek2);
 
+        // スタイリストボタンの初期スタイルを設定
+        Button[] allStylistButtons = {stylistA, stylistB, stylistC};
+        for (Button button : allStylistButtons) {
+            button.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+            button.setTextColor(getResources().getColor(android.R.color.black));
+        }
+
         // デフォルトのスタイリスト選択
         updateStylistSelection(stylistA);
 
