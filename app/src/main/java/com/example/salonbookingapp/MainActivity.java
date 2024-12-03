@@ -29,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
     public void onClick (View view){
         EditText username = findViewById(R.id.username);
         String user = username.getText().toString().trim();
-        if(user.equals("staff")){
+        if (user != null && user.toLowerCase().contains("stylist")) {
             Intent intent = new Intent(this, MyPageforStaff.class);
+            intent.putExtra("username", user);
             startActivity(intent);
         }
         else if(user.isEmpty()){
