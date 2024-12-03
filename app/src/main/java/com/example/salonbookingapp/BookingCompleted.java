@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.io.FileOutputStream; // 追加
 
@@ -27,6 +29,7 @@ public class BookingCompleted extends AppCompatActivity {
     String selectedDate;
     String selectedTime;
     String salonName;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class BookingCompleted extends AppCompatActivity {
         customerEmail = intent.getStringExtra(Constants.EXTRA_CUSTOMER_EMAIL);
         customerRequest = intent.getStringExtra(Constants.EXTRA_CUSTOMER_REQUEST);
         price = intent.getStringExtra(Constants.EXTRA_CUSTOMER_PRICE);
+        username = intent.getStringExtra("username");
 
         // Set the data to the TextViews
         salonTextView.setText(salonName != null ? salonName : "No salon");
@@ -66,11 +70,10 @@ public class BookingCompleted extends AppCompatActivity {
 
         // My Page Button's Click Listener
         myPageButton.setOnClickListener(v -> {
-            // Move to Mypage
-            Intent myPageIntent = new Intent(BookingCompleted.this, MyPage.class);
-            startActivity(myPageIntent);
-            // Optionally, finish current activity
-            // finish();
+            Intent toHome = new Intent(this, Search.class);
+            toHome.putExtra("state", "home");
+            toHome.putExtra("username", username);
+            startActivity(toHome);
         });
     }
 
@@ -82,7 +85,8 @@ public class BookingCompleted extends AppCompatActivity {
 
         // 保存するデータをCSV形式で作成
         String reservationData = salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
-                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "\n";
+
+                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username + "\n";
 
         FileOutputStream outputStream;
 

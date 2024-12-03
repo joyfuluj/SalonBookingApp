@@ -31,11 +31,17 @@ public class CouponMenu extends AppCompatActivity {
     private ListView listView;
     private List<MenuItem> menuItems;
     private MenuAdapter menuAdapter;
+    private String salonName;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        Intent intent = getIntent();
+        salonName = intent.getStringExtra("salonName");
+        username = intent.getStringExtra("username");
 
         // Initialize views
         tabAll = findViewById(R.id.tab_all);
@@ -87,12 +93,14 @@ public class CouponMenu extends AppCompatActivity {
             MenuItem selectedItem = (MenuItem) menuAdapter.getItem(position);
 
             // Pass selected item to next activity
-            Intent intent = new Intent(CouponMenu.this, PickDateTime.class);
-            intent.putExtra("MENU_TYPE", selectedItem.getType());
-            intent.putExtra("MENU_NAME", selectedItem.getName());
-            intent.putExtra("MENU_DESCRIPTION", selectedItem.getDescription());
-            intent.putExtra("MENU_PRICE", selectedItem.getPrice());
-            startActivity(intent);
+            Intent intent2 = new Intent(CouponMenu.this, PickDateTime.class);
+            intent2.putExtra("MENU_TYPE", selectedItem.getType());
+            intent2.putExtra("MENU_NAME", selectedItem.getName());
+            intent2.putExtra("MENU_DESCRIPTION", selectedItem.getDescription());
+            intent2.putExtra("MENU_PRICE", selectedItem.getPrice());
+            intent2.putExtra("salonName", salonName);
+            intent2.putExtra("username", username);
+            startActivity(intent2);
         });
     }
 

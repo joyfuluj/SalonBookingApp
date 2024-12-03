@@ -14,6 +14,7 @@ import com.example.salonbookingapp.databinding.ActivitySearchBinding;
 public class Search extends AppCompatActivity {
     ActivitySearchBinding binding;
     String username;
+    String state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,14 @@ public class Search extends AppCompatActivity {
         // Get the username passed via the Intent
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        state = intent.getStringExtra("state");
 
-        if (savedInstanceState == null) {
+        if(state != null && state.equals("home")){
+            binding.bottomNavigationView.setSelectedItemId(R.id.home);
+            HomeFragment fragment_home = HomeFragment.newInstance("param1Value", "param2Value", username);
+            replaceFragment(fragment_home);
+        }
+        else if (savedInstanceState == null) {
             SearchFragment fragment_search = SearchFragment.newInstance("param1Value", "param2Value", username);
             replaceFragment(fragment_search);
         }
@@ -45,7 +52,7 @@ public class Search extends AppCompatActivity {
                     selectedFragment = HotPickFragment.newInstance("param1Value", "param2Value", username);
                     break;
                 case R.id.home:
-                    selectedFragment = new HomeFragment();  // Show HomeFragment
+                    selectedFragment = HomeFragment.newInstance("param1Value", "param2Value", username);
                     break;
             }
 

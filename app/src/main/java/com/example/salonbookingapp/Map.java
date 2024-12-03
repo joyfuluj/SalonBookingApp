@@ -86,8 +86,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private void showMarkerDialog(String markerTitle){
             AlertDialog.Builder builder = new AlertDialog.Builder(Map.this);
-            builder.setTitle("Select Marker: " + markerTitle)
-                    .setMessage("Do you want to view more details about this location?")
+            builder.setTitle("Salon: " + markerTitle)
+                    .setMessage("Do you want to visit the salon page?")
                     .setPositiveButton("View Details", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // Launch the Detail Activity

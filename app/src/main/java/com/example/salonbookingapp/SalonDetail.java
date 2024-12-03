@@ -22,7 +22,7 @@ public class SalonDetail extends AppCompatActivity {
     String salonIntro;
     String salonName;
     String username;
-    ImageView image; // Moved initialization here
+    ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,22 +67,20 @@ public class SalonDetail extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Apply window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // "Book now" button's Click event
-        Button bookNowButton = findViewById(R.id.button3); // "Book now" button's ID
+        Button bookNowButton = findViewById(R.id.button3);
         bookNowButton.setOnClickListener(v -> {
-            // Move to "Coupon Menu" page
             Intent bookIntent = new Intent(SalonDetail.this, CouponMenu.class);
+            bookIntent.putExtra("salonName", salonName);
+            bookIntent.putExtra("username", username);
             startActivity(bookIntent);
         });
 
-        // Display salon name and intro
         TextView salon = findViewById(R.id.textView14);
         salon.setText(salonName);
         TextView intro = findViewById(R.id.textView16);

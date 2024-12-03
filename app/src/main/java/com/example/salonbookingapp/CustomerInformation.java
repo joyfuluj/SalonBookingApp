@@ -21,11 +21,17 @@ public class CustomerInformation extends AppCompatActivity {
     private String selectedDate;
     private String selectedTime;
     private String menuName; // Added
+    private String salonName;
+    private String username;
+    private TextView salon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_information);
+
+        salon = findViewById(R.id.salon_name);
+        salon.setText(salonName);
 
         // Generate random price between $35 and $65
         String price = generateRandomPrice(35, 65);
@@ -41,6 +47,8 @@ public class CustomerInformation extends AppCompatActivity {
             selectedDate = intent.getStringExtra(Constants.EXTRA_SELECTED_DATE);
             selectedTime = intent.getStringExtra(Constants.EXTRA_SELECTED_TIME);
             menuName = intent.getStringExtra(Constants.EXTRA_MENU_NAME); // Added
+            salonName = intent.getStringExtra("salonName");
+            username = intent.getStringExtra("username");
         }
 
         // Display the selected stylist, date, and time
@@ -120,6 +128,8 @@ public class CustomerInformation extends AppCompatActivity {
                 confirmationIntent.putExtra(Constants.EXTRA_SELECTED_DATE, selectedDate);
                 confirmationIntent.putExtra(Constants.EXTRA_SELECTED_TIME, selectedTime);
                 confirmationIntent.putExtra(Constants.EXTRA_MENU_NAME, menuName); // Added
+                confirmationIntent.putExtra("salonName", salonName);
+                confirmationIntent.putExtra("username", username);
 
                 // Start "BookingConfirmation" activity
                 startActivity(confirmationIntent);
