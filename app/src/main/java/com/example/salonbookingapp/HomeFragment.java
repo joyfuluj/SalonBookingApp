@@ -80,9 +80,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        LinearLayout mainLinearLayout = view.findViewById(R.id.firstLayout);
+        LinearLayout mainLinearLayout = view.findViewById(R.id.frame_layout);
         TextView setUser = view.findViewById(R.id.textView);
-        setUser.setText("Username: " + username);
+        setUser.setText("Hi, " + username + "!");
         setUser.setTextSize(28f);
         String file = "reservations.txt";
 
@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment {
                     String stylist = words[2];
                     String date = words[3];
                     String time = words[4];
-                    String user = words[5];
+                    String user = words[10];
                     String price = words[9];
 
                     if (user.equals(username)) {
@@ -118,6 +118,14 @@ public class HomeFragment extends Fragment {
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 1f
                         ));
+
+                        LinearLayout.LayoutParams leftTop = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        leftTop.setMargins(50, 40, 0, 0);
+
+
                         LinearLayout.LayoutParams left = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -128,7 +136,7 @@ public class HomeFragment extends Fragment {
                         salonTextView.setText(salonName);
                         salonTextView.setTextSize(28f);
                         textLayout.addView(salonTextView);
-                        salonTextView.setLayoutParams(left);
+                        salonTextView.setLayoutParams(leftTop);
 
                         TextView serviceLabelTextView = new TextView(requireContext());
                         serviceLabelTextView.setText("Menu/Coupon: " + menu);
@@ -163,14 +171,21 @@ public class HomeFragment extends Fragment {
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         ));
 
+                        LinearLayout.LayoutParams priceLayout = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        priceLayout.setMargins(0, 40, 40, 0);
+
                         TextView priceTextView = new TextView(requireContext());
                         priceTextView.setText(price);
                         priceTextView.setTextSize(28f);
                         rightLayout.addView(priceTextView);
+                        priceTextView.setLayoutParams(priceLayout);
 
                         Button detailButton = new Button(requireContext());
                         detailButton.setText("Delete");
-                        detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_green));
+                        detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red));
                         detailButton.setOnClickListener(v -> {
                             new AlertDialog.Builder(requireContext())
                                     .setTitle("Delete")
@@ -186,7 +201,7 @@ public class HomeFragment extends Fragment {
                                             while ((line2 = br2.readLine()) != null) {
                                                 String[] words2 = line2.split(",\\s*");
                                                 if (!(words2[0].equals(salonName) && words2[3].equals(date) &&
-                                                        words2[4].equals(time) && words2[5].equals(username))) {
+                                                        words2[4].equals(time) && words2[10].equals(username))) {
                                                     updatedContent.append(line2).append("\n");
                                                 }
                                             }
@@ -209,19 +224,24 @@ public class HomeFragment extends Fragment {
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        params.setMargins(0, 150, 40, 0);
+                        params.setMargins(0, 190, 40, 0);
                         detailButton.setLayoutParams(params);
                         rightLayout.addView(detailButton);
                         horizontalLayout.addView(rightLayout);
                         mainLinearLayout.addView(horizontalLayout);
 
+                        LinearLayout.LayoutParams div = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,  // Match parent width
+                                2  // Height of the divider
+                        );
+                        div.setMargins(0, 40, 0, 0);  // Set top margin
+
                         View divider = new View(requireContext());
-                        divider.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                2  // Height of the line (divider)
-                        ));
+                        divider.setLayoutParams(div);  // Apply layout parameters
                         divider.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black));
+
                         mainLinearLayout.addView(divider);
+
                     }
             }
             if(count == 0){
@@ -233,7 +253,7 @@ public class HomeFragment extends Fragment {
                 ));
 
                 TextView salonTextView = new TextView(requireContext());
-                salonTextView.setText("Haven't made a reservation yet?\nReserve your spot today!");
+                salonTextView.setText("Haven't made a reservation yet?\n\n      Reserve your spot today!");
                 salonTextView.setTextSize(20f);
                 horizontalLayout.addView(salonTextView);
                 mainLinearLayout.addView(horizontalLayout);

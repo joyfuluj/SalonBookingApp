@@ -23,12 +23,16 @@ public class CustomerInformation extends AppCompatActivity {
     private String menuName; // Added
     private String salonName;
     private String username;
+    private TextView salon;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_information);
+
+        salon = findViewById(R.id.salon_name);
+        salon.setText(salonName);
 
         // Generate random price between $35 and $65
         String price = generateRandomPrice(35, 65);

@@ -76,8 +76,8 @@ public class SalonDetail extends AppCompatActivity {
         Button bookNowButton = findViewById(R.id.button3);
         bookNowButton.setOnClickListener(v -> {
             Intent bookIntent = new Intent(SalonDetail.this, CouponMenu.class);
-            intent.putExtra("salonName", salonName);
-            intent.putExtra("username", username);
+            bookIntent.putExtra("salonName", salonName);
+            bookIntent.putExtra("username", username);
             startActivity(bookIntent);
         });
 

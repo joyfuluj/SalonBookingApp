@@ -21,7 +21,9 @@ public class BookingConfirmation extends AppCompatActivity {
     private String email;
     private String request;
     private String menuName; // Added
+    private TextView salon;
     private String salonName;
+    private TextView user;
     private String username;
 
 
@@ -29,6 +31,7 @@ public class BookingConfirmation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_confirmation);
+
 
         // Retrieve data from CustomerInformation
         Intent intent = getIntent();
@@ -47,6 +50,12 @@ public class BookingConfirmation extends AppCompatActivity {
             salonName = intent.getStringExtra("salonName");
             username = intent.getStringExtra("username");
         }
+
+        salon = findViewById(R.id.booking_salon);
+        salon.setText(salonName);
+
+        user = findViewById(R.id.user_name);
+        user.setText(username);
 
         // Display data in TextViews
         TextView nameTextView = findViewById(R.id.customer_name);
@@ -78,7 +87,7 @@ public class BookingConfirmation extends AppCompatActivity {
 
                 // Move to "BookingCompleted" page with necessary data
                 Intent completedIntent = new Intent(BookingConfirmation.this, BookingCompleted.class);
-                completedIntent.putExtra(Constants.EXTRA_BOOKING_SALON, "Salon A"); // Assuming "Salon A" is fixed or retrieve dynamically
+                completedIntent.putExtra(Constants.EXTRA_BOOKING_SALON, salonName); // Assuming "Salon A" is fixed or retrieve dynamically
 //                completedIntent.putExtra(Constants.EXTRA_BOOKING_MENU, "Coupon A"); // Assuming "Coupon A" is fixed or retrieve dynamically
                 completedIntent.putExtra(Constants.EXTRA_BOOKING_MENU, menuName); // Updated to retrieve dynamic menu
                 completedIntent.putExtra(Constants.EXTRA_BOOKING_STYLIST, selectedStylist);
@@ -95,7 +104,6 @@ public class BookingConfirmation extends AppCompatActivity {
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_EMAIL, email);
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_REQUEST, request);
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_PRICE, price);
-//                completedIntent.putExtra("salonName", salonName);
                 completedIntent.putExtra("username", username);
 
 

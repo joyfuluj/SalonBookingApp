@@ -30,6 +30,7 @@ public class PickDateTime extends AppCompatActivity {
     private String menuPrice;
     private String salonName;
     private String username;
+    private TextView salon;
 
     private Button selectedStylistButton;
     private String selectedStylist = "Stylist A"; // デフォルトのスタイリスト名
@@ -63,6 +64,9 @@ public class PickDateTime extends AppCompatActivity {
         menuPrice = intent.getStringExtra("MENU_PRICE");
         salonName = intent.getStringExtra("salonName");
         username = intent.getStringExtra("username");
+
+        salon = findViewById(R.id.salon_name);
+        salon.setText(salonName);
 
         // デバッグ用ログ
         System.out.println("Received Menu Type: " + menuType);
