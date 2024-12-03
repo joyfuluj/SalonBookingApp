@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -347,5 +348,8 @@ public class PickDateTime extends AppCompatActivity {
         selectedButton.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
         selectedButton.setTextColor(getResources().getColor(android.R.color.white));
         selectedStylistButton = selectedButton;
+    }
+    public void back(View view) {
+        finish(); // back to previous page
     }
 }
