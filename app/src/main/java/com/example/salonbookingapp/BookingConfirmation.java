@@ -26,7 +26,23 @@ public class BookingConfirmation extends AppCompatActivity {
                 Intent intent = new Intent(BookingConfirmation.this, BookingCompleted.class);
 
 
+<<<<<<< Updated upstream
                 startActivity(intent);
+=======
+
+                // お客様情報も渡す
+                completedIntent.putExtra(Constants.EXTRA_CUSTOMER_NAME, name);
+                completedIntent.putExtra(Constants.EXTRA_CUSTOMER_PHONE, phone);
+                completedIntent.putExtra(Constants.EXTRA_CUSTOMER_EMAIL, email);
+                completedIntent.putExtra(Constants.EXTRA_CUSTOMER_REQUEST, request);
+                completedIntent.putExtra(Constants.EXTRA_CUSTOMER_PRICE, price);
+
+
+                // Optionally, pass other data if needed
+                startActivity(completedIntent);
+                // Optionally, finish current activity to prevent back navigation
+                // finish();
+>>>>>>> Stashed changes
             }
         });
     }
