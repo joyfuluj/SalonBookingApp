@@ -24,4 +24,5 @@ public class Constants {
     public static final String EXTRA_BOOKING_STYLIST = "com.example.salonbookingapp.BOOKING_STYLIST";
     public static final String EXTRA_BOOKING_DATE = "com.example.salonbookingapp.BOOKING_DATE";
     public static final String EXTRA_BOOKING_TIME = "com.example.salonbookingapp.BOOKING_TIME";
+
 }

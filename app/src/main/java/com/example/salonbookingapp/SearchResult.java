@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
@@ -61,15 +62,11 @@ public class SearchResult extends AppCompatActivity {
         String file = "salon.txt";
         String file2 = "review.txt";
         try {
+            // Open the salon file once
             FileInputStream fis = openFileInput(file);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String line;
-
-            FileInputStream fis2 = openFileInput(file2);
-            InputStreamReader isr2 = new InputStreamReader(fis2);
-            BufferedReader br2 = new BufferedReader(isr2);
-            String line2;
 
             while ((line = br.readLine()) != null) {
 
@@ -90,10 +87,16 @@ public class SearchResult extends AppCompatActivity {
                         horizontalLayoutParams.setMargins(16, 20, 16, 20);
                         horizontalLayout.setLayoutParams(horizontalLayoutParams);
 
+                        String imageName = getSalonImage(salonName, file);
                         ImageView imageView = new ImageView(this);
-                        imageView.setImageResource(R.drawable.baseline_person_24);
-                        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(120, 130);
-                        imageParams.setMargins(0, 0, 16, 0);
+                        int resId = getResources().getIdentifier(imageName.replace(".jpeg", ""), "drawable", getPackageName());
+                        if (resId != 0) {
+                            imageView.setImageResource(resId);
+                        } else {
+                            imageView.setImageResource(R.drawable.default_salon);
+                        }
+                        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(200, 250);
+                        imageParams.setMargins(0, 50, 16, 0);
                         imageView.setLayoutParams(imageParams);
                         horizontalLayout.addView(imageView);
 
@@ -104,7 +107,6 @@ public class SearchResult extends AppCompatActivity {
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 1f
                         ));
-
 
                         TextView salonTextView = new TextView(this);
                         salonTextView.setText(salonName);
@@ -130,35 +132,21 @@ public class SearchResult extends AppCompatActivity {
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         ));
 
-                        float sumAll = 0f;
-                        int count = 0;
-                        while ((line2 = br2.readLine()) != null) {
-                            String[] words2 = line2.split(",\\s*");
-                            if (words2[0].equals(salonName)) {
-                                sumAll += Float.parseFloat(words2[1]);
-                                count++;
-                            }
-                        }
-                        if (count > 0)
-                            rating = String.format("%.1f", sumAll / count);
-                        else
-                            rating = "NA";
 
+                        String rating = calculateRating(salonName, file2);
+                      
                         TextView ratingTextView = new TextView(this);
                         ratingTextView.setText("⭐️" + rating);
                         ratingTextView.setTextSize(30f);
                         rightLayout.addView(ratingTextView);
 
                         Button detailButton = new Button(this);
-                        detailButton.setText("detail");
+                        detailButton.setText("Detail");
                         detailButton.setBackgroundColor(ContextCompat.getColor(this, R.color.light_green));
-
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        detailButton.setLayoutParams(new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        params.setMargins(0, 80, 0, 0);
-                        detailButton.setLayoutParams(params);
+                        ));
 
                         final String currentSalonName = salonName;
                         detailButton.setOnClickListener(new View.OnClickListener() {
@@ -170,9 +158,11 @@ public class SearchResult extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
+
                         rightLayout.addView(detailButton);
                         horizontalLayout.addView(rightLayout);
                         mainLinearLayout.addView(horizontalLayout);
+
                         View divider = new View(this);
                         divider.setLayoutParams(new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -189,6 +179,61 @@ public class SearchResult extends AppCompatActivity {
 
     }
 
+    public String getSalonImage(String salonName, String file) {
+        String imageName = "";
+        try {
+            FileInputStream fis = openFileInput(file);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",\\s*");
+                if (words[0].equals(salonName)) {
+                    imageName = words[4];
+                    break;
+                }
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return imageName;
+    }
+
+    public String calculateRating(String salonName, String filename) {
+        float sum = 0f;
+        int count = 0;
+        String line;
+
+}
+        try {
+            FileInputStream fis = openFileInput(filename);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",\\s*");
+
+                if (words[0].equals(salonName)) {
+                    sum += Float.parseFloat(words[1]);
+                    count++;
+                }
+            }
+
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (count == 0) {
+            return "NA";
+        }
+
+        return String.format("%.1f", sum / count);
+    }
+
+
     public boolean checkServiceArray(String[] services, String[] keyArr) {
         for (String service : services) {
             for (String key : keyArr) {
@@ -200,5 +245,9 @@ public class SearchResult extends AppCompatActivity {
         return false;
     }
 
+
+    public void back(View v){
+        finish();
+    }
 
 }
