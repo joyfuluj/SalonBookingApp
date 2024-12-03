@@ -132,6 +132,7 @@ public class TimeSlot extends AppCompatActivity {
                             intent.putExtra("date", day);
                             intent.putExtra("year", year);
                             intent.putExtra("time", time);
+                            intent.putExtra("staff", staff);
                             intent.putExtra("fileT", fileT);
                             startActivity(intent);
                         }
