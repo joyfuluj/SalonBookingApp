@@ -226,4 +226,7 @@ public class staffProfile extends AppCompatActivity {
             finish();
         });
     }
+    public void back(View v) {
+        finish();
+    }
 }
