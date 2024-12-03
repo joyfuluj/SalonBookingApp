@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,10 +34,43 @@ public class BookingDetails extends AppCompatActivity {
         String day = intent.getStringExtra("date");
         String year = intent.getStringExtra("year");
         String time = intent.getStringExtra("time");
+        String staff = intent.getStringExtra("staff");
         TextView date = findViewById(R.id.day);
         TextView timeView = findViewById(R.id.time);
         date.setText(year+"/"+day);
         timeView.setText(time);
+
+        TextView name = findViewById(R.id.name);
+        TextView email = findViewById(R.id.email);
+        TextView phone = findViewById(R.id.phone);
+        TextView menu = findViewById(R.id.menu);
+        TextView stylist = findViewById(R.id.stylist);
+        TextView remark = findViewById(R.id.special);
+
+        try {
+            String file = "reservations.txt";
+            FileInputStream fis = openFileInput(file);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line ;
+
+            while((line = br.readLine()) !=null){
+                String[] words = line.split(",\\s*");
+                if(words[3].equals(day) && words[4].equals(time) && words[2].equals(staff)){
+                    name.setText(words[2]);
+                    email.setText(words[7]);
+                    phone.setText(words[6]);
+                    menu.setText(words[1]);
+                    stylist.setText(staff);
+                    remark.setText(words[8]);
+                }
+            }
+        br.close();
+        fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -61,6 +95,24 @@ public class BookingDetails extends AppCompatActivity {
                     String day = intent.getStringExtra("date");
                     String time = intent.getStringExtra("time");
                     String fileT = intent.getStringExtra("fileT");
+                    String staff = intent.getStringExtra("staff");
+
+                    FileInputStream fis3 = openFileInput(fileT);
+                    InputStreamReader isr3 = new InputStreamReader(fis3);
+                    BufferedReader br3 = new BufferedReader(isr3);
+                    String line3;
+
+                    StringBuilder updatedContent3 = new StringBuilder();
+                    while ((line3 = br3.readLine()) != null){
+                        String[] words3 = line3.split(",\\s*");
+                        if(words3[3].equals(day) && words3[4].equals(time) && words3[2].equals(staff)){
+                        }
+                        else{
+                            updatedContent3.append(line3).append("\n");
+                        }
+                    }
+                    br3.close();
+                    fis3.close();
 
                     FileInputStream fis2 = openFileInput(fileT);
                     InputStreamReader isr2 = new InputStreamReader(fis2);

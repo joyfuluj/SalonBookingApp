@@ -27,7 +27,7 @@ public class ChooseStaff extends AppCompatActivity {
         Intent intent = new Intent(this, SearchMonth.class);
         String file = "days_schedule1.txt";
         String fileT = "schedule1.txt";
-        String staff = "for staff 1";
+        String staff = "Stylist A";
         intent.putExtra("file",file);
         intent.putExtra("fileT",fileT);
         intent.putExtra("staff",staff);
@@ -38,7 +38,7 @@ public class ChooseStaff extends AppCompatActivity {
         String fileT = "schedule2.txt";
         String file = "days_schedule2.txt";
         intent.putExtra("fileT",fileT);
-        String staff = "for staff 2";
+        String staff = "Stylist B";
         intent.putExtra("staff",staff);
         intent.putExtra("file",file);
         startActivity(intent);
@@ -49,7 +49,7 @@ public class ChooseStaff extends AppCompatActivity {
         String file = "days_schedule3.txt";
         intent.putExtra("fileT",fileT);
         intent.putExtra("file",file);
-        String staff = "for staff 3";
+        String staff = "Stylist C";
         intent.putExtra("staff",staff);
         startActivity(intent);
     }

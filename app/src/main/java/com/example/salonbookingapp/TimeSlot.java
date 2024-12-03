@@ -43,29 +43,28 @@ public class TimeSlot extends AppCompatActivity {
         String day = intent.getStringExtra("date");
         String year = intent.getStringExtra("year");
         String fileT = intent.getStringExtra("fileT");
+        String staff = intent.getStringExtra("staff");
         TextView date = findViewById(R.id.day);
         date.setText(year+"/"+day);
-
 
         LinearLayout mainLinearLayout = findViewById(R.id.status);
         try {
             FileInputStream fis = openFileInput(fileT);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
-            String line = br.readLine();
+            String line ;
 
-
-            while ((line = br.readLine()) != null) {
+            while((line = br.readLine()) !=null){
                 String[] words = line.split(",\\s*");
+
+                if(!words[0].trim().equals(day)){continue;}
 
                 final String time = words[1];
                 final String bookStatus = words[3];
                 final String ava = words[4];
 
-
                 LinearLayout horizontalLayout = new LinearLayout(this);
                 horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-
 
                 LinearLayout.LayoutParams horizontalLayoutParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -132,6 +131,7 @@ public class TimeSlot extends AppCompatActivity {
                             intent.putExtra("date", day);
                             intent.putExtra("year", year);
                             intent.putExtra("time", time);
+                            intent.putExtra("staff", staff);
                             intent.putExtra("fileT", fileT);
                             startActivity(intent);
                         }

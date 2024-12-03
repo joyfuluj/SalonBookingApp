@@ -36,6 +36,7 @@ public class DailySchedule extends AppCompatActivity {
         setContentView(R.layout.activity_daily_schedule);
 
         Intent intent = getIntent();
+        String staff = intent.getStringExtra("staff");
         String year = intent.getStringExtra("year");
         String month = intent.getStringExtra("month");
         String file = intent.getStringExtra("file");
@@ -124,6 +125,7 @@ public class DailySchedule extends AppCompatActivity {
                             Intent intent = new Intent(DailySchedule.this, TimeSlot.class);
                             intent.putExtra("date", dayMonth);
                             intent.putExtra("year", year);
+                            intent.putExtra("staff", staff);
                             intent.putExtra("fileT", fileT);
                             startActivity(intent);
                         }
@@ -257,6 +259,8 @@ public class DailySchedule extends AppCompatActivity {
                     }
                 });
             }
+            br.close();
+            fis.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
