@@ -185,7 +185,7 @@ public class HomeFragment extends Fragment {
 
                         Button detailButton = new Button(requireContext());
                         detailButton.setText("Delete");
-                        detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red));
+                        detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_red));
                         detailButton.setOnClickListener(v -> {
                             new AlertDialog.Builder(requireContext())
                                     .setTitle("Delete")
@@ -269,6 +269,18 @@ public class HomeFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Button logoutButton = view.findViewById(R.id.button13);
+        logoutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+
+            SharedPreferences preferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            editor.apply();
+
+            startActivity(intent);
+            requireActivity().finish();
+        });
 
         return view;
     }
