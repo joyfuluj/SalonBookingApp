@@ -45,7 +45,7 @@ public class Search extends AppCompatActivity {
                     selectedFragment = HotPickFragment.newInstance("param1Value", "param2Value", username);
                     break;
                 case R.id.home:
-                    selectedFragment = new HomeFragment();  // Show HomeFragment
+                    selectedFragment = HomeFragment.newInstance("param1Value", "param2Value", username);
                     break;
             }
 
