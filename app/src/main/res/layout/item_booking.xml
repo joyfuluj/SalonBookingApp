@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="4dp"
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- サロン名 -->
+        <TextView
+            android:id="@+id/text_view_salon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salon A"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- メニュー -->
+        <TextView
+            android:id="@+id/text_view_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu: Coupon A"
+            android:textSize="16sp"
+            android:paddingTop="4dp" />
+
+        <!-- スタイリスト -->
+        <TextView
+            android:id="@+id/text_view_stylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stylist: Stylist A"
+            android:textSize="16sp"
+            android:paddingTop="4dp" />
+
+        <!-- 日時 -->
+        <TextView
+            android:id="@+id/text_view_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024/11/03(Sun) 11:00am - 12:00pm"
+            android:textSize="16sp"
+            android:paddingTop="4dp" />
+
+        <!-- 詳細表示ボタン -->
+        <Button
+            android:id="@+id/button_view_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Details"
+            android:background="@color/light_green"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

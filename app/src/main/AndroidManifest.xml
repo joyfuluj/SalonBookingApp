@@ -86,6 +86,20 @@
             android:name=".Search"
             android:exported="false" />
         <activity
+            android:name=".MyPage"
+            android:exported="false" />
+        <activity
+            android:name=".UpcomingBookingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookingDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SalonInfoActivity"
+            android:exported="false" />
+
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

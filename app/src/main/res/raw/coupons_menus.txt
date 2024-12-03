@@ -1,0 +1,7 @@
+Type,Name,Description,Price
+Coupon,10% Off,10% off on all services,
+Coupon,$20 Off,Get $20 off your next visit,
+Coupon,Seasonal Special,Special discount,
+Menu,Cut,Professional haircut for any style, $40
+Menu,Color,Choose your favorite hair color, $75
+Menu,Cut & Style,Haircut with styling included, $55

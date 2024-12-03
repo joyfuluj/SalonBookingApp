@@ -58,10 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:paddingVertical="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Salon:"
                     android:textStyle="bold"
@@ -70,10 +70,12 @@
 
                 <TextView
                     android:id="@+id/booking_salon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Salon A"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:layout_weight="3"
+                    android:gravity="end" />
             </LinearLayout>
 
             <!-- Menu -->
@@ -81,10 +83,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:paddingVertical="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Menu:"
                     android:textStyle="bold"
@@ -93,20 +95,23 @@
 
                 <TextView
                     android:id="@+id/booking_menu"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Coupon A"
-                    android:textSize="16sp" />
+                    android:text="No Menu"
+                    android:textSize="16sp"
+                    android:layout_weight="3"
+                    android:gravity="end" />
             </LinearLayout>
 
             <!-- Stylist -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Stylist:"
                     android:textStyle="bold"
@@ -115,10 +120,12 @@
 
                 <TextView
                     android:id="@+id/booking_stylist"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Stylist A"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:layout_weight="3"
+                    android:gravity="end" />
             </LinearLayout>
         </LinearLayout>
 

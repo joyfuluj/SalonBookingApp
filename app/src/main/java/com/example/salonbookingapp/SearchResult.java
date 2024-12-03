@@ -2,15 +2,16 @@ package com.example.salonbookingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.core.content.ContextCompat;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class SearchResult extends AppCompatActivity {
     String username;
     String salonName;
     String rating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,7 @@ public class SearchResult extends AppCompatActivity {
                 salonName = words[0];
                 String[] servicesArray = words[3].split(";");
                 String services = String.join(", ", servicesArray);
+
 
                 if (!salonName.equals("Name")) {
                     if (checkServiceArray(servicesArray, serviceArr)) {
@@ -129,7 +132,9 @@ public class SearchResult extends AppCompatActivity {
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         ));
 
+
                         String rating = calculateRating(salonName, file2);
+                      
                         TextView ratingTextView = new TextView(this);
                         ratingTextView.setText("⭐️" + rating);
                         ratingTextView.setTextSize(30f);
@@ -202,6 +207,7 @@ public class SearchResult extends AppCompatActivity {
         int count = 0;
         String line;
 
+}
         try {
             FileInputStream fis = openFileInput(filename);
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
