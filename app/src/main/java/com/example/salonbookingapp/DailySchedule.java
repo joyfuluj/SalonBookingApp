@@ -145,7 +145,7 @@ public class DailySchedule extends AppCompatActivity {
                                     TimeSlot.setText("-");
 
                                     try {
-                                        FileInputStream fis3 = openFileInput(fileT);
+                                        FileInputStream fis3 = openFileInput(file);
                                         InputStreamReader isr3 = new InputStreamReader(fis3);
                                         BufferedReader br3 = new BufferedReader(isr3);
                                         String line3;
@@ -154,7 +154,8 @@ public class DailySchedule extends AppCompatActivity {
 
                                         while ((line3 = br3.readLine()) != null){
                                             String[] words3 = line3.split(",\\s*");
-                                            if (words3[3].equals("1") && words3[0].equals(dayMonth)) {
+                                            if (words3.length > 3 && words3[3].equals("1") && words3[0].equals(dayMonth)) {
+
                                                 Toast.makeText(DailySchedule.this, "Please cancel the bookings on this day", Toast.LENGTH_SHORT).show();
                                                 booked = true;
                                                 break;
@@ -166,7 +167,7 @@ public class DailySchedule extends AppCompatActivity {
                                         if(booked){
                                             TimeOff.setChecked(true);
                                             TimeSlot.setText("TIME SLOT");}
-                                        else {
+                                        else { // close the day
                                             FileInputStream fis2 = openFileInput(file);
                                             InputStreamReader isr2 = new InputStreamReader(fis2);
                                             BufferedReader br2 = new BufferedReader(isr2);
@@ -184,9 +185,32 @@ public class DailySchedule extends AppCompatActivity {
                                             br2.close();
                                             fis2.close();
 
+                                            FileInputStream fis4 = openFileInput(fileT);
+                                            InputStreamReader isr4 = new InputStreamReader(fis4);
+                                            BufferedReader br4 = new BufferedReader(isr4);
+                                            StringBuilder updatedContentTime = new StringBuilder();
+                                            String line4;
+                                            while ((line4 = br4.readLine()) != null) {
+                                                String[] words3 = line4.split(",\\s*");
+                                                if(words3[0].equals(dayMonth)){
+                                                    updatedContentTime.append(words3[0]).append(",").append(words3[1]).append(",").append("0").append(",").append(words3[3]).append(",").append("0").append("\n");
+                                                }
+                                                else {
+                                                    updatedContentTime.append(line4).append("\n");
+                                                }
+                                            }
+                                            br4.close();
+                                            fis4.close();
+
                                             FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
                                             fos.write(updatedContent.toString().getBytes());
                                             fos.close();
+
+                                            fos = openFileOutput(fileT, Context.MODE_PRIVATE);
+                                            fos.write(updatedContentTime.toString().getBytes());
+                                            fos.close();
+
+
 
                                             Toast.makeText(DailySchedule.this, "Day status updated", Toast.LENGTH_SHORT).show();
                                             recreate();
@@ -233,9 +257,30 @@ public class DailySchedule extends AppCompatActivity {
                                         br2.close();
                                         fis2.close();
 
+                                        FileInputStream fis4 = openFileInput(fileT);
+                                        InputStreamReader isr4 = new InputStreamReader(fis4);
+                                        BufferedReader br4 = new BufferedReader(isr4);
+                                        StringBuilder updatedContentTime = new StringBuilder();
+                                        String line4;
+                                        while ((line4 = br4.readLine()) != null) {
+                                            String[] words3 = line4.split(",\\s*");
+                                            if(words3[0].equals(dayMonth)){
+                                                updatedContentTime.append(words3[0]).append(",").append(words3[1]).append(",").append("1").append(",").append(words3[3]).append(",").append("1").append("\n");
+                                            }
+                                            else {
+                                                updatedContentTime.append(line4).append("\n");
+                                            }
+                                        }
+                                        br4.close();
+                                        fis4.close();
+
 
                                         FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
                                         fos.write(updatedContent.toString().getBytes());
+                                        fos.close();
+
+                                        fos = openFileOutput(fileT, Context.MODE_PRIVATE);
+                                        fos.write(updatedContentTime.toString().getBytes());
                                         fos.close();
 
                                         Toast.makeText(DailySchedule.this, "Day status updated", Toast.LENGTH_SHORT).show();
