@@ -54,192 +54,192 @@ public class TimeSlot extends AppCompatActivity {
             BufferedReader br = new BufferedReader(isr);
             String line = br.readLine();
 
-
             while ((line = br.readLine()) != null) {
                 String[] words = line.split(",\\s*");
-
+                final String salonDate = words[0];
                 final String time = words[1];
                 final String bookStatus = words[3];
                 final String ava = words[4];
 
-
-                LinearLayout horizontalLayout = new LinearLayout(this);
-                horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-
-                LinearLayout.LayoutParams horizontalLayoutParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                horizontalLayoutParams.setMargins(16, 20, 16, 20);
-                horizontalLayout.setLayoutParams(horizontalLayoutParams);
-
-                LinearLayout.LayoutParams booking = new LinearLayout.LayoutParams(
-                        150,150
-                );
-                booking.setMargins(170, 20, 16, 20);
+                if(salonDate.equals(day)){
+                    LinearLayout horizontalLayout = new LinearLayout(this);
+                    horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
 
 
-                TextView timeV = new TextView(this);
-                Button bookingStatus = new Button(this);
-                Switch avaV = new Switch(this);
+                    LinearLayout.LayoutParams horizontalLayoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    horizontalLayoutParams.setMargins(16, 20, 16, 20);
+                    horizontalLayout.setLayoutParams(horizontalLayoutParams);
+
+                    LinearLayout.LayoutParams booking = new LinearLayout.LayoutParams(
+                            150,150
+                    );
+                    booking.setMargins(170, 20, 16, 20);
 
 
-                bookingStatus.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
-                bookingStatus.setLayoutParams(booking);
-                avaV.setLayoutParams(booking);
+                    TextView timeV = new TextView(this);
+                    Button bookingStatus = new Button(this);
+                    Switch avaV = new Switch(this);
 
 
-                timeV.setText(words[1]);
-                timeV.setTextSize(28f);
-                horizontalLayout.addView(timeV);
+                    bookingStatus.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+                    bookingStatus.setLayoutParams(booking);
+                    avaV.setLayoutParams(booking);
 
 
-                if (bookStatus.equals("0")) {
-                    bookingStatus.setText("-");
-                }
-                else{bookingStatus.setText("⭕");}
+                    timeV.setText(words[1]);
+                    timeV.setTextSize(28f);
+                    horizontalLayout.addView(timeV);
 
 
-                bookingStatus.setTextSize(20f);
-                horizontalLayout.addView(bookingStatus);
-
-
-                if (ava.equals("1")) {
-                    avaV.setChecked(true);
-                } else {
-                    avaV.setChecked(false);
-                }
-                horizontalLayout.addView(avaV);
-
-
-                mainLinearLayout.addView(horizontalLayout);
-                View divider = new View(this);
-                divider.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        2  // Height of the line (divider)
-                ));
-                divider.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
-                mainLinearLayout.addView(divider);
-
-
-                timeV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(bookStatus.equals("0")){Toast.makeText(TimeSlot.this, "No booking", Toast.LENGTH_SHORT).show();}
-                        else {
-                            Intent intent = new Intent(TimeSlot.this, BookingDetails.class);
-                            intent.putExtra("date", day);
-                            intent.putExtra("year", year);
-                            intent.putExtra("time", time);
-                            intent.putExtra("fileT", fileT);
-                            startActivity(intent);
-                        }
+                    if (bookStatus.equals("0")) {
+                        bookingStatus.setText("-");
                     }
-                });
+                    else{bookingStatus.setText("⭕");}
 
-                avaV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(TimeSlot.this);
-                        builder.setCancelable(true);
-                        builder.setTitle("Update");
-                        if(ava.equals("1")){
-                            builder.setMessage("Are you sure you want to set this time slot unavailable?");
-                            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    try {
-                                        FileInputStream fis2 = openFileInput(fileT);
-                                        InputStreamReader isr2 = new InputStreamReader(fis2);
-                                        BufferedReader br2 = new BufferedReader(isr2);
 
-                                        StringBuilder updatedContent = new StringBuilder();
-                                        String line2;
-                                        while ((line2 = br2.readLine()) != null) {
-                                            String[] words2 = line2.split(",\\s*");
-                                            if (words2[1].equals(time) && words2[0].equals(day)) {
-                                                updatedContent.append(day).append(",").append(time).append(",").append(words2[2]).append(",").append("0").append(",").append("0").append("\n");
-                                            } else {
-                                                updatedContent.append(line2).append("\n");
+                    bookingStatus.setTextSize(20f);
+                    horizontalLayout.addView(bookingStatus);
+
+
+                    if (ava.equals("1")) {
+                        avaV.setChecked(true);
+                    } else {
+                        avaV.setChecked(false);
+                    }
+                    horizontalLayout.addView(avaV);
+
+
+                    mainLinearLayout.addView(horizontalLayout);
+                    View divider = new View(this);
+                    divider.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            2  // Height of the line (divider)
+                    ));
+                    divider.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+                    mainLinearLayout.addView(divider);
+
+
+                    timeV.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(bookStatus.equals("0")){Toast.makeText(TimeSlot.this, "No booking", Toast.LENGTH_SHORT).show();}
+                            else {
+                                Intent intent = new Intent(TimeSlot.this, BookingDetails.class);
+                                intent.putExtra("date", day);
+                                intent.putExtra("year", year);
+                                intent.putExtra("time", time);
+                                intent.putExtra("fileT", fileT);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+
+                    avaV.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(TimeSlot.this);
+                            builder.setCancelable(true);
+                            builder.setTitle("Update");
+                            if(ava.equals("1")){
+                                builder.setMessage("Are you sure you want to set this time slot unavailable?");
+                                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        try {
+                                            FileInputStream fis2 = openFileInput(fileT);
+                                            InputStreamReader isr2 = new InputStreamReader(fis2);
+                                            BufferedReader br2 = new BufferedReader(isr2);
+
+                                            StringBuilder updatedContent = new StringBuilder();
+                                            String line2;
+                                            while ((line2 = br2.readLine()) != null) {
+                                                String[] words2 = line2.split(",\\s*");
+                                                if (words2[1].equals(time) && words2[0].equals(day)) {
+                                                    updatedContent.append(day).append(",").append(time).append(",").append(words2[2]).append(",").append("0").append(",").append("0").append("\n");
+                                                } else {
+                                                    updatedContent.append(line2).append("\n");
+                                                }
                                             }
+                                            br2.close();
+                                            fis2.close();
+
+                                            FileOutputStream fos = openFileOutput(fileT, Context.MODE_PRIVATE);
+                                            fos.write(updatedContent.toString().getBytes());
+                                            fos.close();
+
+
+
+                                            avaV.setChecked(false);
+                                            timeV.setText("-");
+                                            Toast.makeText(TimeSlot.this, "Time status updated", Toast.LENGTH_SHORT).show();
+                                            recreate();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
                                         }
-                                        br2.close();
-                                        fis2.close();
+                                    }
+                                });
+                                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        avaV.setChecked(true);
+                                    }
+                                });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
+                            else{
+                                builder.setMessage("Are you sure you want to set this time slot available?");
+                                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        avaV.setChecked(true);
 
-                                        FileOutputStream fos = openFileOutput(fileT, Context.MODE_PRIVATE);
-                                        fos.write(updatedContent.toString().getBytes());
-                                        fos.close();
+                                        try {
+                                            FileInputStream fis2 = openFileInput(fileT);
+                                            InputStreamReader isr2 = new InputStreamReader(fis2);
+                                            BufferedReader br2 = new BufferedReader(isr2);
 
 
+                                            StringBuilder updatedContent = new StringBuilder();
+                                            String line2;
+                                            while ((line2 = br2.readLine()) != null) {
+                                                String[] words2 = line2.split(",\\s*");
+                                                if (words2[1].equals(time)  && words2[0].equals(day)) {
+                                                    updatedContent.append(day).append(",").append(time).append(",").append(words2[2]).append(",").append("0").append(",").append("1").append("\n");
 
+                                                } else {
+                                                    updatedContent.append(line2).append("\n");
+                                                }
+                                            }
+                                            br2.close();
+                                            fis2.close();
+
+                                            FileOutputStream fos = openFileOutput(fileT, Context.MODE_PRIVATE);
+                                            fos.write(updatedContent.toString().getBytes());
+                                            fos.close();
+
+                                            Toast.makeText(TimeSlot.this, "Time status updated", Toast.LENGTH_SHORT).show();
+                                            recreate();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
                                         avaV.setChecked(false);
-                                        timeV.setText("-");
-                                        Toast.makeText(TimeSlot.this, "Time status updated", Toast.LENGTH_SHORT).show();
-                                        recreate();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
                                     }
-                                }
-                            });
-                            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    avaV.setChecked(true);
-                                }
-                            });
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
+                                });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
                         }
-                        else{
-                            builder.setMessage("Are you sure you want to set this time slot available?");
-                            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    avaV.setChecked(true);
-
-                                    try {
-                                        FileInputStream fis2 = openFileInput(fileT);
-                                        InputStreamReader isr2 = new InputStreamReader(fis2);
-                                        BufferedReader br2 = new BufferedReader(isr2);
-
-
-                                        StringBuilder updatedContent = new StringBuilder();
-                                        String line2;
-                                        while ((line2 = br2.readLine()) != null) {
-                                            String[] words2 = line2.split(",\\s*");
-                                            if (words2[1].equals(time)  && words2[0].equals(day)) {
-                                                updatedContent.append(day).append(",").append(time).append(",").append(words2[2]).append(",").append("0").append(",").append("1").append("\n");
-
-                                            } else {
-                                                updatedContent.append(line2).append("\n");
-                                            }
-                                        }
-                                        br2.close();
-                                        fis2.close();
-
-                                        FileOutputStream fos = openFileOutput(fileT, Context.MODE_PRIVATE);
-                                        fos.write(updatedContent.toString().getBytes());
-                                        fos.close();
-
-                                        Toast.makeText(TimeSlot.this, "Time status updated", Toast.LENGTH_SHORT).show();
-                                        recreate();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
-                            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    avaV.setChecked(false);
-                                }
-                            });
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                        }
-                    }
-                });
+                    });
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
