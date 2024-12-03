@@ -1,0 +1,2 @@
+salonName,menu,stylist,date,time,name,phone,email,request,price,username
+Luxe Nails & Hair,$20 Off,Stylist C,2024-12-05,10:30,joy,0987654,yhuji@huo.ocm,,$65.00,aaa
