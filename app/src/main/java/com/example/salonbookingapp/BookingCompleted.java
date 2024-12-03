@@ -85,6 +85,7 @@ public class BookingCompleted extends AppCompatActivity {
 
         // 保存するデータをCSV形式で作成
         String reservationData = salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
+
                 customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username + "\n";
 
         FileOutputStream outputStream;

@@ -134,7 +134,7 @@ public class SearchResult extends AppCompatActivity {
 
 
                         String rating = calculateRating(salonName, file2);
-                      
+
                         TextView ratingTextView = new TextView(this);
                         ratingTextView.setText("⭐️" + rating);
                         ratingTextView.setTextSize(30f);

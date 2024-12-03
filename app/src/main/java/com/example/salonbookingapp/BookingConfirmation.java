@@ -26,7 +26,6 @@ public class BookingConfirmation extends AppCompatActivity {
     private TextView user;
     private String username;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +66,6 @@ public class BookingConfirmation extends AppCompatActivity {
         TextView dateTimeTextView = findViewById(R.id.booking_date_time);
         TextView menuTextView = findViewById(R.id.booking_menu); // 追加
 
-
         nameTextView.setText(name != null ? name : "No name");
         phoneTextView.setText(phone != null ? phone : "No phone");
         emailTextView.setText(email != null ? email : "No email");
@@ -76,6 +74,17 @@ public class BookingConfirmation extends AppCompatActivity {
         stylistTextView.setText(selectedStylist != null ? selectedStylist : "No stylist");
         dateTimeTextView.setText((selectedDate != null ? selectedDate : "No date") + " " + (selectedTime != null ? selectedTime : "No time"));
         menuTextView.setText(menuName != null ? menuName : "No menu"); // 追加
+
+        // バックボタンの初期化
+        TextView backButton = findViewById(R.id.backButton); // TextView の ID を使用
+
+        // バックボタンのクリックリスナーを設定
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back(view);
+            }
+        });
 
         // Confirm Button
         Button confirmButton = findViewById(R.id.btn_confirm_reservation);
@@ -94,10 +103,6 @@ public class BookingConfirmation extends AppCompatActivity {
                 completedIntent.putExtra(Constants.EXTRA_BOOKING_DATE, selectedDate);
                 completedIntent.putExtra(Constants.EXTRA_BOOKING_TIME, selectedTime);
 
-
-                startActivity(intent);
-
-
                 // お客様情報も渡す
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_NAME, name);
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_PHONE, phone);
@@ -106,20 +111,21 @@ public class BookingConfirmation extends AppCompatActivity {
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_PRICE, price);
                 completedIntent.putExtra("username", username);
 
+                // 不要な startActivity(intent); を削除
 
-                // Optionally, pass other data if needed
+                // Start "BookingCompleted" activity
                 startActivity(completedIntent);
+
                 // Optionally, finish current activity to prevent back navigation
                 // finish();
-
             }
         });
     }
 
-    // Function to generate a random price between a given min and max
-    private String generateRandomPrice(int min, int max) {
-        Random random = new Random();
-        int randomPrice = random.nextInt((max - min) + 1) + min; // Generate a random price between min and max
-        return "$" + randomPrice + ".00";  // Format as a price (e.g., "$45.00")
+    /**
+     * バックボタンが押されたときに呼び出されるメソッド
+     */
+    public void back(View v) {
+        finish();
     }
 }

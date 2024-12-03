@@ -25,7 +25,6 @@ public class CustomerInformation extends AppCompatActivity {
     private String username;
     private TextView salon;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,11 +131,28 @@ public class CustomerInformation extends AppCompatActivity {
                 confirmationIntent.putExtra("salonName", salonName);
                 confirmationIntent.putExtra("username", username);
 
-
                 // Start "BookingConfirmation" activity
                 startActivity(confirmationIntent);
             }
         });
+
+        // Initialize the back button
+        TextView backButton = findViewById(R.id.backButton); // TextViewのIDを使用
+
+        // Back Button's click listener
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back(view);
+            }
+        });
+    }
+
+    /**
+     * バックボタンが押されたときに呼び出されるメソッド
+     */
+    public void back(View v) {
+        finish();
     }
 
     // Function to generate a random price between a given min and max
