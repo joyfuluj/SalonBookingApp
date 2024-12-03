@@ -21,6 +21,8 @@ public class BookingConfirmation extends AppCompatActivity {
     private String email;
     private String request;
     private String menuName; // Added
+    private String salonName;
+    private String username;
 
 
     @Override
@@ -42,6 +44,8 @@ public class BookingConfirmation extends AppCompatActivity {
             selectedTime = intent.getStringExtra(Constants.EXTRA_SELECTED_TIME);
 
             menuName = intent.getStringExtra(Constants.EXTRA_MENU_NAME); // Added
+            salonName = intent.getStringExtra("salonName");
+            username = intent.getStringExtra("username");
         }
 
         // Display data in TextViews
@@ -91,6 +95,8 @@ public class BookingConfirmation extends AppCompatActivity {
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_EMAIL, email);
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_REQUEST, request);
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_PRICE, price);
+//                completedIntent.putExtra("salonName", salonName);
+                completedIntent.putExtra("username", username);
 
 
                 // Optionally, pass other data if needed

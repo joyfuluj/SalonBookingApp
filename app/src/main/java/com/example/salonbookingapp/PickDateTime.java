@@ -28,6 +28,8 @@ public class PickDateTime extends AppCompatActivity {
     private String menuName;
     private String menuDescription;
     private String menuPrice;
+    private String salonName;
+    private String username;
 
     private Button selectedStylistButton;
     private String selectedStylist = "Stylist A"; // デフォルトのスタイリスト名
@@ -52,12 +54,15 @@ public class PickDateTime extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_date_time);
 
+
         // Intent からデータを取得
         Intent intent = getIntent();
         menuType = intent.getStringExtra("MENU_TYPE");
         menuName = intent.getStringExtra("MENU_NAME");
         menuDescription = intent.getStringExtra("MENU_DESCRIPTION");
         menuPrice = intent.getStringExtra("MENU_PRICE");
+        salonName = intent.getStringExtra("salonName");
+        username = intent.getStringExtra("username");
 
         // デバッグ用ログ
         System.out.println("Received Menu Type: " + menuType);
@@ -258,6 +263,8 @@ public class PickDateTime extends AppCompatActivity {
                         intent.putExtra(Constants.EXTRA_SELECTED_STYLIST, selectedStylist);
                         intent.putExtra(Constants.EXTRA_SELECTED_DATE, date);
                         intent.putExtra(Constants.EXTRA_SELECTED_TIME, timeSlot);
+                        intent.putExtra("salonName", salonName);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                     });
                 } else {
