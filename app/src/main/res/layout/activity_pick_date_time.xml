@@ -59,9 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="4dp"
             android:text="Salon A"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <!-- Coupon/Menu selected -->
@@ -69,9 +69,9 @@
             android:id="@+id/selected_coupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="4dp"
             android:text="Selected Coupon / Menu: Coupon A"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <!-- Stylist Buttons A,B,C -->
         <LinearLayout
@@ -79,27 +79,36 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingVertical="8dp">
+            android:paddingVertical="4dp">
 
             <Button
                 android:id="@+id/stylist_a"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Stylist A" />
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:text="Stylist A"
+                android:textSize="12sp"
+                android:padding="6dp" />
 
             <Button
                 android:id="@+id/stylist_b"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Stylist B" />
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:text="Stylist B"
+                android:textSize="12sp"
+                android:padding="6dp" />
 
             <Button
                 android:id="@+id/stylist_c"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Stylist C" />
+                android:layout_weight="1"
+                android:text="Stylist C"
+                android:textSize="12sp"
+                android:padding="6dp" />
         </LinearLayout>
 
         <!-- Stylist Details -->
@@ -109,13 +118,13 @@
             android:layout_height="wrap_content"
             android:background="@android:color/darker_gray"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="4dp">
 
             <ImageView
                 android:id="@+id/stylist_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/baseline_person_24" />
 
             <LinearLayout
@@ -127,9 +136,9 @@
                     android:id="@+id/stylist_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="4dp"
+                    android:paddingBottom="2dp"
                     android:text="Stylist A"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/message_text"
@@ -137,43 +146,68 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:gravity="start"
-                    android:padding="8dp"
-                    android:text="Message" />
+                    android:padding="6dp"
+                    android:text="Message"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Calendar (Month of the Year) -->
+        <!-- Month and Year -->
         <TextView
             android:id="@+id/month_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="8dp"
-            android:text="December, 2024" />
+            android:padding="4dp"
+            android:text="December, 2024"
+            android:textSize="16sp" />
+
+        <!-- Week Selection Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/button_week1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Week 1 (12/01-12/07)"
+                android:textSize="10sp"
+                android:padding="4dp" />
+
+            <Button
+                android:id="@+id/button_week2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Week 2 (12/08-12/14)"
+                android:textSize="10sp"
+                android:padding="4dp" />
+        </LinearLayout>
 
         <!-- Availability Table -->
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:fillViewport="true">
 
-            <ScrollView
+            <TableLayout
+                android:id="@+id/table_availability"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fillViewport="true">
+                android:layout_margin="4dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*">
 
-                <TableLayout
-                    android:id="@+id/table_availability"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:shrinkColumns="*"
-                    android:stretchColumns="*">
+                <!-- 動的に生成されるコンテンツ -->
 
-                    <!-- 動的に生成されるコンテンツ -->
-
-                </TableLayout>
-            </ScrollView>
+            </TableLayout>
         </HorizontalScrollView>
 
     </LinearLayout>

@@ -77,21 +77,98 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Price (pay at salon)"
-                    android:textSize="16sp"
-                    android:layout_weight="1" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/price"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="$65.00"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_gravity="end" />
+                    android:layout_weight="3"
+                    android:gravity="end" />
             </LinearLayout>
 
+            <!-- Selected Stylist Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="4dp">
 
+                <TextView
+                    android:id="@+id/selected_stylist_label"
+                    android:layout_width="82dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Selected Stylist:"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/selected_stylist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Stylist A"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_weight="3"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Selected Date Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="4dp">
+
+                <TextView
+                    android:id="@+id/selected_date_label"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Selected Date:"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/selected_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="12/01/2024"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_weight="3"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Selected Time Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="4dp">
+
+                <TextView
+                    android:id="@+id/selected_time_label"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Selected Time:"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/selected_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10:00 AM"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_weight="3"
+                    android:gravity="end" />
+            </LinearLayout>
 
             <!-- Customer Information Header -->
             <TextView
@@ -110,7 +187,7 @@
                 android:paddingVertical="4dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Name:"
                     android:layout_weight="1"
@@ -132,7 +209,7 @@
                 android:paddingVertical="4dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Phone:"
                     android:layout_weight="1"
@@ -155,7 +232,7 @@
                 android:paddingVertical="4dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Email:"
                     android:layout_weight="1"
@@ -174,7 +251,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Requests"
+                android:text="Requests(optional)"
                 android:textSize="16sp"
                 android:paddingVertical="8dp" />
 

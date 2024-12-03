@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+//import android.view.MenuItem;  // causing 12 error. Never Import MenuItem!!!
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,12 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuAdapter;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.salonbookingapp.Constants;
+
 
 public class CouponMenu extends AppCompatActivity {
 
@@ -66,34 +71,47 @@ public class CouponMenu extends AppCompatActivity {
             updateButtonStyles(tabMenu);
         });
 
-        // List item click listener
+//        // List item click listener
+//        listView.setOnItemClickListener((parent, view, position, id) -> {
+//            MenuItem selectedItem = menuItems.get(position);
+//            Toast.makeText(this, "Selected: " + selectedItem.getName(), Toast.LENGTH_SHORT).show();
+//
+//            // Pass selected item to next activity
+//            Intent intent = new Intent(CouponMenu.this, PickDateTime.class);
+//            intent.putExtra("MENU", selectedItem.getName());
+//            startActivity(intent);
+//        });
+//    }
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            MenuItem selectedItem = menuItems.get(position);
-            Toast.makeText(this, "Selected: " + selectedItem.getName(), Toast.LENGTH_SHORT).show();
+            MenuItem selectedItem = (MenuItem) menuAdapter.getItem(position);
 
             // Pass selected item to next activity
             Intent intent = new Intent(CouponMenu.this, PickDateTime.class);
-            intent.putExtra("MENU", selectedItem.getName());
+            intent.putExtra("MENU_TYPE", selectedItem.getType());
+            intent.putExtra("MENU_NAME", selectedItem.getName());
+            intent.putExtra("MENU_DESCRIPTION", selectedItem.getDescription());
+            intent.putExtra("MENU_PRICE", selectedItem.getPrice());
             startActivity(intent);
         });
     }
 
-    private void loadCouponMenuData() {
+        private void loadCouponMenuData() {
         try {
             InputStream inputStream = getResources().openRawResource(R.raw.coupons_menus);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
+            // ヘッダー行をスキップ
+            reader.readLine();
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",", 3);
-                if (parts.length == 3) {
+                String[] parts = line.split(",", 4);
+                if (parts.length == 4) {
                     String type = parts[0].trim();
                     String name = parts[1].trim();
-                    String price = parts[2].trim();
+                    String description = parts[2].trim();
+                    String price = parts[3].trim();
 
-                    // Skip "Name" row
-                    if (name.equalsIgnoreCase("Name")) continue;
-
-                    menuItems.add(new MenuItem(type, name, price));
+                    menuItems.add(new MenuItem(type, name, description, price));
                 }
             }
             reader.close();
@@ -133,11 +151,13 @@ public class CouponMenu extends AppCompatActivity {
     private static class MenuItem {
         private final String type;
         private final String name;
+        private final String description;
         private final String price;
 
-        public MenuItem(String type, String name, String price) {
+        public MenuItem(String type, String name, String description, String price) {
             this.type = type;
             this.name = name;
+            this.description = description;
             this.price = price;
         }
 
@@ -147,6 +167,10 @@ public class CouponMenu extends AppCompatActivity {
 
         public String getName() {
             return name;
+        }
+
+        public String getDescription() {
+            return description;
         }
 
         public String getPrice() {
@@ -189,6 +213,7 @@ public class CouponMenu extends AppCompatActivity {
             }
 
             TextView name = convertView.findViewById(R.id.item_name);
+            TextView description = convertView.findViewById(R.id.item_description);
             TextView price = convertView.findViewById(R.id.item_price);
 
             MenuItem item = data.get(position);
@@ -196,6 +221,9 @@ public class CouponMenu extends AppCompatActivity {
             // Set title text
             name.setText(item.getName());
             name.setTypeface(null, Typeface.BOLD);
+
+            // Set description text
+            description.setText(item.getDescription());
 
             // Set price text
             if (item.getPrice() == null || item.getPrice().isEmpty()) {

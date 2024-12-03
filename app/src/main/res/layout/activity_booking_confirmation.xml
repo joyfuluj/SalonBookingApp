@@ -119,6 +119,28 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Menu -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Menu"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/booking_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No menu"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
             <!-- Price -->
             <LinearLayout
                 android:layout_width="match_parent"

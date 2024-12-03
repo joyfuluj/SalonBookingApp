@@ -13,11 +13,15 @@ import java.util.Random;
 import android.text.TextUtils;
 import android.util.Patterns;
 
-
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CustomerInformation extends AppCompatActivity {
+
+    private String selectedStylist;
+    private String selectedDate;
+    private String selectedTime;
+    private String menuName; // Added
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +35,33 @@ public class CustomerInformation extends AppCompatActivity {
         TextView priceTextView = findViewById(R.id.price);
         priceTextView.setText(price);
 
+        // Retrieve data from PickDateTime
+        Intent intent = getIntent();
+        if (intent != null) {
+            selectedStylist = intent.getStringExtra(Constants.EXTRA_SELECTED_STYLIST);
+            selectedDate = intent.getStringExtra(Constants.EXTRA_SELECTED_DATE);
+            selectedTime = intent.getStringExtra(Constants.EXTRA_SELECTED_TIME);
+            menuName = intent.getStringExtra(Constants.EXTRA_MENU_NAME); // Added
+        }
 
-        // button
+        // Display the selected stylist, date, and time
+        TextView selectedStylistTextView = findViewById(R.id.selected_stylist);
+        TextView selectedDateTextView = findViewById(R.id.selected_date);
+        TextView selectedTimeTextView = findViewById(R.id.selected_time);
+
+        if (selectedStylist != null) {
+            selectedStylistTextView.setText(selectedStylist);
+        }
+
+        if (selectedDate != null) {
+            selectedDateTextView.setText(selectedDate);
+        }
+
+        if (selectedTime != null) {
+            selectedTimeTextView.setText(selectedTime);
+        }
+
+        // Initialize the review button
         Button reviewButton = findViewById(R.id.btn_review_reservation);
 
         // Button's click listener
@@ -47,11 +76,10 @@ public class CustomerInformation extends AppCompatActivity {
                 EditText requestInput = findViewById(R.id.input_request);
 
                 // Convert user input to string
-                String name = nameInput.getText().toString();
-                String phone = phoneInput.getText().toString();
-                String email = emailInput.getText().toString();
-                String request = requestInput.getText().toString();
-
+                String name = nameInput.getText().toString().trim();
+                String phone = phoneInput.getText().toString().trim();
+                String email = emailInput.getText().toString().trim();
+                String request = requestInput.getText().toString().trim();
 
                 // Validate inputs.
                 if (TextUtils.isEmpty(name)) {
@@ -61,7 +89,7 @@ public class CustomerInformation extends AppCompatActivity {
                 }
 
                 if (TextUtils.isEmpty(phone)) {
-                    phoneInput.setError("Phone is required");
+                    phoneInput.setError("Phone number is required");
                     phoneInput.requestFocus();
                     return;
                 }
@@ -72,20 +100,31 @@ public class CustomerInformation extends AppCompatActivity {
                     return;
                 }
 
-
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    emailInput.setError("Enter a valid email");
+                    emailInput.requestFocus();
+                    return;
+                }
 
                 // Move to "BookingConfirmation" page
-                Intent intent = new Intent(CustomerInformation.this, BookingConfirmation.class);
+                Intent confirmationIntent = new Intent(CustomerInformation.this, BookingConfirmation.class);
 
                 // Pass input data and random price to the intent
-                intent.putExtra("CUSTOMER_NAME", name);
-                intent.putExtra("CUSTOMER_PHONE", phone);
-                intent.putExtra("CUSTOMER_EMAIL", email);
-                intent.putExtra("CUSTOMER_REQUEST", request);
-                intent.putExtra("CUSTOMER_PRICE", price);  // Add price to intent
+                confirmationIntent.putExtra(Constants.EXTRA_CUSTOMER_NAME, name);
+                confirmationIntent.putExtra(Constants.EXTRA_CUSTOMER_PHONE, phone);
+                confirmationIntent.putExtra(Constants.EXTRA_CUSTOMER_EMAIL, email);
+                confirmationIntent.putExtra(Constants.EXTRA_CUSTOMER_REQUEST, request);
+                confirmationIntent.putExtra(Constants.EXTRA_CUSTOMER_PRICE, price);  // Add price to intent
+
+                // Pass selected stylist, date, and time
+                confirmationIntent.putExtra(Constants.EXTRA_SELECTED_STYLIST, selectedStylist);
+                confirmationIntent.putExtra(Constants.EXTRA_SELECTED_DATE, selectedDate);
+                confirmationIntent.putExtra(Constants.EXTRA_SELECTED_TIME, selectedTime);
+                confirmationIntent.putExtra(Constants.EXTRA_MENU_NAME, menuName); // Added
+
 
                 // Start "BookingConfirmation" activity
-                startActivity(intent);
+                startActivity(confirmationIntent);
             }
         });
     }
@@ -97,6 +136,3 @@ public class CustomerInformation extends AppCompatActivity {
         return "$" + randomPrice + ".00";  // Format as a price (e.g., "$45.00")
     }
 }
-
-
-
