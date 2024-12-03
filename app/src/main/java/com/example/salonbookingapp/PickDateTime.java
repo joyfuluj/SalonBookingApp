@@ -73,6 +73,10 @@ public class PickDateTime extends AppCompatActivity {
         Button buttonWeek1 = findViewById(R.id.button_week1);
         Button buttonWeek2 = findViewById(R.id.button_week2);
 
+
+        // デフォルトの週選択（Week 1 をハイライト）
+        highlightWeekButton(buttonWeek1, buttonWeek2);
+
         // デフォルトのスタイリスト選択
         updateStylistSelection(stylistA);
 
