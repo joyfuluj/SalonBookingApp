@@ -7,3 +7,4 @@ CharlotteK,staff,charlotte.king@modsalonkelowna.ca,250-555-6789
 WilliamH,customer,william.hall@modsalonkelowna.ca,250-555-7890
 MasonD,staff,mason.davis@modsalonkelowna.ca,250-555-9012
 
+
