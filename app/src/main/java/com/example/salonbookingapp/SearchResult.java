@@ -207,7 +207,6 @@ public class SearchResult extends AppCompatActivity {
         int count = 0;
         String line;
 
-}
         try {
             FileInputStream fis = openFileInput(filename);
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
