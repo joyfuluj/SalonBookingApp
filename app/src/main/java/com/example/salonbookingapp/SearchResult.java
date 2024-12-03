@@ -134,7 +134,7 @@ public class SearchResult extends AppCompatActivity {
 
 
                         String rating = calculateRating(salonName, file2);
-                      
+
                         TextView ratingTextView = new TextView(this);
                         ratingTextView.setText("⭐️" + rating);
                         ratingTextView.setTextSize(30f);
@@ -207,7 +207,6 @@ public class SearchResult extends AppCompatActivity {
         int count = 0;
         String line;
 
-}
         try {
             FileInputStream fis = openFileInput(filename);
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
