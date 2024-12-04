@@ -29,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
     public void onClick (View view){
         EditText username = findViewById(R.id.username);
         String user = username.getText().toString().trim();
-        if(user.equals("staff")){
+        if (user != null && user.toLowerCase().contains("stylist")) {
             Intent intent = new Intent(this, MyPageforStaff.class);
+            intent.putExtra("username", user);
             startActivity(intent);
         }
         else if(user.isEmpty()){
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void copyFilesFromRawToInternalStorage() {
 
-        int[] rawResources = {R.raw.review, R.raw.booking, R.raw.salon, R.raw.user, R.raw.stylist, R.raw.schedule2, R.raw.schedule1, R.raw.schedule3, R.raw.days_schedule1, R.raw.days_schedule2, R.raw.days_schedule3}; // Raw resource IDs
-        String[] fileNames = {"review.txt", "booking.txt", "salon.txt", "user.txt", "stylist.txt", "schedule2.txt", "schedule1.txt", "schedule3.txt", "days_schedule1.txt", "days_schedule2.txt", "days_schedule3.txt"}; // Internal file names
+        int[] rawResources = {R.raw.review, R.raw.booking, R.raw.salon, R.raw.user, R.raw.stylist, R.raw.schedule2, R.raw.schedule1, R.raw.schedule3, R.raw.days_schedule1, R.raw.days_schedule2, R.raw.days_schedule3, R.raw.reservations}; // Raw resource IDs
+        String[] fileNames = {"review.txt", "booking.txt", "salon.txt", "user.txt", "stylist.txt", "schedule2.txt", "schedule1.txt", "schedule3.txt", "days_schedule1.txt", "days_schedule2.txt", "days_schedule3.txt", "reservations.txt"}; // Internal file names
 
 
         File internalDir = getFilesDir();

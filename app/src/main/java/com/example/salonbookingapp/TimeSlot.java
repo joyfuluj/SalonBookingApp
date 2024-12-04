@@ -47,6 +47,7 @@ public class TimeSlot extends AppCompatActivity {
         TextView date = findViewById(R.id.day);
         date.setText(year+"/"+day);
 
+
         LinearLayout mainLinearLayout = findViewById(R.id.status);
         try {
             FileInputStream fis = openFileInput(fileT);
@@ -63,8 +64,10 @@ public class TimeSlot extends AppCompatActivity {
                 final String bookStatus = words[3];
                 final String ava = words[4];
 
+
                 LinearLayout horizontalLayout = new LinearLayout(this);
                 horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+
 
                 LinearLayout.LayoutParams horizontalLayoutParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,

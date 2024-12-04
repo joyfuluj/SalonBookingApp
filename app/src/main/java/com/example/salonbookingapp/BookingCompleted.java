@@ -1,15 +1,21 @@
 package com.example.salonbookingapp;
 
-import android.content.Context;
+import android.content.Context; // 追加
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.io.FileOutputStream;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream; // 追加
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class BookingCompleted extends AppCompatActivity {
 
@@ -17,17 +23,17 @@ public class BookingCompleted extends AppCompatActivity {
     private Button myPageButton;
 
     // 予約情報を保存する変数
-    private String customerName;
-    private String customerPhone;
-    private String customerEmail;
-    private String customerRequest;
-    private String price;
-    private String menuName;
-    private String selectedStylist;
-    private String selectedDate;
-    private String selectedTime;
-    private String salonName;
-
+    String customerName;
+    String customerPhone;
+    String customerEmail;
+    String customerRequest;
+    String price;
+    String menuName;
+    String selectedStylist;
+    String selectedDate;
+    String selectedTime;
+    String salonName;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,71 +49,92 @@ public class BookingCompleted extends AppCompatActivity {
 
         // Get data from the Intent using Constants
         Intent intent = getIntent();
-        String salon = intent.getStringExtra(Constants.EXTRA_BOOKING_SALON);
-        String menu = intent.getStringExtra(Constants.EXTRA_BOOKING_MENU);
-        String stylist = intent.getStringExtra(Constants.EXTRA_BOOKING_STYLIST);
-        String date = intent.getStringExtra(Constants.EXTRA_BOOKING_DATE);
-        String time = intent.getStringExtra(Constants.EXTRA_BOOKING_TIME);
-
-        // Set the data to the TextViews
-        salonTextView.setText(salon != null ? salon : "No salon");
-        menuTextView.setText(menu != null ? menu : "No menu");
-        stylistTextView.setText(stylist != null ? stylist : "No stylist");
-        dateTimeTextView.setText((date != null ? date : "No date") + "\n" + (time != null ? time : "No time"));
-
-
-        // My Page Button's Click Listener
-        myPageButton.setOnClickListener(v -> {
-//            // Toast Messages for debugging
-//            Toast.makeText(BookingCompleted.this, "MyPage ボタンがクリックされました", Toast.LENGTH_SHORT).show();
-
-            // Move to Mypage
-            Intent myPageIntent = new Intent(BookingCompleted.this, MyPage.class);
-            startActivity(myPageIntent);
-            // Optionally, finish current activity
-            // finish();
-        });
+        salonName = intent.getStringExtra(Constants.EXTRA_BOOKING_SALON);
+        menuName = intent.getStringExtra(Constants.EXTRA_BOOKING_MENU);
+        selectedStylist = intent.getStringExtra(Constants.EXTRA_BOOKING_STYLIST);
+        selectedDate = intent.getStringExtra(Constants.EXTRA_BOOKING_DATE);
+        selectedTime = intent.getStringExtra(Constants.EXTRA_BOOKING_TIME);
 
         // お客様情報も取得
-        customerName =intent.getStringExtra(Constants.EXTRA_CUSTOMER_NAME);
-        customerPhone =intent.getStringExtra(Constants.EXTRA_CUSTOMER_PHONE);
-        customerEmail =intent.getStringExtra(Constants.EXTRA_CUSTOMER_EMAIL);
-        customerRequest =intent.getStringExtra(Constants.EXTRA_CUSTOMER_REQUEST);
-        price =intent.getStringExtra(Constants.EXTRA_CUSTOMER_PRICE);
+        customerName = intent.getStringExtra(Constants.EXTRA_CUSTOMER_NAME);
+        customerPhone = intent.getStringExtra(Constants.EXTRA_CUSTOMER_PHONE);
+        customerEmail = intent.getStringExtra(Constants.EXTRA_CUSTOMER_EMAIL);
+        customerRequest = intent.getStringExtra(Constants.EXTRA_CUSTOMER_REQUEST);
+        price = intent.getStringExtra(Constants.EXTRA_CUSTOMER_PRICE);
+        username = intent.getStringExtra("username");
+
+        // Set the data to the TextViews
+        salonTextView.setText(salonName != null ? salonName : "No salon");
+        menuTextView.setText(menuName != null ? menuName : "No menu");
+        stylistTextView.setText(selectedStylist != null ? selectedStylist : "No stylist");
+        dateTimeTextView.setText((selectedDate != null ? selectedDate : "No date") + "\n" + (selectedTime != null ? selectedTime : "No time"));
 
         // データをテキストファイルに保存
         saveReservationData();
-}
-        /**
-         * 予約情報をテキストファイルに保存するメソッド
-         */
-        private void saveReservationData() {
-            String filename = "reservations.txt";
 
-            // 保存するデータをCSV形式で作成
-            String reservationData = salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
-                    customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "\n";
+        // My Page Button's Click Listener
+        myPageButton.setOnClickListener(v -> {
+            Intent toHome = new Intent(this, Search.class);
+            toHome.putExtra("state", "home");
+            toHome.putExtra("username", username);
+            startActivity(toHome);
+        });
+    }
 
-            FileOutputStream outputStream;
+    /**
+     * 予約情報をテキストファイルに保存するメソッド
+     */
+    private void saveReservationData() {
+        String filename = "reservations.txt";
 
-            try {
-                // ファイルにデータを追記（存在しない場合は新規作成）
-                outputStream = openFileOutput(filename, Context.MODE_APPEND);
-                outputStream.write(reservationData.getBytes());
-                outputStream.close();
+        // 保存するデータをCSV形式で作成
+        String reservationData = salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
 
-                // 保存成功のメッセージを表示
-                Toast.makeText(this, "Reservation saved successfully!", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                e.printStackTrace();
-                // 保存失敗のメッセージを表示
-                Toast.makeText(this, "Failed to save reservation.", Toast.LENGTH_SHORT).show();
+                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username + "\n";
+
+        FileOutputStream outputStream;
+
+        try {
+            String file = "schedule1.txt";
+            FileInputStream fis2 = openFileInput(file);
+            InputStreamReader isr2 = new InputStreamReader(fis2);
+            BufferedReader br2 = new BufferedReader(isr2);
+
+            StringBuilder updatedContent = new StringBuilder();
+            String line2;
+            while ((line2 = br2.readLine()) != null) {
+                String[] words2 = line2.split(",\\s*");
+                if (words2[1].equals(selectedTime) && words2[0].equals(selectedDate)) {
+                    updatedContent.append(selectedDate).append(",").append(selectedTime).append(",").append(words2[2]).append(",").append("1").append(",").append(words2[4]).append("\n");
+                } else {
+                    updatedContent.append(line2).append("\n");
+                }
             }
+            br2.close();
+            fis2.close();
 
+            FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
+            fos.write(updatedContent.toString().getBytes());
+            fos.close();
 
+            //Toast.makeText(TimeSlot.this, "Time status updated", Toast.LENGTH_SHORT).show();
+            recreate();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        public void login(View v){
-            Intent completedIntent = new Intent(BookingCompleted.this, MainActivity.class);
-            startActivity(completedIntent);
+
+        try {
+            // ファイルにデータを追記（存在しない場合は新規作成）
+            outputStream = openFileOutput(filename, Context.MODE_APPEND);
+            outputStream.write(reservationData.getBytes());
+            outputStream.close();
+
+            // 保存成功のメッセージを表示
+            Toast.makeText(this, "Reservation saved successfully!", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 保存失敗のメッセージを表示
+            Toast.makeText(this, "Failed to save reservation.", Toast.LENGTH_SHORT).show();
         }
+    }
 }
