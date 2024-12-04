@@ -56,6 +56,8 @@ public class TimeSlot extends AppCompatActivity {
 
             while ((line = br.readLine()) != null) {
                 String[] words = line.split(",\\s*");
+                 if(!words[0].trim().equals(day)){continue;} 
+                
                 final String salonDate = words[0];
                 final String time = words[1];
                 final String bookStatus = words[3];
@@ -104,37 +106,40 @@ public class TimeSlot extends AppCompatActivity {
                     horizontalLayout.addView(bookingStatus);
 
 
-                    if (ava.equals("1")) {
-                        avaV.setChecked(true);
-                    } else {
-                        avaV.setChecked(false);
-                    }
-                    horizontalLayout.addView(avaV);
+
+                if (ava.equals("1")) {
+                    avaV.setChecked(true);
+                } else {
+                    avaV.setChecked(false);
+                }
+                horizontalLayout.addView(avaV);
 
 
-                    mainLinearLayout.addView(horizontalLayout);
-                    View divider = new View(this);
-                    divider.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            2  // Height of the line (divider)
-                    ));
-                    divider.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
-                    mainLinearLayout.addView(divider);
+                mainLinearLayout.addView(horizontalLayout);
+                View divider = new View(this);
+                divider.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        2  // Height of the line (divider)
+                ));
+                divider.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+                mainLinearLayout.addView(divider);
 
 
-                    timeV.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if(bookStatus.equals("0")){Toast.makeText(TimeSlot.this, "No booking", Toast.LENGTH_SHORT).show();}
-                            else {
-                                Intent intent = new Intent(TimeSlot.this, BookingDetails.class);
-                                intent.putExtra("date", day);
-                                intent.putExtra("year", year);
-                                intent.putExtra("time", time);
-                                intent.putExtra("fileT", fileT);
-                                startActivity(intent);
-                            }
+                timeV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(bookStatus.equals("0")){Toast.makeText(TimeSlot.this, "No booking", Toast.LENGTH_SHORT).show();}
+                        else {
+                            Intent intent = new Intent(TimeSlot.this, BookingDetails.class);
+                            intent.putExtra("date", day);
+                            intent.putExtra("year", year);
+                            intent.putExtra("time", time);
+                            intent.putExtra("staff", staff);
+                            intent.putExtra("fileT", fileT);
+                            startActivity(intent);
                         }
+               
+                      }
                     });
 
                     avaV.setOnClickListener(new View.OnClickListener() {

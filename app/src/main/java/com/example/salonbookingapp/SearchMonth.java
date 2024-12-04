@@ -58,12 +58,14 @@ public class SearchMonth extends AppCompatActivity {
         }
         else{
             Intent intent = getIntent();
+            String staff = intent.getStringExtra("staff");            
             String file = intent.getStringExtra("file");
             String fileT = intent.getStringExtra("fileT");
             Intent newintent = new Intent(SearchMonth.this, DailySchedule.class);
             newintent.putExtra("year", year);
             newintent.putExtra("month", month);
             newintent.putExtra("file", file);
+            newintent.putExtra("staff", staff);            
             newintent.putExtra("fileT", fileT);
             startActivity(newintent);
         }
