@@ -184,12 +184,12 @@ public class HomeFragment extends Fragment {
                         priceTextView.setLayoutParams(priceLayout);
 
                         Button detailButton = new Button(requireContext());
-                        detailButton.setText("Delete");
-                        detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red));
+                        detailButton.setText("Cancel");
+                        detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_red));
                         detailButton.setOnClickListener(v -> {
                             new AlertDialog.Builder(requireContext())
-                                    .setTitle("Delete")
-                                    .setMessage("Are you sure you want to delete this reservation?")
+                                    .setTitle("Cancel")
+                                    .setMessage("Are you sure you want to cancel this reservation?")
                                     .setPositiveButton("Confirm", (dialog, which) -> {
                                         try {
                                             FileInputStream fis2 = requireContext().openFileInput(file);
@@ -269,6 +269,18 @@ public class HomeFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Button logoutButton = view.findViewById(R.id.button13);
+        logoutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+
+            SharedPreferences preferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            editor.apply();
+
+            startActivity(intent);
+            requireActivity().finish();
+        });
 
         return view;
     }

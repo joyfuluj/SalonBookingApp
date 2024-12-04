@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -171,22 +172,23 @@ public class PickDateTime extends AppCompatActivity {
         stylistAvailability = new HashMap<>();
 
         // スタイリスト名とスケジュールファイルの対応付け
-        Map<String, Integer> stylistScheduleFiles = new HashMap<>();
-        stylistScheduleFiles.put("Stylist A", R.raw.schedule1);
-        stylistScheduleFiles.put("Stylist B", R.raw.schedule2);
-        stylistScheduleFiles.put("Stylist C", R.raw.schedule3);
+        Map<String, String> stylistScheduleFiles = new HashMap<>();
+        stylistScheduleFiles.put("Stylist A", "schedule1.txt");
+        stylistScheduleFiles.put("Stylist B", "schedule2.txt");
+        stylistScheduleFiles.put("Stylist C", "schedule3.txt");
 
         try {
             for (String stylist : stylistScheduleFiles.keySet()) {
-                int resourceId = stylistScheduleFiles.get(stylist);
-                InputStream inputStream = getResources().openRawResource(resourceId);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String resourceFile = stylistScheduleFiles.get(stylist);
+                FileInputStream fis = openFileInput(resourceFile);
+                InputStreamReader isr = new InputStreamReader(fis);
+                BufferedReader br = new BufferedReader(isr);
                 String line;
 
                 // ヘッダー行をスキップ
-                reader.readLine();
+                br.readLine();
 
-                while ((line = reader.readLine()) != null) {
+                while ((line = br.readLine()) != null) {
                     String[] parts = line.split(",", -1); // day,time,dayAva,bookingStatus,timeAva
                     if (parts.length == 5) {
                         String date = parts[0].trim();      // 例: "12/01"
@@ -197,7 +199,7 @@ public class PickDateTime extends AppCompatActivity {
 
                         // 空き状況の判定
                         String available;
-                        if ("1".equals(dayAva) && "1".equals(timeAva) && "0".equals(bookingStatus)) {
+                        if ("1".equals(dayAva) && "0".equals(bookingStatus) && "1".equals(timeAva)) {
                             available = "○";
                         } else {
                             available = "×";
@@ -212,7 +214,7 @@ public class PickDateTime extends AppCompatActivity {
                         System.out.println("Loaded availability: Stylist=" + stylist + ", Date=" + date + ", TimeSlot=" + timeSlot + ", Available=" + available);
                     }
                 }
-                reader.close();
+                br.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

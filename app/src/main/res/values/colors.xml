@@ -4,5 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_green">#80BF82</color>
     <color name="pink">#D99898</color>
-    <color name="red">#FF6666</color>
+    <color name="light_red">#FF4500</color>
+    <color name="colorSelectedItem">#FFA07A</color> <!-- (orange) -->
+    <color name="colorUnselectedItem">#A9A9A9</color> <!-- (grey) -->
+    <color name="colorBackground">#F5F5DC</color> <!-- (beige) -->
 </resources>
