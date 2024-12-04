@@ -56,6 +56,8 @@ public class TimeSlot extends AppCompatActivity {
 
             while ((line = br.readLine()) != null) {
                 String[] words = line.split(",\\s*");
+                 if(!words[0].trim().equals(day)){continue;} 
+                
                 final String salonDate = words[0];
                 final String time = words[1];
                 final String bookStatus = words[3];
