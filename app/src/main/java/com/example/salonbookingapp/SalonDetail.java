@@ -85,18 +85,18 @@ public class SalonDetail extends AppCompatActivity {
             bookIntent.putExtra("username", username);
             startActivity(bookIntent);
         });
-        if(state.equals("staff")){
-            ViewGroup parentLayout = (ViewGroup) bookNowButton.getParent();
-            parentLayout.removeView(bookNowButton);
-        }
-
         TextView salon = findViewById(R.id.textView14);
         salon.setText(salonName);
 
-        if (salon.getParent() instanceof ConstraintLayout) {
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) salon.getLayoutParams();
-            params.topMargin = 140;  // Adjust top margin as needed
-            salon.setLayoutParams(params);
+        if(state != null && state.equals("staff")){
+            ViewGroup parentLayout = (ViewGroup) bookNowButton.getParent();
+            parentLayout.removeView(bookNowButton);
+
+            if (salon.getParent() instanceof ConstraintLayout) {
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) salon.getLayoutParams();
+                params.topMargin = 140;  // Adjust top margin as needed
+                salon.setLayoutParams(params);
+            }
         }
 
         TextView intro = findViewById(R.id.textView16);
