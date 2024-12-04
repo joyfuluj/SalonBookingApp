@@ -90,9 +90,9 @@ public class BookingCompleted extends AppCompatActivity {
         String filename = "reservations.txt";
 
         // 保存するデータをCSV形式で作成
-        String reservationData = salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
+        String reservationData = "\n" + salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
 
-                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username + "\n";
+                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username;
 
         FileOutputStream outputStream;
 

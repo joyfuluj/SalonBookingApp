@@ -126,7 +126,7 @@ public class TimeSlot extends AppCompatActivity {
                 mainLinearLayout.addView(divider);
 
 
-                timeV.setOnClickListener(new View.OnClickListener() {
+                bookingStatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(bookStatus.equals("0")){Toast.makeText(TimeSlot.this, "No booking", Toast.LENGTH_SHORT).show();}
