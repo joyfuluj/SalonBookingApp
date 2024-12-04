@@ -184,12 +184,12 @@ public class HomeFragment extends Fragment {
                         priceTextView.setLayoutParams(priceLayout);
 
                         Button detailButton = new Button(requireContext());
-                        detailButton.setText("Delete");
+                        detailButton.setText("Cancel");
                         detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_red));
                         detailButton.setOnClickListener(v -> {
                             new AlertDialog.Builder(requireContext())
-                                    .setTitle("Delete")
-                                    .setMessage("Are you sure you want to delete this reservation?")
+                                    .setTitle("Cancel")
+                                    .setMessage("Are you sure you want to cancel this reservation?")
                                     .setPositiveButton("Confirm", (dialog, which) -> {
                                         try {
                                             FileInputStream fis2 = requireContext().openFileInput(file);
