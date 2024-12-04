@@ -23,6 +23,7 @@ public class CustomerInformation extends AppCompatActivity {
     private String menuName; // Added
     private String salonName;
     private String username;
+    private String fileName;
     private TextView salon;
 
     @Override
@@ -49,6 +50,7 @@ public class CustomerInformation extends AppCompatActivity {
             menuName = intent.getStringExtra(Constants.EXTRA_MENU_NAME); // Added
             salonName = intent.getStringExtra("salonName");
             username = intent.getStringExtra("username");
+            fileName = intent.getStringExtra("fileName");
         }
 
         // Display the selected stylist, date, and time
@@ -130,6 +132,7 @@ public class CustomerInformation extends AppCompatActivity {
                 confirmationIntent.putExtra(Constants.EXTRA_MENU_NAME, menuName); // Added
                 confirmationIntent.putExtra("salonName", salonName);
                 confirmationIntent.putExtra("username", username);
+                confirmationIntent.putExtra("fileName", fileName);
 
                 // Start "BookingConfirmation" activity
                 startActivity(confirmationIntent);

@@ -34,6 +34,7 @@ public class BookingCompleted extends AppCompatActivity {
     String selectedTime;
     String salonName;
     String username;
+    String file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class BookingCompleted extends AppCompatActivity {
         customerRequest = intent.getStringExtra(Constants.EXTRA_CUSTOMER_REQUEST);
         price = intent.getStringExtra(Constants.EXTRA_CUSTOMER_PRICE);
         username = intent.getStringExtra("username");
+        file = intent.getStringExtra("fileName");
 
         // Set the data to the TextViews
         salonTextView.setText(salonName != null ? salonName : "No salon");
@@ -88,9 +90,9 @@ public class BookingCompleted extends AppCompatActivity {
         String filename = "reservations.txt";
 
         // 保存するデータをCSV形式で作成
-        String reservationData = salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
+        String reservationData = "\n" + salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
 
-                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username + "\n";
+                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username;
 
         FileOutputStream outputStream;
 
@@ -138,7 +140,6 @@ public class BookingCompleted extends AppCompatActivity {
         }
 
         try {
-            String file = "schedule1.txt";
             FileInputStream fis2 = openFileInput(file);
             InputStreamReader isr2 = new InputStreamReader(fis2);
             BufferedReader br2 = new BufferedReader(isr2);

@@ -57,12 +57,16 @@ public class BookingDetails extends AppCompatActivity {
             while((line = br.readLine()) !=null){
                 String[] words = line.split(",\\s*");
                 if(words[3].equals(day) && words[4].equals(time) && words[2].equals(staff)){
-                    name.setText(words[2]);
-                    email.setText(words[7]);
-                    phone.setText(words[6]);
-                    menu.setText(words[1]);
-                    stylist.setText(staff);
-                    remark.setText(words[8]);
+                    name.setText("Name: "+ words[5]);
+                    email.setText("Email: "+ words[7]);
+                    phone.setText("Phone Number: "+ words[6]);
+                    menu.setText("Menu: "+ words[1]);
+                    stylist.setText("Stylist: "+ staff);
+                    if(words[8].equals("")){
+                        remark.setText("Special Remark: N/A");
+                    }
+                    else
+                        remark.setText("Special Remark: "+ words[8]);
                 }
             }
         br.close();
