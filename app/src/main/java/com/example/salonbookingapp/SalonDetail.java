@@ -3,12 +3,15 @@ package com.example.salonbookingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,7 +25,8 @@ public class SalonDetail extends AppCompatActivity {
     String salonIntro;
     String salonName;
     String username;
-    ImageView image; // Moved initialization here
+    ImageView image;
+    String state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class SalonDetail extends AppCompatActivity {
         Intent intent = getIntent();
         salonName = intent.getStringExtra("salonName");
         username = intent.getStringExtra("username");
+        state = intent.getStringExtra("state");
 
         String file = "salon.txt";
 
@@ -67,25 +72,37 @@ public class SalonDetail extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Apply window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // "Book now" button's Click event
-        Button bookNowButton = findViewById(R.id.button3); // "Book now" button's ID
+        Button bookNowButton = findViewById(R.id.button3);
         bookNowButton.setOnClickListener(v -> {
-            // Move to "Coupon Menu" page
             Intent bookIntent = new Intent(SalonDetail.this, CouponMenu.class);
+            bookIntent.putExtra("salonName", salonName);
+            bookIntent.putExtra("username", username);
             startActivity(bookIntent);
         });
-
-        // Display salon name and intro
         TextView salon = findViewById(R.id.textView14);
         salon.setText(salonName);
+
+        if(state != null && state.equals("staff")){
+            ViewGroup parentLayout = (ViewGroup) bookNowButton.getParent();
+            parentLayout.removeView(bookNowButton);
+
+            if (salon.getParent() instanceof ConstraintLayout) {
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) salon.getLayoutParams();
+                params.topMargin = 140;  // Adjust top margin as needed
+                salon.setLayoutParams(params);
+            }
+        }
+
         TextView intro = findViewById(R.id.textView16);
+
+
+
 
         try {
             FileInputStream fis = openFileInput(file);

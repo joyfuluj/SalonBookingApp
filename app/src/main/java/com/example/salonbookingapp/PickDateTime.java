@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -16,27 +15,29 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.example.salonbookingapp.Constants;
 
 public class PickDateTime extends AppCompatActivity {
     private String menuType;
     private String menuName;
     private String menuDescription;
     private String menuPrice;
+    private String salonName;
+    private String username;
+    private TextView salon;
 
     private Button selectedStylistButton;
     private String selectedStylist = "Stylist A"; // デフォルトのスタイリスト名
     private Map<String, Map<String, Map<String, String>>> stylistAvailability;
 
-    // 週ごとの日付配列
+    // 週ごとの日付配列（MM/DD 形式）
     private final String[][] weeks = {
-            {"2024-12-01", "2024-12-02", "2024-12-03", "2024-12-04", "2024-12-05", "2024-12-06", "2024-12-07"}, // Week 1
-            {"2024-12-08", "2024-12-09", "2024-12-10", "2024-12-11", "2024-12-12", "2024-12-13", "2024-12-14"}  // Week 2
+            {"12/01", "12/02", "12/03", "12/04", "12/05", "12/06", "12/07"}, // Week 1
+            {"12/08", "12/09", "12/10", "12/11", "12/12", "12/13", "12/14"}  // Week 2
     };
 
     private int selectedWeekIndex = 0; // デフォルトはWeek 1
@@ -52,12 +53,18 @@ public class PickDateTime extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_date_time);
 
+
         // Intent からデータを取得
         Intent intent = getIntent();
         menuType = intent.getStringExtra("MENU_TYPE");
         menuName = intent.getStringExtra("MENU_NAME");
         menuDescription = intent.getStringExtra("MENU_DESCRIPTION");
         menuPrice = intent.getStringExtra("MENU_PRICE");
+        salonName = intent.getStringExtra("salonName");
+        username = intent.getStringExtra("username");
+
+        salon = findViewById(R.id.salon_name);
+        salon.setText(salonName);
 
         // デバッグ用ログ
         System.out.println("Received Menu Type: " + menuType);
@@ -76,6 +83,17 @@ public class PickDateTime extends AppCompatActivity {
         // 週切り替えボタンの初期化
         Button buttonWeek1 = findViewById(R.id.button_week1);
         Button buttonWeek2 = findViewById(R.id.button_week2);
+
+
+        // デフォルトの週選択（Week 1 をハイライト）
+        highlightWeekButton(buttonWeek1, buttonWeek2);
+
+        // スタイリストボタンの初期スタイルを設定
+        Button[] allStylistButtons = {stylistA, stylistB, stylistC};
+        for (Button button : allStylistButtons) {
+            button.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+            button.setTextColor(getResources().getColor(android.R.color.black));
+        }
 
         // デフォルトのスタイリスト選択
         updateStylistSelection(stylistA);
@@ -152,29 +170,52 @@ public class PickDateTime extends AppCompatActivity {
      */
     private void loadStylistAvailabilityData() {
         stylistAvailability = new HashMap<>();
+
+        // スタイリスト名とスケジュールファイルの対応付け
+        Map<String, String> stylistScheduleFiles = new HashMap<>();
+        stylistScheduleFiles.put("Stylist A", "schedule1.txt");
+        stylistScheduleFiles.put("Stylist B", "schedule2.txt");
+        stylistScheduleFiles.put("Stylist C", "schedule3.txt");
+
         try {
-            InputStream inputStream = getResources().openRawResource(R.raw.stylist_availability);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
+            for (String stylist : stylistScheduleFiles.keySet()) {
+                String resourceFile = stylistScheduleFiles.get(stylist);
+                FileInputStream fis = openFileInput(resourceFile);
+                InputStreamReader isr = new InputStreamReader(fis);
+                BufferedReader br = new BufferedReader(isr);
+                String line;
 
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",", 4); // Stylist, Date, Time, Availability
-                if (parts.length == 4) {
-                    String stylist = parts[0].trim();     // 例: "Stylist A"
-                    String date = parts[1].trim();        // 例: "2024-12-01"
-                    String timeSlot = parts[2].trim();    // 例: "11:00"
-                    String available = parts[3].trim();   // "○" または "×"
+                // ヘッダー行をスキップ
+                br.readLine();
 
-                    // スタイリストとその空き状況データを追加
-                    stylistAvailability.putIfAbsent(stylist, new HashMap<>());
-                    stylistAvailability.get(stylist).putIfAbsent(date, new HashMap<>());
-                    stylistAvailability.get(stylist).get(date).put(timeSlot, available);
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.split(",", -1); // day,time,dayAva,bookingStatus,timeAva
+                    if (parts.length == 5) {
+                        String date = parts[0].trim();      // 例: "12/01"
+                        String timeSlot = parts[1].trim();  // 例: "10:00"
+                        String dayAva = parts[2].trim();    // "1" または "0"
+                        String bookingStatus = parts[3].trim(); // "1" または "0"
+                        String timeAva = parts[4].trim();   // "1" または "0"
 
-                    // デバッグ用ログ
-                    System.out.println("Loaded availability: Stylist=" + stylist + ", Date=" + date + ", TimeSlot=" + timeSlot + ", Available=" + available);
+                        // 空き状況の判定
+                        String available;
+                        if ("1".equals(dayAva) && "0".equals(bookingStatus) && "1".equals(timeAva)) {
+                            available = "○";
+                        } else {
+                            available = "×";
+                        }
+
+                        // マップにデータを格納
+                        stylistAvailability.putIfAbsent(stylist, new HashMap<>());
+                        stylistAvailability.get(stylist).putIfAbsent(date, new HashMap<>());
+                        stylistAvailability.get(stylist).get(date).put(timeSlot, available);
+
+                        // デバッグ用ログ
+                        System.out.println("Loaded availability: Stylist=" + stylist + ", Date=" + date + ", TimeSlot=" + timeSlot + ", Available=" + available);
+                    }
                 }
+                br.close();
             }
-            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Failed to load stylist availability data", Toast.LENGTH_SHORT).show();
@@ -198,7 +239,7 @@ public class PickDateTime extends AppCompatActivity {
 
         for (String date : currentWeekDates) {
             TextView dateHeader = new TextView(this);
-            String displayDate = getDisplayDate(date); // 表示用に日付を整形
+            String displayDate = date; // 日付をそのまま表示
             dateHeader.setText(displayDate);
             dateHeader.setPadding(8, 8, 8, 8);
             dateHeader.setGravity(Gravity.CENTER);
@@ -240,15 +281,6 @@ public class PickDateTime extends AppCompatActivity {
                 availabilityCell.setGravity(Gravity.CENTER);
                 availabilityCell.setTypeface(null, Typeface.BOLD);
 
-                // 背景色をスタイルに応じて変更（必要に応じてコメントアウトを外してください）
-                // if ("⭕️".equals(availability)) {
-                //     availabilityCell.setBackgroundColor(Color.parseColor("#A5D6A7")); // 緑色
-                // } else if ("-".equals(availability)) {
-                //     availabilityCell.setBackgroundColor(Color.parseColor("#EF9A9A")); // 赤色
-                // } else {
-                //     availabilityCell.setBackgroundColor(Color.WHITE);
-                // }
-
                 // 予約可能なセルのみクリック可能にする
                 if ("⭕️".equals(availability)) {
                     availabilityCell.setClickable(true);
@@ -258,6 +290,8 @@ public class PickDateTime extends AppCompatActivity {
                         intent.putExtra(Constants.EXTRA_SELECTED_STYLIST, selectedStylist);
                         intent.putExtra(Constants.EXTRA_SELECTED_DATE, date);
                         intent.putExtra(Constants.EXTRA_SELECTED_TIME, timeSlot);
+                        intent.putExtra("salonName", salonName);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                     });
                 } else {
@@ -298,19 +332,6 @@ public class PickDateTime extends AppCompatActivity {
     }
 
     /**
-     * 表示用の日付形式に変換するメソッド
-     * 例: "2024-12-01" -> "12/01"
-     */
-    private String getDisplayDate(String date) {
-        if (date.length() == 10) { // "YYYY-MM-DD"
-            String month = date.substring(5, 7);
-            String day = date.substring(8, 10);
-            return month + "/" + day;
-        }
-        return date;
-    }
-
-    /**
      * 指定されたスタイリスト、日付、時間スロットの空き状況を取得するメソッド
      */
     private String getAvailability(String stylist, String date, String timeSlot) {
@@ -347,5 +368,8 @@ public class PickDateTime extends AppCompatActivity {
         selectedButton.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
         selectedButton.setTextColor(getResources().getColor(android.R.color.white));
         selectedStylistButton = selectedButton;
+    }
+    public void back(View view) {
+        finish(); // back to previous page
     }
 }
