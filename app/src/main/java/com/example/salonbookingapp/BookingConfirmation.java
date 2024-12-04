@@ -25,6 +25,7 @@ public class BookingConfirmation extends AppCompatActivity {
     private String salonName;
     private TextView user;
     private String username;
+    private String fileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class BookingConfirmation extends AppCompatActivity {
             menuName = intent.getStringExtra(Constants.EXTRA_MENU_NAME); // Added
             salonName = intent.getStringExtra("salonName");
             username = intent.getStringExtra("username");
+            fileName = intent.getStringExtra("fileName");
         }
 
         salon = findViewById(R.id.booking_salon);
@@ -110,6 +112,7 @@ public class BookingConfirmation extends AppCompatActivity {
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_REQUEST, request);
                 completedIntent.putExtra(Constants.EXTRA_CUSTOMER_PRICE, price);
                 completedIntent.putExtra("username", username);
+                completedIntent.putExtra("fileName", fileName);
 
                 // 不要な startActivity(intent); を削除
 

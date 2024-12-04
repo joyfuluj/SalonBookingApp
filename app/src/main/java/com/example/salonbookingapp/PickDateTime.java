@@ -281,6 +281,16 @@ public class PickDateTime extends AppCompatActivity {
                 availabilityCell.setGravity(Gravity.CENTER);
                 availabilityCell.setTypeface(null, Typeface.BOLD);
 
+                String fileName;
+
+                if(selectedStylist.equals("Stylist A")){
+                    fileName = "schedule1.txt";
+                }
+                else if(selectedStylist.equals("Stylist B")){
+                    fileName = "schedule2.txt";
+                }
+                else fileName = "schedule3.txt";
+
                 // 予約可能なセルのみクリック可能にする
                 if ("⭕️".equals(availability)) {
                     availabilityCell.setClickable(true);
@@ -292,6 +302,7 @@ public class PickDateTime extends AppCompatActivity {
                         intent.putExtra(Constants.EXTRA_SELECTED_TIME, timeSlot);
                         intent.putExtra("salonName", salonName);
                         intent.putExtra("username", username);
+                        intent.putExtra("fileName", fileName);
                         startActivity(intent);
                     });
                 } else {
