@@ -43,6 +43,7 @@ public class TimeSlot extends AppCompatActivity {
         String day = intent.getStringExtra("date");
         String year = intent.getStringExtra("year");
         String fileT = intent.getStringExtra("fileT");
+        String staff = intent.getStringExtra("staff");
         TextView date = findViewById(R.id.day);
         date.setText(year+"/"+day);
 
