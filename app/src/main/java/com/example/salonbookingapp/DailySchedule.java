@@ -41,6 +41,7 @@ public class DailySchedule extends AppCompatActivity {
         String month = intent.getStringExtra("month");
         String file = intent.getStringExtra("file");
         String fileT = intent.getStringExtra("fileT");
+        String staff = intent.getStringExtra("staff");
 
         TextView m = findViewById(R.id.month);
         m.setText(month);
@@ -127,6 +128,7 @@ public class DailySchedule extends AppCompatActivity {
                             intent.putExtra("year", year);
                             intent.putExtra("staff", staff);
                             intent.putExtra("fileT", fileT);
+                            intent.putExtra("staff", staff);
                             startActivity(intent);
                         }
                     }

@@ -23,7 +23,7 @@ public class ChooseStaff extends AppCompatActivity {
             return insets;
         });
     }
-    public void one(View v){
+     public void one(View v){
         Intent intent = new Intent(this, SearchMonth.class);
         String file = "days_schedule1.txt";
         String fileT = "schedule1.txt";
