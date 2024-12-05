@@ -90,9 +90,9 @@ public class BookingCompleted extends AppCompatActivity {
         String filename = "reservations.txt";
 
         // 保存するデータをCSV形式で作成
-        String reservationData = "\n" + salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
+        String reservationData = salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
 
-                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username;
+                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username + "\n" ;
 
         FileOutputStream outputStream;
 
@@ -119,8 +119,6 @@ public class BookingCompleted extends AppCompatActivity {
             fos.write(updatedContent.toString().getBytes());
             fos.close();
 
-            //Toast.makeText(TimeSlot.this, "Time status updated", Toast.LENGTH_SHORT).show();
-            recreate();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -161,8 +159,6 @@ public class BookingCompleted extends AppCompatActivity {
             fos.write(updatedContent.toString().getBytes());
             fos.close();
 
-            //Toast.makeText(TimeSlot.this, "Time status updated", Toast.LENGTH_SHORT).show();
-//            recreate();
         } catch (IOException e) {
             e.printStackTrace();
         }
