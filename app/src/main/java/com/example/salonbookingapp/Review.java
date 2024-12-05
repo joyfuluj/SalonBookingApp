@@ -104,7 +104,7 @@ public class Review extends AppCompatActivity {
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                     );
-                    ratingParams.setMargins(600, 0, 0, 0);
+                    ratingParams.setMargins(550, 0, 0, 0);
 
                     TextView ratingTextView = new TextView(this);
                     ratingTextView.setText("⭐️" + all);

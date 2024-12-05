@@ -13,8 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:elevation="1dp"
-        android:onClick="back"
         android:text="&lt;"
         android:onClick="back"
         android:textColor="@color/black"
@@ -30,12 +28,6 @@
         app:layout_constraintVertical_bias="0.005"
         android:elevation="1dp"/>
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
