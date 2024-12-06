@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,7 @@ public class SearchResult extends AppCompatActivity {
     String username;
     String salonName;
     String rating;
+    int salonCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,7 @@ public class SearchResult extends AppCompatActivity {
 
 
                 if (!salonName.equals("Name")) {
+                    salonCount++;
                     if (checkServiceArray(servicesArray, serviceArr)) {
                         LinearLayout horizontalLayout = new LinearLayout(this);
                         horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -170,13 +173,37 @@ public class SearchResult extends AppCompatActivity {
                         ));
                         divider.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
                         mainLinearLayout.addView(divider);
+
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if(salonCount == 0){
+                        LinearLayout horizontalLayout = new LinearLayout(this);
+                        horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+                        horizontalLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        ));
 
+                        TextView salonTextView = new TextView(this);
+                        salonTextView.setText("Salon with the keyword is not found.\n             Try another keyword!");
+                        salonTextView.setTextSize(20f);
+                        horizontalLayout.addView(salonTextView);
+                        mainLinearLayout.addView(horizontalLayout);
+
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        params.setMargins(100, 80, 0, 0);
+                        salonTextView.setLayoutParams(params);
+        }
+        else{
+            Toast.makeText(this, "Here are salons with " + searchTerm + " service.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public String getSalonImage(String salonName, String file) {
