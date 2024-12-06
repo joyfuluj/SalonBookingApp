@@ -104,7 +104,7 @@ public class CouponMenu extends AppCompatActivity {
         });
     }
 
-        private void loadCouponMenuData() {
+    private void loadCouponMenuData() {
         try {
             InputStream inputStream = getResources().openRawResource(R.raw.coupons_menus);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));

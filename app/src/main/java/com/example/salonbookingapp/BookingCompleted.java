@@ -17,6 +17,8 @@ import java.io.FileOutputStream; // 追加
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import java.io.FileOutputStream; // 追加
+
 public class BookingCompleted extends AppCompatActivity {
 
     private TextView salonTextView, menuTextView, stylistTextView, dateTimeTextView;
@@ -92,36 +94,9 @@ public class BookingCompleted extends AppCompatActivity {
         // 保存するデータをCSV形式で作成
         String reservationData = salonName + "," + menuName + "," + selectedStylist + "," + selectedDate + "," + selectedTime + "," +
 
-                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username + "\n" ;
+                customerName + "," + customerPhone + "," + customerEmail + "," + customerRequest + "," + price + "," + username +"\n";
 
         FileOutputStream outputStream;
-
-        try {
-            String file = "schedule1.txt";
-            FileInputStream fis2 = openFileInput(file);
-            InputStreamReader isr2 = new InputStreamReader(fis2);
-            BufferedReader br2 = new BufferedReader(isr2);
-
-            StringBuilder updatedContent = new StringBuilder();
-            String line2;
-            while ((line2 = br2.readLine()) != null) {
-                String[] words2 = line2.split(",\\s*");
-                if (words2[1].equals(selectedTime) && words2[0].equals(selectedDate)) {
-                    updatedContent.append(selectedDate).append(",").append(selectedTime).append(",").append(words2[2]).append(",").append("1").append(",").append(words2[4]).append("\n");
-                } else {
-                    updatedContent.append(line2).append("\n");
-                }
-            }
-            br2.close();
-            fis2.close();
-
-            FileOutputStream fos = openFileOutput(file, Context.MODE_PRIVATE);
-            fos.write(updatedContent.toString().getBytes());
-            fos.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         try {
             // ファイルにデータを追記（存在しない場合は新規作成）
@@ -159,6 +134,8 @@ public class BookingCompleted extends AppCompatActivity {
             fos.write(updatedContent.toString().getBytes());
             fos.close();
 
+            //Toast.makeText(TimeSlot.this, "Time status updated", Toast.LENGTH_SHORT).show();
+            // recreate();
         } catch (IOException e) {
             e.printStackTrace();
         }

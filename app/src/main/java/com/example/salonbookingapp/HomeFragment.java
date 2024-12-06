@@ -93,156 +93,156 @@ public class HomeFragment extends Fragment {
             BufferedReader br = new BufferedReader(isr);
             int count = 0;
             while ((line = br.readLine()) != null) {
-                    String[] words = line.split(",\\s*");
-                    String salonName = words[0];
-                    String menu = words[1];
-                    String stylist = words[2];
-                    String date = words[3];
-                    String time = words[4];
-                    String user = words[10];
-                    String price = words[9];
+                String[] words = line.split(",\\s*");
+                String salonName = words[0];
+                String menu = words[1];
+                String stylist = words[2];
+                String date = words[3];
+                String time = words[4];
+                String user = words[10];
+                String price = words[9];
 
-                    if (user.equals(username)) {
-                        count++;
-                        LinearLayout horizontalLayout = new LinearLayout(requireContext());
-                        horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-                        horizontalLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        ));
+                if (user.equals(username)) {
+                    count++;
+                    LinearLayout horizontalLayout = new LinearLayout(requireContext());
+                    horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+                    horizontalLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    ));
 
-                        LinearLayout textLayout = new LinearLayout(requireContext());
-                        textLayout.setOrientation(LinearLayout.VERTICAL);
-                        textLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                                0,
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                1f
-                        ));
+                    LinearLayout textLayout = new LinearLayout(requireContext());
+                    textLayout.setOrientation(LinearLayout.VERTICAL);
+                    textLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                            0,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            1f
+                    ));
 
-                        LinearLayout.LayoutParams leftTop = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        leftTop.setMargins(50, 40, 0, 0);
+                    LinearLayout.LayoutParams leftTop = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    leftTop.setMargins(50, 40, 0, 0);
 
 
-                        LinearLayout.LayoutParams left = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        left.setMargins(50, 0, 0, 0);
+                    LinearLayout.LayoutParams left = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    left.setMargins(50, 0, 0, 0);
 
-                        TextView salonTextView = new TextView(requireContext());
-                        salonTextView.setText(salonName);
-                        salonTextView.setTextSize(28f);
-                        textLayout.addView(salonTextView);
-                        salonTextView.setLayoutParams(leftTop);
+                    TextView salonTextView = new TextView(requireContext());
+                    salonTextView.setText(salonName);
+                    salonTextView.setTextSize(28f);
+                    textLayout.addView(salonTextView);
+                    salonTextView.setLayoutParams(leftTop);
 
-                        TextView serviceLabelTextView = new TextView(requireContext());
-                        serviceLabelTextView.setText("Menu/Coupon: " + menu);
-                        serviceLabelTextView.setTextSize(20f);
-                        textLayout.addView(serviceLabelTextView);
-                        serviceLabelTextView.setLayoutParams(left);
+                    TextView serviceLabelTextView = new TextView(requireContext());
+                    serviceLabelTextView.setText("Menu/Coupon: " + menu);
+                    serviceLabelTextView.setTextSize(20f);
+                    textLayout.addView(serviceLabelTextView);
+                    serviceLabelTextView.setLayoutParams(left);
 
-                        TextView ratingTextView = new TextView(requireContext());
-                        ratingTextView.setText("Stylist: " + stylist);
-                        ratingTextView.setTextSize(20f);
-                        textLayout.addView(ratingTextView);
-                        ratingTextView.setLayoutParams(left);
+                    TextView ratingTextView = new TextView(requireContext());
+                    ratingTextView.setText("Stylist: " + stylist);
+                    ratingTextView.setTextSize(20f);
+                    textLayout.addView(ratingTextView);
+                    ratingTextView.setLayoutParams(left);
 
-                        TextView dateTextView = new TextView(requireContext());
-                        dateTextView.setText("Date: " + date);
-                        dateTextView.setTextSize(20f);
-                        textLayout.addView( dateTextView);
-                        dateTextView.setLayoutParams(left);
+                    TextView dateTextView = new TextView(requireContext());
+                    dateTextView.setText("Date: " + date);
+                    dateTextView.setTextSize(20f);
+                    textLayout.addView( dateTextView);
+                    dateTextView.setLayoutParams(left);
 
-                        TextView timeTextView = new TextView(requireContext());
-                        timeTextView.setText("time: " + time);
-                        timeTextView.setTextSize(20f);
-                        textLayout.addView(timeTextView);
-                        timeTextView.setLayoutParams(left);
+                    TextView timeTextView = new TextView(requireContext());
+                    timeTextView.setText("time: " + time);
+                    timeTextView.setTextSize(20f);
+                    textLayout.addView(timeTextView);
+                    timeTextView.setLayoutParams(left);
 
-                        horizontalLayout.addView(textLayout);
+                    horizontalLayout.addView(textLayout);
 
-                        LinearLayout rightLayout = new LinearLayout(requireContext());
-                        rightLayout.setOrientation(LinearLayout.VERTICAL);
-                        rightLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        ));
+                    LinearLayout rightLayout = new LinearLayout(requireContext());
+                    rightLayout.setOrientation(LinearLayout.VERTICAL);
+                    rightLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    ));
 
-                        LinearLayout.LayoutParams priceLayout = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        priceLayout.setMargins(0, 40, 40, 0);
+                    LinearLayout.LayoutParams priceLayout = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    priceLayout.setMargins(0, 40, 40, 0);
 
-                        TextView priceTextView = new TextView(requireContext());
-                        priceTextView.setText(price);
-                        priceTextView.setTextSize(28f);
-                        rightLayout.addView(priceTextView);
-                        priceTextView.setLayoutParams(priceLayout);
+                    TextView priceTextView = new TextView(requireContext());
+                    priceTextView.setText(price);
+                    priceTextView.setTextSize(28f);
+                    rightLayout.addView(priceTextView);
+                    priceTextView.setLayoutParams(priceLayout);
 
-                        Button detailButton = new Button(requireContext());
-                        detailButton.setText("Cancel");
-                        detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_red));
-                        detailButton.setOnClickListener(v -> {
-                            new AlertDialog.Builder(requireContext())
-                                    .setTitle("Cancel")
-                                    .setMessage("Are you sure you want to cancel this reservation?")
-                                    .setPositiveButton("Confirm", (dialog, which) -> {
-                                        try {
-                                            FileInputStream fis2 = requireContext().openFileInput(file);
-                                            InputStreamReader isr2 = new InputStreamReader(fis2);
-                                            BufferedReader br2 = new BufferedReader(isr2);
+                    Button detailButton = new Button(requireContext());
+                    detailButton.setText("Cancel");
+                    detailButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_red));
+                    detailButton.setOnClickListener(v -> {
+                        new AlertDialog.Builder(requireContext())
+                                .setTitle("Cancel")
+                                .setMessage("Are you sure you want to cancel this reservation?")
+                                .setPositiveButton("Confirm", (dialog, which) -> {
+                                    try {
+                                        FileInputStream fis2 = requireContext().openFileInput(file);
+                                        InputStreamReader isr2 = new InputStreamReader(fis2);
+                                        BufferedReader br2 = new BufferedReader(isr2);
 
-                                            StringBuilder updatedContent = new StringBuilder();
-                                            String line2;
-                                            while ((line2 = br2.readLine()) != null) {
-                                                String[] words2 = line2.split(",\\s*");
-                                                if (!(words2[0].equals(salonName) && words2[3].equals(date) &&
-                                                        words2[4].equals(time) && words2[10].equals(username))) {
-                                                    updatedContent.append(line2).append("\n");
-                                                }
+                                        StringBuilder updatedContent = new StringBuilder();
+                                        String line2;
+                                        while ((line2 = br2.readLine()) != null) {
+                                            String[] words2 = line2.split(",\\s*");
+                                            if (!(words2[0].equals(salonName) && words2[3].equals(date) &&
+                                                    words2[4].equals(time) && words2[10].equals(username))) {
+                                                updatedContent.append(line2).append("\n");
                                             }
-                                            br2.close();
-                                            fis2.close();
-
-                                            FileOutputStream fos = requireContext().openFileOutput(file, Context.MODE_PRIVATE);
-                                            fos.write(updatedContent.toString().getBytes());
-                                            fos.close();
-                                            getActivity().recreate();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
                                         }
-                                    })
-                                    .setNegativeButton(android.R.string.cancel, null)
-                                    .show();
-                        });
+                                        br2.close();
+                                        fis2.close();
 
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        params.setMargins(0, 190, 40, 0);
-                        detailButton.setLayoutParams(params);
-                        rightLayout.addView(detailButton);
-                        horizontalLayout.addView(rightLayout);
-                        mainLinearLayout.addView(horizontalLayout);
+                                        FileOutputStream fos = requireContext().openFileOutput(file, Context.MODE_PRIVATE);
+                                        fos.write(updatedContent.toString().getBytes());
+                                        fos.close();
+                                        getActivity().recreate();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.cancel, null)
+                                .show();
+                    });
 
-                        LinearLayout.LayoutParams div = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,  // Match parent width
-                                2  // Height of the divider
-                        );
-                        div.setMargins(0, 40, 0, 0);  // Set top margin
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    params.setMargins(0, 190, 40, 0);
+                    detailButton.setLayoutParams(params);
+                    rightLayout.addView(detailButton);
+                    horizontalLayout.addView(rightLayout);
+                    mainLinearLayout.addView(horizontalLayout);
 
-                        View divider = new View(requireContext());
-                        divider.setLayoutParams(div);  // Apply layout parameters
-                        divider.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black));
+                    LinearLayout.LayoutParams div = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,  // Match parent width
+                            2  // Height of the divider
+                    );
+                    div.setMargins(0, 40, 0, 0);  // Set top margin
 
-                        mainLinearLayout.addView(divider);
+                    View divider = new View(requireContext());
+                    divider.setLayoutParams(div);  // Apply layout parameters
+                    divider.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black));
 
-                    }
+                    mainLinearLayout.addView(divider);
+
+                }
             }
             if(count == 0){
                 LinearLayout horizontalLayout = new LinearLayout(requireContext());
@@ -265,7 +265,7 @@ public class HomeFragment extends Fragment {
                 params.setMargins(150, 80, 0, 0);
                 salonTextView.setLayoutParams(params);
             }
-                br.close();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

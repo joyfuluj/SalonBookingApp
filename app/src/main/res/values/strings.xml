@@ -37,6 +37,24 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string-array name="cities">
+        <item>Toronto</item>
+        <item>Vancouver</item>
+        <item>Montreal</item>
+        <item>Ottawa</item>
+        <item>Calgary</item>
+        <item>Edmonton</item>
+        <item>Quebec City</item>
+        <item>Winnipeg</item>
+        <item>Halifax</item>
+        <item>Victoria</item>
+        <item>Regina</item>
+        <item>Charlottetown</item>
+        <item>Saskatoon</item>
+        <item>Whitehorse</item>
+        <item>Yellowknife</item>
+    </string-array>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

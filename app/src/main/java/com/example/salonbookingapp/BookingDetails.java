@@ -69,8 +69,8 @@ public class BookingDetails extends AppCompatActivity {
                         remark.setText("Special Remark: "+ words[8]);
                 }
             }
-        br.close();
-        fis.close();
+            br.close();
+            fis.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,8 +100,10 @@ public class BookingDetails extends AppCompatActivity {
                     String time = intent.getStringExtra("time");
                     String fileT = intent.getStringExtra("fileT");
                     String staff = intent.getStringExtra("staff");
+                    String year = intent.getStringExtra("year");
+                    String file = "reservations.txt";
 
-                    FileInputStream fis3 = openFileInput(fileT);
+                    FileInputStream fis3 = openFileInput(file);
                     InputStreamReader isr3 = new InputStreamReader(fis3);
                     BufferedReader br3 = new BufferedReader(isr3);
                     String line3;
@@ -117,6 +119,10 @@ public class BookingDetails extends AppCompatActivity {
                     }
                     br3.close();
                     fis3.close();
+
+                    FileOutputStream fos3 = openFileOutput(file, Context.MODE_PRIVATE);
+                    fos3.write(updatedContent3.toString().getBytes());
+                    fos3.close();
 
                     FileInputStream fis2 = openFileInput(fileT);
                     InputStreamReader isr2 = new InputStreamReader(fis2);
@@ -140,7 +146,11 @@ public class BookingDetails extends AppCompatActivity {
                     fos.close();
 
                     Toast.makeText(BookingDetails.this, "Booking Cancelled", Toast.LENGTH_SHORT).show();
-                    recreate();
+
+                    Intent intent2 = new Intent(BookingDetails.this, MyPageforStaff.class);
+                    intent2.putExtra("username", staff);
+                    startActivity(intent2);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

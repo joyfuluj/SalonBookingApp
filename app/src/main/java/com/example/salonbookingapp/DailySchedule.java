@@ -36,10 +36,10 @@ public class DailySchedule extends AppCompatActivity {
         setContentView(R.layout.activity_daily_schedule);
 
         Intent intent = getIntent();
-        String staff = intent.getStringExtra("staff");
         String year = intent.getStringExtra("year");
         String month = intent.getStringExtra("month");
         String file = intent.getStringExtra("file");
+        String staff = intent.getStringExtra("staff");
         String fileT = intent.getStringExtra("fileT");
 
         TextView m = findViewById(R.id.month);
@@ -148,7 +148,7 @@ public class DailySchedule extends AppCompatActivity {
                                     TimeSlot.setText("-");
 
                                     try {
-                                        FileInputStream fis3 = openFileInput(file);
+                                        FileInputStream fis3 = openFileInput(fileT);
                                         InputStreamReader isr3 = new InputStreamReader(fis3);
                                         BufferedReader br3 = new BufferedReader(isr3);
                                         String line3;
@@ -157,7 +157,7 @@ public class DailySchedule extends AppCompatActivity {
 
                                         while ((line3 = br3.readLine()) != null){
                                             String[] words3 = line3.split(",\\s*");
-                                            if (words3.length > 3 && words3[3].equals("1") && words3[0].equals(dayMonth)) {
+                                            if ( words3[3].equals("1") && words3[0].equals(dayMonth)) {
 
                                                 Toast.makeText(DailySchedule.this, "Please cancel the bookings on this day", Toast.LENGTH_SHORT).show();
                                                 booked = true;

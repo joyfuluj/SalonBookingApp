@@ -225,6 +225,7 @@ public class staffProfile extends AppCompatActivity {
             startActivity(intent2);
             finish();
         });
+
     }
     public void back(View v) {
         finish();
