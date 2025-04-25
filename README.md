@@ -43,6 +43,9 @@ In addition, a heuristic evaluation was conducted to identify usability issues b
 ## Video Walkthrough
 You can view the full working prototype of the project through the following [YouTube link](https://youtu.be/J6P26wpeW_Y). This video demonstrates how to use the prototype and showcases the four main tasks.
 
+<img src="https://github.com/user-attachments/assets/93ca6af0-3f6b-4c86-b8ee-0a25e9b63dee" width="300"/>
+
+
 ---
 
 ## Contact
